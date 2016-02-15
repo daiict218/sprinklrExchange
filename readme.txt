@@ -1,1 +1,1 @@
-sprinklrExchange
+sprinklrExchangeJithin
