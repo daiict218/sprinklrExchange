@@ -105,3 +105,30 @@ body{
 	color: blue;
 	font-size: 14px;
 }
+.sidebar{
+	display: inline-block;
+	vertical-align: top;
+	float: right;
+	//border: 1px solid red;
+}
+.newbie{
+	background-color: #FFF8DC;
+	padding: 20px;
+	width: 330px;
+	height: 259px;
+}
+.tips{
+	padding-top: 10px;
+	font-size: 14px;
+}
+#newbie-lower{
+	margin-top: 20px;
+	height: 500px;
+}
+.newbietext{
+	display: inline-block;
+	margin-left: 3px;
+}
+#newbiespan{
+	background-color: #eee;
+}
