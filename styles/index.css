@@ -42,7 +42,7 @@ body{
 	width: 728px;
 	overflow: hidden;
 }
-.summary{
+.question__summary{
 	width: 530px;
 	display: inline-block;
 }
@@ -55,10 +55,18 @@ body{
 	text-decoration: none;
 	cursor: pointer;
 }
-.tags{
+.question__summary__tags{
+	display: inline-block;
+	width: 300px;
 	line-height: 2.3em;
 }
-.tags__javascript{
+.question__summary__author{
+	float: right;
+	display: inline-block;
+	width: 230px;
+	line-height: 2.3em;
+}
+.tags{
 	background: #E1ECF4;
     border: 1px solid #E1ECF4;
     display: inline-block;
@@ -83,12 +91,12 @@ body{
     color: #3af;
 	text-decoration: none;
 }
-.vav{
+.question__vav{
   margin-right:10px;
   vertical-align:top;
   display:inline-block;
 }
-.votes{
+.question__vav--noncolor{
     display: inline-block;
     height: 38px;
     min-width: 38px;
@@ -98,23 +106,13 @@ body{
     padding: 5px 5px 6px 5px;
     text-align:centre;
 }
-.answers{
+.question__vav--color{
     display: inline-block;
     margin: 0 3px 0 0;
     min-width: 44px;
     font-size: 11px;
     padding: 6px;
     background-color: #75845C;
-}
-.views{
-  	display: inline-block;
-	height: 38px;
-	min-width: 40px;
-	margin: 0 7px 0 0;
-	font-size: 11px;
-	color: #777;
-	padding: 5px 5px 6px 5px;
-	text-align:centre;
 }
 .mini-counts{
   cursor:pointer;
