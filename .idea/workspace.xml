@@ -1,30 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c908cbf3-67c3-449c-8311-f27c14f0129c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wmd-master/images/wmd-buttons.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wmd-master/images/wmd-buttons.psd" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/index2.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/styles/index2.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wmd-master/Uservoice bugs.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wmd-master/jQuery/jquery-1.2.6.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wmd-master/jQuery/jquery-1.2.6.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wmd-master/markdown 1.0.1/License.text" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wmd-master/markdown 1.0.1/Markdown Readme.text" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wmd-master/markdown 1.0.1/Markdown.pl" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wmd-master/mit license.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wmd-master/pasteme.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wmd-master/readme.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wmd-master/showdown.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wmd-master/wmd-test.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wmd-master/wmd.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wmd-master/wmd.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wmd.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/tags.css" afterPath="$PROJECT_DIR$/css/tags.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/styles/index.css" afterPath="$PROJECT_DIR$/styles/index.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tags.html" afterPath="$PROJECT_DIR$/tags.html" />
-    </list>
+    <list default="true" id="c908cbf3-67c3-449c-8311-f27c14f0129c" name="Default" comment="" />
     <ignored path="sprinklrExchange.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -272,12 +249,12 @@
       <option name="number" value="Default" />
       <updated>1455621110761</updated>
       <workItem from="1455621112147" duration="7816000" />
-      <workItem from="1455683161117" duration="3323000" />
+      <workItem from="1455683161117" duration="3388000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11139000" />
+    <option name="totallyTimeSpent" value="11204000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
