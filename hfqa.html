@@ -10,40 +10,8 @@
 </title>
 </head>
 <body>
-<div class ="topbar clearfix">
-	<!--<div class="toplogo">
-		<img class="top__logo__img" src="img/sprinklrlogotop.png">
-	</div>-->
-	<div class="topbarholder">
-		<div class="rightcorner">
-			<div class="profile">
-				<img class="profileimage" src="img/profile.png">
-
-			</div>
-			<div class="searchcontainer">
-				
-			<form id="search">
-                <i class="fa fa-search" id="searchicon"></i>
-                <input class="searchbox" maxlength="240" placeholder="Search Q&A">
-            </form>
-        	</div>
-		</div>
-	</div>
-</div>
+<div id="header"></div>
 <div class = "container">
-	<div class = "header clearfix">
-		<div class="logo">
-			<img class="logo__image" src="img/sprinklrlogo.png">
-		</div>
-		<div class="tabs">
-			<ul>
-				<li class="options"><a  id="questions">Questions</a></li>
-				<li class="options"><a id="questions">Tags</a></li>
-				<li class="options"><a id="questions">Ask Question</a></li>
-
-			</ul>
-		</div>
-	</div>
 <div class="content">
 	<div class="question-header">
          <h1><a href="#" class="question-hyperlink">How do I convert a complex number?</a></h1>
@@ -174,7 +142,12 @@ Is there any way of getting this to print as a floating number? Nothing I've tri
 
 </div>
 </div>
-<div class="footer">
+<div id="footer">
 
 </div>
+<script>
+	$("#header").load("./header.html");
+	$("#footer").load("./footer.html");
+</script>
+
 </body>
