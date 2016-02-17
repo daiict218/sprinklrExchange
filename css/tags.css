@@ -1,0 +1,83 @@
+html, body{
+    overflow: hidden;
+}
+#content{
+    margin: 0 auto;
+    width: 1060px;
+    padding: 15px;
+    background-color: #fff;
+    box-sizing:content-box;
+}
+#subheader{
+    text-align:left;
+    height: 34px;
+    border-bottom: 1px solid #eaebec;
+    margin-bottom: 15px;
+}
+#subheader h1{
+    font-size: 18px;
+    font-weight:400;
+    color: #222426;
+}
+#page-desc{
+    font-size: 14px;
+    margin: 10px 0;
+    line-height: 18px;
+}
+#tagfilter{
+    background: #FFF;
+    color: #444;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    padding: 8px 10px;
+    box-shadow: 0 1px 1px;
+}
+.tag-cell{
+    width: 260px;
+    border-bottom: 1px dotted #E0E0E0;
+    padding-bottom: 12px;
+    padding-top: 6px;
+    vertical-align: top;
+    display:inline-block;
+
+}
+.tag{
+    color: #39739d;
+    font-size: 12px;
+    white-space: nowrap;
+    background: #E1ECF4;
+    border: 1px solid #E1ECF4;
+    display: inline-block;
+    margin: 2px 2px 2px 0;
+}
+.totaltags
+{
+    color:#777;
+    font-size:11px;
+}
+.multiply-x
+{
+    color:#888;
+    font-size:11px;
+    margin-right:4px;
+}
+.excerpt {
+    font-size: 12px;
+    height: 44px;
+    line-height: 14px;
+    overflow: hidden;
+    margin-bottom: 4px;
+    color:#888;
+    font-family: Arial,Liberation Sans,DejaVu Sans,sans-serif;
+}
+.tag-footer
+{
+    font-size: 12px;
+    color: #444;
+    cursor:pointer;
+}
+p
+{
+    clear: both;
+    margin-bottom: 1em;
+}

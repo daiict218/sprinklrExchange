@@ -27,10 +27,10 @@ body{
 }
 .subheader{
 	height: 34px;
-	border-bottom: 1px solid #f69c55;
+	border-bottom: 1px solid #eaebec;
 	width: 728px;
 }
-.questionheader{
+#questions{
 	color: #222426;
 	font-size: 18px;
 	font-weight: 400;
@@ -98,14 +98,13 @@ body{
     padding: 5px 5px 6px 5px;
     text-align:centre;
 }
-.answerstotal{
+.answers{
     display: inline-block;
     margin: 0 3px 0 0;
     min-width: 44px;
     font-size: 11px;
     padding: 6px;
-    background-color:#f69c55;
-    //background-color: #75845C;
+    background-color: #75845C;
 }
 .views{
   	display: inline-block;
