@@ -3,7 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="28903c33-8663-4bf7-b437-7fb98a314add" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/headerfooter.css" afterPath="$PROJECT_DIR$/css/headerfooter.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/qa.css" afterPath="$PROJECT_DIR$/css/qa.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/headerfooter.html" afterPath="$PROJECT_DIR$/headerfooter.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/questionanswer.html" afterPath="$PROJECT_DIR$/questionanswer.html" />
     </list>
     <ignored path="sprinklrExchange.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -43,6 +45,13 @@
   <component name="GradleLocalSettings">
     <option name="externalProjectsViewState">
       <projects_view />
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/headerfooter.html" />
+      </list>
     </option>
   </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" />
@@ -205,16 +214,16 @@
       <created>1455703144805</created>
       <option name="number" value="Default" />
       <updated>1455703144805</updated>
-      <workItem from="1455703146243" duration="14000" />
+      <workItem from="1455703146243" duration="265000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14000" />
+    <option name="totallyTimeSpent" value="265000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="817" extended-state="0" />
-    <editor active="true" />
+    <frame x="0" y="23" width="1440" height="817" extended-state="1" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />

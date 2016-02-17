@@ -11,7 +11,7 @@ body
 {
 	background-color:#222426;
 }
-.topbarholder
+.topbar__topbarholder
 {
 	margin:0 auto;
 	width:1060px;
@@ -27,12 +27,12 @@ body
 	max-width:100%;
 	max-height:100%;
 }
-.rightcorner
+.topbar__topbarholder__rightcorner
 {
 	float:right;
 	color:#ffffff;
 }
-.profile
+.topbar__topbarholder__rightcorner__profile
 {
 	width:34px;
 	height:34px;
@@ -40,19 +40,19 @@ body
 	vertical-align: top;
 	cursor:pointer;
 }
-.profileimage
+.topbar__topbarholder__rightcorner__profile__profileimage
 {
 	max-width:100%;
 	max-height:100%;
 }
-.searchcontainer
+.topbar__topbarholder__rightcorner__searchcontainer
 {
 	height:34px;
 	display:inline-block;
 	vertical-align:top;
 	margin-left:10px;
 }
-.searchbox
+.searchform__searchbox
 {
 	width:188px;
 	max-width:188px;
@@ -88,7 +88,7 @@ body
 	display:block;
 }
 
-.logo
+.header__logo
 {
 	width:200px;
 	height:50px;
@@ -96,12 +96,12 @@ body
 	float:left;
 	cursor:pointer;
 }
-.logo__image
+.header__logo__image
 {
 	max-width:100%;
 	max-height:100%;
 }
-.tabs
+.header__tabs
 {
 	display:inline-block;
 	float:right;
@@ -113,7 +113,7 @@ ul
 	margin-top:16px;
 	margin-bottom:16px;
 }
-.options
+.header__tabs__options
 {
 	display:inline-block;
 	background-color:#9ea3a9;
@@ -125,7 +125,7 @@ ul
     cursor:pointer;
 
 }
-.options:hover
+.header__tabs__options:hover
 {
 	background-color: #f69c55;
 }

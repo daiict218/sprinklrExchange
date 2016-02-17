@@ -12,7 +12,7 @@ body
     box-sizing: content-box;
     position: relative;
 }
-.question-header .question-hyperlink
+.question-header .question-header__question-hyperlink
 {
 	font-size:24px;
 	color:#222426;
@@ -43,12 +43,12 @@ body
 {
 	vertical-align:top;
 }
-.votecell .vote
+.votecell .votecell__vote
 {
 	min-width:46px;
 	padding-right:15px;
 }
-.vote
+.votecell__vote
 {
 	text-align:center;
 	color:#777;
@@ -72,7 +72,7 @@ body
 	margin-top:10px;
 	color:#f69c55;
 }
-.posttext
+.postcell__posttext
 {
 	width: 660px;
     margin-bottom: 5px;
@@ -91,7 +91,7 @@ body
 	padding:0.4em 0.5em;
 	cursor:pointer;
 }
-.info
+.postcell__postfooter__info
 {
 	color:#9ea3a9;	
 	background-color:#e1ecf4;
@@ -103,7 +103,7 @@ body
 	margin-top:5px;
 	
 }
-.userinfo
+.postcell__postfooter__info__userinfo
 {
 	color: #39739d;
 }
