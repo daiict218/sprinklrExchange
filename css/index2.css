@@ -1,11 +1,7 @@
 *{
 	margin: 0px;
 	padding: 0px;
-<<<<<<< HEAD
-	//border: 1px solid red;
-=======
 //border: 1px solid red;
->>>>>>> 323f24f2643f5e47261a0691e204df13523ee5d0
 }
 *{
 	-webkit-box-sizing: border-box;
@@ -75,6 +71,12 @@ body{
 	width: 665px;
 	max-height: 300px;
 	overflow: scroll;
+	box-sizing: border-box;
+    padding: 10px 0;
+    border-top: 1px dotted #ccc;
+    border-bottom: 1px dotted #ccc;
+    clear: both;
+    margin-top:10px;
 }
 .text-area{
 	display: inline-block;
@@ -86,46 +88,44 @@ body{
 .form__tags{
 	display: block;
 }
-<<<<<<< HEAD
-#tags__element{
-=======
 .inputtags__element{
->>>>>>> 323f24f2643f5e47261a0691e204df13523ee5d0
 	width: 665px;
 	height: 60px;
 	padding-top: 5px;
 	padding-bottom: 5px;
-<<<<<<< HEAD
-	//border: 1px solid red;
-=======
 //border: 1px solid red;
->>>>>>> 323f24f2643f5e47261a0691e204df13523ee5d0
 }
-#btn-submit{
+.btn-submit{
 	display: inline-block;
-	padding: 0.6em 1em;
-	text-align: center;
-	text-decoration: none;
-	width: 140px;
-	height: 31px;
-	background-color: blue;
-	font-size: 11px;
-	color: white;
+    position: relative;
+    padding: .61538462em 1em;
+    vertical-align: middle;
+    min-height: 2.46153846em;
+    color: #fff;
+    font-weight: 400;
+    font-family: inherit;
+    line-height: 1;
+    text-align: center;
+    text-decoration: none;
+    background-color: #0095ff;
+    border-radius: 2px;
+    border: 1px solid #07c;
+    box-shadow: inset 0 1px 0 #66bfff;
+    cursor: pointer;
+    outline: none;
+    touch-action: manipulation;
+    transition: all .1s ease-in;
 }
 #discard{
 	display: inline-block;
-	color: blue;
+	color: #0095ff;
 	font-size: 14px;
 }
 .sidebar{
 	display: inline-block;
 	vertical-align: top;
 	float: right;
-<<<<<<< HEAD
-	//border: 1px solid red;
-=======
 //border: 1px solid red;
->>>>>>> 323f24f2643f5e47261a0691e204df13523ee5d0
 }
 .newbie{
 	background-color: #FFF8DC;
@@ -147,8 +147,4 @@ body{
 }
 #newbiespan{
 	background-color: #eee;
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 323f24f2643f5e47261a0691e204df13523ee5d0
