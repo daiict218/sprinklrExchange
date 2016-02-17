@@ -1,3 +1,6 @@
+html, body{
+    overflow: hidden;
+}
 #content{
     margin: 0 auto;
     width: 1060px;
