@@ -1,0 +1,134 @@
+*{
+	margin: 0px;
+	padding: 0px;
+//border: 1px solid red;
+}
+*{
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+}
+body{
+	font-family: Arial,'Helvetica Neue',Helvetica,sans-serif;
+	line-height: 1.3em;
+	color: #222426;
+}
+.container{
+	position: relative;
+	width: 100%;
+}
+.content{
+	width: 1060px;
+	margin: 0 auto;
+	padding: 15px;
+	background-color: #fff;
+}
+.mainbar{
+	width: 665px;
+	display: inline-block;
+}
+#question_title{
+	display: inline-block;
+	width: 40px;
+	height: 44px;
+	text-align: center;
+	padding-top: 10px;
+	font-size: 13px;
+	font-weight: 600;
+}
+.input_element{
+	display: inline-block;
+	width: 614px;
+	height: 34px;
+	box-shadow: 0.3px 0.3px 0.3px 0.3px;
+	font-size: 14px;
+	padding: 10px;
+
+}
+#wmd-help-button{
+	visibility: hidden;
+	background-color: white;
+}
+#wmd-button-bar{
+	background-color: white;
+}
+#wmd-button-row{
+	background-color: white;
+	margin: 0px 0px 0px 0px;
+	width: 665px;
+}
+#wmd-input{
+	background-color: white;
+	width: 665px;
+	margin-left: 0px;
+	margin-right: 0px;
+	height: 200px;
+	font-size: 16px;
+}
+#wmd-preview{
+	background-color: white;
+	width: 665px;
+	max-height: 300px;
+	overflow: scroll;
+}
+.text-area{
+	display: inline-block;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	width: 665px;
+	font-size: 16px;
+}
+.form__tags{
+	display: block;
+}
+.inputtags__element{
+	width: 665px;
+	height: 60px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+//border: 1px solid red;
+}
+#btn-submit{
+	display: inline-block;
+	padding: 0.6em 1em;
+	text-align: center;
+	text-decoration: none;
+	width: 140px;
+	height: 31px;
+	background-color: blue;
+	font-size: 11px;
+	color: white;
+}
+#discard{
+	display: inline-block;
+	color: blue;
+	font-size: 14px;
+}
+.sidebar{
+	display: inline-block;
+	vertical-align: top;
+	float: right;
+//border: 1px solid red;
+}
+.newbie{
+	background-color: #FFF8DC;
+	padding: 20px;
+	width: 330px;
+	height: 259px;
+}
+.tips{
+	padding-top: 10px;
+	font-size: 14px;
+}
+#newbie-lower{
+	margin-top: 20px;
+	height: 500px;
+}
+.newbietext{
+	display: inline-block;
+	margin-left: 3px;
+}
+#newbiespan{
+	background-color: #eee;
+}

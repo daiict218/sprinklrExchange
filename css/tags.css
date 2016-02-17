@@ -1,25 +1,25 @@
 html, body{
     overflow: hidden;
 }
-#content{
+.content{
     margin: 0 auto;
     width: 1060px;
     padding: 15px;
     background-color: #fff;
     box-sizing:content-box;
 }
-#subheader{
+.subheader{
     text-align:left;
     height: 34px;
     border-bottom: 1px solid #eaebec;
     margin-bottom: 15px;
 }
-#subheader h1{
+.subheader h1{
     font-size: 18px;
     font-weight:400;
     color: #222426;
 }
-#page-desc{
+.page-desc{
     font-size: 14px;
     margin: 10px 0;
     line-height: 18px;
@@ -50,18 +50,20 @@ html, body{
     display: inline-block;
     margin: 2px 2px 2px 0;
 }
-.totaltags
+.tag-cell__tagname__totaltags
 {
     color:#777;
     font-size:11px;
+    padding-top:10px;
+    display:inline-block;
 }
-.multiply-x
+.tag-cell__tagname__multiply-x
 {
     color:#888;
     font-size:11px;
     margin-right:4px;
 }
-.excerpt {
+.tag-cell__excerpt {
     font-size: 12px;
     height: 44px;
     line-height: 14px;
@@ -70,7 +72,7 @@ html, body{
     color:#888;
     font-family: Arial,Liberation Sans,DejaVu Sans,sans-serif;
 }
-.tag-footer
+.tag-cell__tag-footer
 {
     font-size: 12px;
     color: #444;
