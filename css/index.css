@@ -1,0 +1,144 @@
+*{
+	margin: 0px;
+	padding: 0px;
+	//border: 1px solid red;
+}
+*{
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+}
+body{
+	font-family: Arial,'Helvetica Neue',Helvetica,sans-serif;
+}
+.container{
+	position: relative;
+	width: 100%;
+}
+.content{
+	width: 1060px;
+	margin: 0 auto;
+	padding: 15px;
+	background-color: #fff;
+}
+.mainbar{
+	width: 728px;
+}
+.subheader{
+	height: 34px;
+	border-bottom: 1px solid #eaebec;
+	width: 728px;
+}
+#questions{
+	color: #222426;
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 1.3;
+}
+.question{
+	padding: 12px 0 10px 0;
+	border-bottom: 1px solid #eaebec;
+	width: 728px;
+	overflow: hidden;
+}
+.summary{
+	width: 530px;
+	display: inline-block;
+}
+.question-link{
+	color: #0077CC;
+	line-height: 1.3;
+	margin-bottom: 1.2em;
+	font-size: 17px;
+	font-weight: 400;
+	text-decoration: none;
+	cursor: pointer;
+}
+.tags{
+	line-height: 2.3em;
+}
+.tags__javascript{
+	background: #E1ECF4;
+    border: 1px solid #E1ECF4;
+    display: inline-block;
+    margin: 2px 2px 2px 0;
+    padding: .4em .5em;
+    display: inline-block;
+    text-align: center;
+    line-height: 1;    
+    cursor: pointer;
+    font-size: 12px;
+    text-decoration: none;
+	text-decoration: none;
+	color: #39739d;
+}
+.author{
+	display: inline-block;
+	float: right;
+	font-size: 12px;
+	font-weight: normal;
+}
+.author a{
+    color: #3af;
+	text-decoration: none;
+}
+.vav{
+  margin-right:10px;
+  vertical-align:top;
+  display:inline-block;
+}
+.votes{
+    display: inline-block;
+    height: 38px;
+    min-width: 38px;
+    margin: 0 3px 0 0;
+    font-size: 11px;
+    color: #777;
+    padding: 5px 5px 6px 5px;
+    text-align:centre;
+}
+.answers{
+    display: inline-block;
+    margin: 0 3px 0 0;
+    min-width: 44px;
+    font-size: 11px;
+    padding: 6px;
+    background-color: #75845C;
+}
+.views{
+  	display: inline-block;
+	height: 38px;
+	min-width: 40px;
+	margin: 0 7px 0 0;
+	font-size: 11px;
+	color: #777;
+	padding: 5px 5px 6px 5px;
+	text-align:centre;
+}
+.mini-counts{
+  cursor:pointer;
+  font-size: 17px;
+  font-weight: 300;
+  color: #777;
+  margin-bottom: 4px;
+  //display:block;
+  text-align:center;
+}
+.x
+{
+  display:inline-block;
+  //vertical-align:top;
+  //margin:0 auto;
+}
+.name{
+  text-align:center;
+  
+}
+.name--mod{
+ color: #FFFFFF;
+ text-align:center;
+}
+.x--mod{
+  color:#FFFFFF;
+}
