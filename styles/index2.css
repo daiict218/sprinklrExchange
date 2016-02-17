@@ -82,7 +82,7 @@ body{
 .form__tags{
 	display: block;
 }
-#tags__element{
+.inputtags__element{
 	width: 665px;
 	height: 60px;
 	padding-top: 5px;
