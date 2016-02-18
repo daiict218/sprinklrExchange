@@ -1,7 +1,7 @@
 $(function(){
     var quesId= 1;
     var questions= [];
-    var tags = ['JavaScript','HTML','CSS','Java','swing'];
+    var tags = ['JavaScript','HTML','CSS','Java','Swing','AngularJS','BackboneJS','React'];
     var model = {
         init: function(){
             
@@ -14,7 +14,7 @@ $(function(){
             question.text = text;
             question.tags = tags;
             questions.push(question);
-            //console.log(questions+" "+question);
+            console.log(question.tags);
         },
         getAllQuestions: function() {
             return questions;
@@ -41,17 +41,30 @@ $(function(){
 
     var view = {
         init:function(){
-            $('#btn-submit').click(function(){
+            $('#btn-submit').click(function(e){
                 var title = $('#input_element1').val();
-                console.log(title);
+                // console.log(title);
                 var text = $('#wmd-input').val();
-                console.log(text);
-                var tags = $('#input_element2').val();
-                //console.log(tags);
-                var values = tags.split(', ');
-                console.log(values);
-                octopus.addNewQuestion(title,text,tags);
-                view.render();
+                var errors = $('.inputtags__errors');
+                var elements = $('.inputtags__element');
+                var message = [];
+                var selected = $("#options option:selected");
+                selected.each(function (i) {
+                    message[i] = $(this).text();
+                });
+                if(title === ""){
+                    errors.html("Empty title");
+                }
+                else if(text === ""){
+                    errors.html("Empty Body");   
+                }
+                else if(message.length === 0){
+                    errors.html("No tags selected");   
+                }
+                else{
+                    octopus.addNewQuestion(title,text,message);
+                }   
+                e.preventDefault();
             });
             view.render();
         },
