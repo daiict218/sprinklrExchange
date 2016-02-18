@@ -132,3 +132,8 @@ body{
 #newbiespan{
 	background-color: #eee;
 }
+.inputtags__errors{
+	display: inline-block;
+	color: #800000;
+	padding-bottom: 20px;
+}
