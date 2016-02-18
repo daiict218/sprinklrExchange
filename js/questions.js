@@ -1,6 +1,7 @@
 $(function(){
     var quesId= 1;
     var questions= [];
+    var tags = ['JavaScript','HTML','CSS','Java','swing'];
     var model = {
         init: function(){
             
@@ -55,8 +56,14 @@ $(function(){
             view.render();
         },
         render:function(){
-            $('#viewTemp').html(octopus.getQuestions()[0]);
+            // $('#viewTemp').html(octopus.getQuestions()[0]);
            // console.log(questions);
+           var htmlStr = '';
+           for (var i = 0; i < tags.length; i++) {
+               htmlStr += "<option value="+(i+1)+">"+tags[i]+"</option>"
+           };        
+           //console.log(htmlStr);
+           $("#options").html(htmlStr);
         }
     };
     octopus.init();
