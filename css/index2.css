@@ -1,7 +1,7 @@
 *{
 	margin: 0px;
 	padding: 0px;
-	//border: 1px solid red;
+//border: 1px solid red;
 }
 *{
 	-webkit-box-sizing: border-box;
@@ -87,7 +87,7 @@ body{
 	height: 60px;
 	padding-top: 5px;
 	padding-bottom: 5px;
-	//border: 1px solid red;
+//border: 1px solid red;
 }
 #btn-submit{
 	display: inline-block;
@@ -109,7 +109,7 @@ body{
 	display: inline-block;
 	vertical-align: top;
 	float: right;
-	//border: 1px solid red;
+//border: 1px solid red;
 }
 .newbie{
 	background-color: #FFF8DC;
