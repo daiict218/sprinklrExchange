@@ -97,7 +97,8 @@ var answerView = {
 				}
 				else
 				{
-
+					element.className = "fa fa-sort-asc fa-3x grey vote";
+					answerController.changecount(tobechanged,-1);
 				}
 			}
 			else
@@ -117,7 +118,8 @@ var answerView = {
 				}
 				else
 				{
-
+					element.className = "fa fa-sort-desc fa-3x grey vote";
+					answerController.changecount(tobechanged,1);
 				}	
 			}
 		});
