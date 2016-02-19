@@ -1,11 +1,7 @@
 *{
 	margin: 0px;
 	padding: 0px;
-<<<<<<< HEAD
-	//border: 1px solid red;
-=======
 //border: 1px solid red;
->>>>>>> 323f24f2643f5e47261a0691e204df13523ee5d0
 }
 *{
 	-webkit-box-sizing: border-box;
@@ -86,20 +82,12 @@ body{
 .form__tags{
 	display: block;
 }
-<<<<<<< HEAD
-#tags__element{
-=======
 .inputtags__element{
->>>>>>> 323f24f2643f5e47261a0691e204df13523ee5d0
 	width: 665px;
 	height: 60px;
 	padding-top: 5px;
 	padding-bottom: 5px;
-<<<<<<< HEAD
-	//border: 1px solid red;
-=======
 //border: 1px solid red;
->>>>>>> 323f24f2643f5e47261a0691e204df13523ee5d0
 }
 #btn-submit{
 	display: inline-block;
@@ -121,11 +109,7 @@ body{
 	display: inline-block;
 	vertical-align: top;
 	float: right;
-<<<<<<< HEAD
-	//border: 1px solid red;
-=======
 //border: 1px solid red;
->>>>>>> 323f24f2643f5e47261a0691e204df13523ee5d0
 }
 .newbie{
 	background-color: #FFF8DC;
@@ -147,8 +131,4 @@ body{
 }
 #newbiespan{
 	background-color: #eee;
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 323f24f2643f5e47261a0691e204df13523ee5d0

@@ -11,11 +11,7 @@ body
 {
 	background-color:#222426;
 }
-<<<<<<< HEAD
-.topbarholder
-=======
 .topbar__topbarholder
->>>>>>> 323f24f2643f5e47261a0691e204df13523ee5d0
 {
 	margin:0 auto;
 	width:1060px;
@@ -31,20 +27,12 @@ body
 	max-width:100%;
 	max-height:100%;
 }
-<<<<<<< HEAD
-.rightcorner
-=======
 .topbar__topbarholder__rightcorner
->>>>>>> 323f24f2643f5e47261a0691e204df13523ee5d0
 {
 	float:right;
 	color:#ffffff;
 }
-<<<<<<< HEAD
-.profile
-=======
 .topbar__topbarholder__rightcorner__profile
->>>>>>> 323f24f2643f5e47261a0691e204df13523ee5d0
 {
 	width:34px;
 	height:34px;
@@ -52,31 +40,19 @@ body
 	vertical-align: top;
 	cursor:pointer;
 }
-<<<<<<< HEAD
-.profileimage
-=======
 .topbar__topbarholder__rightcorner__profile__profileimage
->>>>>>> 323f24f2643f5e47261a0691e204df13523ee5d0
 {
 	max-width:100%;
 	max-height:100%;
 }
-<<<<<<< HEAD
-.searchcontainer
-=======
 .topbar__topbarholder__rightcorner__searchcontainer
->>>>>>> 323f24f2643f5e47261a0691e204df13523ee5d0
 {
 	height:34px;
 	display:inline-block;
 	vertical-align:top;
 	margin-left:10px;
 }
-<<<<<<< HEAD
-.searchbox
-=======
 .searchform__searchbox
->>>>>>> 323f24f2643f5e47261a0691e204df13523ee5d0
 {
 	width:188px;
 	max-width:188px;
@@ -99,19 +75,11 @@ body
 .header
 {
 	margin: 0 auto;
-<<<<<<< HEAD
-    width: 1060px;
-    padding: 10px 15px;
-    box-sizing: content-box;
-    position: relative;
-    //border:1px solid;
-=======
 	width: 1060px;
 	padding: 10px 15px;
 	box-sizing: content-box;
 	position: relative;
 //border:1px solid;
->>>>>>> 323f24f2643f5e47261a0691e204df13523ee5d0
 }
 .clearfix:after
 {
@@ -120,11 +88,7 @@ body
 	display:block;
 }
 
-<<<<<<< HEAD
-.logo
-=======
 .header__logo
->>>>>>> 323f24f2643f5e47261a0691e204df13523ee5d0
 {
 	width:200px;
 	height:50px;
@@ -132,20 +96,12 @@ body
 	float:left;
 	cursor:pointer;
 }
-<<<<<<< HEAD
-.logo__image
-=======
 .header__logo__image
->>>>>>> 323f24f2643f5e47261a0691e204df13523ee5d0
 {
 	max-width:100%;
 	max-height:100%;
 }
-<<<<<<< HEAD
-.tabs
-=======
 .header__tabs
->>>>>>> 323f24f2643f5e47261a0691e204df13523ee5d0
 {
 	display:inline-block;
 	float:right;
@@ -154,32 +110,15 @@ ul
 {
 	list-style: none;
 	padding-left:0px;
-<<<<<<< HEAD
-}
-.options
-=======
 	margin-top:16px;
 	margin-bottom:16px;
 }
 .header__tabs__options
->>>>>>> 323f24f2643f5e47261a0691e204df13523ee5d0
 {
 	display:inline-block;
 	background-color:#9ea3a9;
 	color:#ffffff;
 	padding: 4px 10px 5px;
-<<<<<<< HEAD
-    font-size: 14px;
-    line-height: 1.3;
-    transition: background-color 0.15s ease;
-    cursor:pointer;
-
-}
-.options:hover
-{
-	background-color: #f69c55;
-}
-=======
 	font-size: 14px;
 	line-height: 1.3;
 	transition: background-color 0.15s ease;
@@ -193,4 +132,3 @@ ul
 a{
 	color:#ffffff;
 }
->>>>>>> 323f24f2643f5e47261a0691e204df13523ee5d0
