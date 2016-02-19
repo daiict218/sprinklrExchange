@@ -14,8 +14,9 @@ body
 .topbar__topbarholder
 {
 	margin:0 auto;
-	width:1060px;
+	width:900px;
 	box-sizing:content-box;
+
 }
 .toplogo
 {
@@ -39,11 +40,13 @@ body
 	display:inline-block;
 	vertical-align: top;
 	cursor:pointer;
+	margin-top:5px;
 }
 .topbar__topbarholder__rightcorner__profile__profileimage
 {
 	max-width:100%;
 	max-height:100%;
+
 }
 .topbar__topbarholder__rightcorner__searchcontainer
 {
@@ -58,7 +61,7 @@ body
 	max-width:188px;
 	line-height:1.5;
 	font-size: 13px;
-	margin-top:5px;
+	margin-top:11px;
 	padding-left:25px;
 
 }
@@ -132,3 +135,29 @@ ul
 a{
 	color:#ffffff;
 }
+.g-signin2{
+	display:inline-block;
+	padding-left:20px;
+	padding-top:6px;
+	height: 20px;
+	font-size: 12px;
+}
+.signout{
+	display: inline-block;
+	color: #0095ff;
+	width: 50px;
+	vertical-align: top;
+	margin-top: 11px;
+	padding: 4px;
+	box-sizing: content-box;
+ }
+.signout a
+{
+	color:#0095ff;
+}
+#signin
+{
+	display: inline-block;
+	margin-top: 5px;
+}
+
