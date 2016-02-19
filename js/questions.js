@@ -75,8 +75,8 @@ $(function(){
            for (var i = 0; i < tags.length; i++) {
                htmlStr += "<option value="+(i+1)+">"+tags[i]+"</option>"
            };        
-           //console.log(htmlStr);
-           $("#options").html(htmlStr);
+           console.log(htmlStr);
+           //$("#options").html(htmlStr);
         }
     };
     octopus.init();
