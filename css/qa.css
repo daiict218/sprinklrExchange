@@ -61,6 +61,12 @@ body
 	display:block;
 	color:#777;
 }
+.orange
+{
+	cursor:pointer;
+	display:block;
+	color:#f69c55;	
+}
 .star
 {
 	font-size:1.5em;

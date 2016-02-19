@@ -70,7 +70,7 @@ body{
 	background-color: white;
 	width: 665px;
 	max-height: 300px;
-	overflow: scroll;
+	//overflow: scroll;
 	box-sizing: border-box;
     padding: 10px 0;
     border-top: 1px dotted #ccc;
