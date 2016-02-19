@@ -18,6 +18,7 @@ $(function(){
             question.votes=0;
             question.answers=0;
             question.views=0;
+            questions=JSON.parse(localStorage.questions);
             questions.push(question);
             localStorage.questions = JSON.stringify(questions);
         },

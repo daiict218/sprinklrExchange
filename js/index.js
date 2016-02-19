@@ -7,20 +7,8 @@ var Model={
 
     },
     questionSummary:[
-        //{votes:10,answers:10,views:10,question:"how do i build stackoverflow front page?",tags:['javascript','html','stackoverflow'],askedby:'jithin',time:'about 1min ago'}
     ]
 };
-/*var answerbtn = document.getElementsByClassName('question__vav__btn question__vav__btn--color')[0];
-var c=answerbtn.childNodes[1].childNodes[0];
-//console.log(answerbtn);
-var n=answerbtn.childNodes[3];
-if(parseInt(c.textContent)==0) {
-    c.className = 'x';
-    n.className= 'name'
-    answerbtn.style.background='white';
-}
-else
-    answerbtn.style.background='orange';*/
 var octopus={
     init: function(){
             Model.init();
@@ -80,6 +68,25 @@ var view={
         });
         //questionblock.innerHTML=htmlstr;
         //listelem.appendChild(questionblock);
+        Model.questionSummary.forEach(function(element,index,a){
+
+            var answerbtn = document.getElementsByClassName('question__vav__btn question__vav__btn--color')[index];
+            var c=answerbtn.childNodes[1].childNodes[0];
+//console.log(answerbtn);
+            //console.log(c.textContent);
+            var n=answerbtn.childNodes[3];
+            if(parseInt(c.textContent)==0) {
+                console.log(element.title);
+                c.className = 'x';
+                n.className= 'name'
+                answerbtn.style.background='white';
+                console.log(answerbtn);
+            }
+            else {
+                console.log(element.title, "hello");
+                answerbtn.style.background = '#f69c55';
+            }
+        });
     }
 }
 octopus.init();
