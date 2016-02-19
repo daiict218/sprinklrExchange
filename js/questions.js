@@ -1,44 +1,76 @@
-$(function(){
-    var quesId= 1;
-    var questions= [];
-    var tags = ['JavaScript','HTML','CSS','Java','Swing','AngularJS','BackboneJS','React'];
+$(function () {
+    var quesId = 1;
+    var questions = [];
+    var tags = ['JavaScript', 'HTML', 'CSS', 'Java', 'Swing', 'AngularJS', 'BackboneJS', 'React'];
+
+/*    var questionCollection = {
+        init: function () {
+            this.questions = data.map(function (datum) {
+                new QuestionModel(datum);
+            });
+        },
+        add: function(datum){
+            this.questions.push(new QuestionModel())
+        }
+    };
+
+    var QuestionModel = function (questionProps) {
+        this.data = questionProps;
+        this.id = QuestionModel._getId();
+    };
+
+    QuestionModel.prototype = {
+        constructor: QuestionModel,
+        update: function (updatedProps) {
+            this.data = updatedProps;
+        }
+    };
+
+    QuestionModel._getId = function () {
+        return 'q' + QuestionModel._counter++;
+    };
+    QuestionModel._counter = 0;
+*/
     var model = {
-        init: function(){
+        init: function () {
 
         },
 
-        add:function(title,text,tags){
+        add: function (title, text, tags) {
             var question = {};
             question.id = quesId++;
             question.title = title;
             question.text = text;
             question.tags = tags;
-            question.author='jitin';
-            question.time='a min ago';
-            question.votes=0;
-            question.answers=0;
-            question.views=0;
-            questions=JSON.parse(localStorage.questions);
+
+            question.author = localStorage.author;
+            question.time = new Date();
+            question.votes = 0;
+            question.answers = [];
+            question.views = 0;
+            if (questions.length > 0)
+                questions = JSON.parse(localStorage.questions);
             questions.push(question);
             localStorage.questions = JSON.stringify(questions);
+
         },
-        getAllQuestions: function() {
+        getAllQuestions: function () {
             return questions;
         }
     };
 
 
     var octopus = {
-        addNewQuestion:function(title,text,tags){
-            model.add(title,text,tags);
+        addNewQuestion: function (title, text, tags) {
+            model.add(title, text, tags);
             view.render();
         },
 
-        getQuestions: function() {
+        getQuestions: function () {
             return model.getAllQuestions();
         },
 
-        init: function() {
+        init: function () {
             model.init();
             view.init();
         }
@@ -46,8 +78,8 @@ $(function(){
 
 
     var view = {
-        init:function(){
-            $('#btn-submit').click(function(e){
+        init: function () {
+            $('#btn-submit').click(function (e) {
                 var title = $('#input_element1').val();
                 // console.log(title);
                 var text = $('#wmd-input').val();
@@ -58,33 +90,40 @@ $(function(){
                 selected.each(function (i) {
                     message[i] = $(this).text();
                 });
-                if(title === ""){
+                if (title === "") {
                     errors.html("Empty title");
                 }
-                else if(text === ""){
+                else if (text === "") {
+
                     errors.html("Empty Body");
                 }
-                else if(message.length === 0){
+                else if (message.length === 0) {
                     errors.html("No tags selected");
                 }
-                else{
-                    console.log('hello');
-                    octopus.addNewQuestion(title,text,message);
+                else {
+                    //console.log('hello');
+                    octopus.addNewQuestion(title, text, message);
                 }
+
                 e.preventDefault();
             });
             view.render();
         },
-        render:function(){
+        render: function () {
             // $('#viewTemp').html(octopus.getQuestions()[0]);
+
             // console.log(questions);
             var htmlStr = '';
             for (var i = 0; i < tags.length; i++) {
-                htmlStr += "<option value="+(i+1)+">"+tags[i]+"</option>"
-            };
+                htmlStr += "<option value=" + (i + 1) + ">" + tags[i] + "</option>"
+            }
+            ;
             //console.log(htmlStr);
             $("#options").html(htmlStr);
         }
     };
     octopus.init();
 });
+
+
+

@@ -2,12 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <list default="true" id="c908cbf3-67c3-449c-8311-f27c14f0129c" name="Default" comment="">
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/css/qa.css" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/questionanswer.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tags.html" afterPath="$PROJECT_DIR$/tags.html" />
+=======
+    <list default="true" id="28903c33-8663-4bf7-b437-7fb98a314add" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/headerfooter.css" afterPath="$PROJECT_DIR$/css/headerfooter.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/qa.css" afterPath="$PROJECT_DIR$/css/qa.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/headerfooter.html" afterPath="$PROJECT_DIR$/headerfooter.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/questionanswer.html" afterPath="$PROJECT_DIR$/questionanswer.html" />
+>>>>>>> 6830be50e439f6017efc735547bc8eca7ff32bff
 =======
     <list default="true" id="52b66436-7b63-45b0-b5e7-7c6c3a767193" name="Default" comment="">
       <change type="DELETED" beforePath="$PROJECT_DIR$/css/index 2.css" afterPath="" />
@@ -55,6 +63,12 @@
               <caret line="75" column="47" selection-start-line="75" selection-start-column="47" selection-end-line="75" selection-end-column="47" />
 =======
     <leaf>
+<<<<<<< HEAD
+      <file leaf-file-name="headerfooter.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/headerfooter.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+=======
       <file leaf-file-name="header.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/css/header.css">
           <provider selected="true" editor-type-id="text-editor">
@@ -149,12 +163,15 @@
         <entry file="file://$PROJECT_DIR$/css/index2.css">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="59.583332">
+>>>>>>> 323f24f2643f5e47261a0691e204df13523ee5d0
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
+=======
       <file leaf-file-name="index2.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index2.html">
           <provider selected="true" editor-type-id="text-editor">
@@ -166,6 +183,7 @@
           </provider>
         </entry>
       </file>
+>>>>>>> 323f24f2643f5e47261a0691e204df13523ee5d0
     </leaf>
   </component>
   <component name="Git.Settings">
@@ -180,9 +198,13 @@
     <option name="CHANGED_PATHS">
       <list>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/css/tags.css" />
         <option value="$PROJECT_DIR$/tags.html" />
         <option value="$PROJECT_DIR$/index2.html" />
+=======
+        <option value="$PROJECT_DIR$/headerfooter.html" />
+>>>>>>> 6830be50e439f6017efc735547bc8eca7ff32bff
 =======
         <option value="$PROJECT_DIR$/hfqa.html" />
         <option value="$PROJECT_DIR$/css/footer.css" />
@@ -209,8 +231,14 @@
   </component>
   <component name="ProjectFrameBounds">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <option name="width" value="1440" />
     <option name="height" value="900" />
+=======
+    <option name="y" value="23" />
+    <option name="width" value="1440" />
+    <option name="height" value="817" />
+>>>>>>> 6830be50e439f6017efc735547bc8eca7ff32bff
 =======
     <option name="x" value="80" />
     <option name="y" value="23" />
@@ -243,6 +271,12 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< HEAD
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="Scratches" />
+=======
+>>>>>>> 323f24f2643f5e47261a0691e204df13523ee5d0
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -261,6 +295,16 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+<<<<<<< HEAD
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+=======
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="sprinklrExchange" />
@@ -690,6 +734,7 @@
       <method />
     </configuration>
 <<<<<<< HEAD
+<<<<<<< HEAD
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="SvnConfiguration">
@@ -704,6 +749,8 @@
       <workItem from="1455621112147" duration="7816000" />
       <workItem from="1455683161117" duration="5017000" />
       <workItem from="1455777241975" duration="26000" />
+=======
+>>>>>>> 6830be50e439f6017efc735547bc8eca7ff32bff
 =======
     <configuration default="true" type="TestNGTestDiscovery" factoryName="TestNG Test Discovery" changeList="All">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
@@ -748,10 +795,18 @@
     <configuration default="true" type="osgi.bnd.run" factoryName="Test Launcher (JUnit)">
       <method />
     </configuration>
+>>>>>>> 323f24f2643f5e47261a0691e204df13523ee5d0
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
+<<<<<<< HEAD
+      <changelist id="28903c33-8663-4bf7-b437-7fb98a314add" name="Default" comment="" />
+      <created>1455703144805</created>
+      <option name="number" value="Default" />
+      <updated>1455703144805</updated>
+      <workItem from="1455703146243" duration="265000" />
+=======
       <changelist id="52b66436-7b63-45b0-b5e7-7c6c3a767193" name="Default" comment="" />
       <created>1455708155074</created>
       <option name="number" value="Default" />
@@ -762,6 +817,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
 <<<<<<< HEAD
     <option name="totallyTimeSpent" value="12859000" />
   </component>
@@ -802,6 +858,36 @@
     </option>
   </component>
 =======
+    <option name="totallyTimeSpent" value="265000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="23" width="1440" height="817" extended-state="1" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+>>>>>>> 6830be50e439f6017efc735547bc8eca7ff32bff
+=======
     <option name="totallyTimeSpent" value="6282000" />
   </component>
   <component name="ToolWindowManager">
@@ -830,6 +916,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" />
+>>>>>>> 323f24f2643f5e47261a0691e204df13523ee5d0
     </layout>
   </component>
 >>>>>>> 323f24f2643f5e47261a0691e204df13523ee5d0
@@ -842,10 +929,16 @@
   </component>
   <component name="editorHistoryManager">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/index2.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+=======
+    <entry file="file://$PROJECT_DIR$/headerfooter.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+>>>>>>> 6830be50e439f6017efc735547bc8eca7ff32bff
 =======
     <entry file="file://$PROJECT_DIR$/hfqa.html">
       <provider selected="true" editor-type-id="text-editor">
@@ -918,11 +1011,14 @@
     <entry file="file://$PROJECT_DIR$/css/index2.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="59.583332">
+>>>>>>> 323f24f2643f5e47261a0691e204df13523ee5d0
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+=======
     <entry file="file://$PROJECT_DIR$/css/qa.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.2941175">
@@ -985,5 +1081,6 @@
         </state>
       </provider>
     </entry>
+>>>>>>> 323f24f2643f5e47261a0691e204df13523ee5d0
   </component>
 </project>

@@ -19,6 +19,8 @@ var octopus={
 
 var view={
     init:function(){
+        if(!localStorage.currentQuestionId)
+            localStorage.currentQuestionId= 1;
         view.render();
     },
     render:function(){
@@ -40,7 +42,7 @@ var view={
             '							<div class="name">votes</div>'+
             '						</div>'+
                     '				<div id="answerbtn'+i+'"class="question__vav__btn question__vav__btn--color">'+
-                    '				<div class="mini-counts"><span class="x--mod">'+elem.answers+'</span></div>'+
+                    '				<div class="mini-counts"><span class="x--mod">'+elem.answers.length+'</span></div>'+
             '						<div class="name--mod">answers</div>'+
             '						</div>'+
                     '						<div id="viewbtn'+i+'" class="question__vav__btn">'+
@@ -50,7 +52,7 @@ var view={
             '            </div>'+
                     '					<div class="question__summary">'+
                     '						<div class="question__summary__ques">'+
-                    '							<h3><a href="#" class="question-link">'+elem.title+'</a></h3>'+
+                    '							<h3><a href="questionanswer.html" onclick="localStorage.currentQuestionId = elem.id" class="question-link">'+elem.title+'</a></h3>'+
                     '						</div>'+
                     '						<div class="question__summary__tags">'+
                                                 tagstr+
@@ -66,11 +68,10 @@ var view={
             questionblock.innerHTML=htmlstr;
             listelem.appendChild(questionblock);
         });
-        //questionblock.innerHTML=htmlstr;
-        //listelem.appendChild(questionblock);
+
         Model.questionSummary.forEach(function(element,index,a){
 
-            var answerbtn = document.getElementsByClassName('question__vav__btn question__vav__btn--color')[index];
+            var answerbtn = document.getElementsByClassName('question__vav__btn question__vav__btn--color')[index+1];
             var c=answerbtn.childNodes[1].childNodes[0];
 //console.log(answerbtn);
             //console.log(c.textContent);
