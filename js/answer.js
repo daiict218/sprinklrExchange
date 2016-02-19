@@ -1,35 +1,35 @@
 $(function(){
+	var answers = [];
+	var answerid = 0;
+	var details = [];
 var answerModel = {
-		currentAnswer : null,
-		details: [
-		{
-			user:"Karan Tankshali",	//id
-			question:1,
-			text:"dgfghdjf dfhjkdsfhdjk sdgjfgkd dhfjskdfhjdskff dhfksdfjh",
-			//upvotes:5,
-			//downvotes:3,
-			id:1,
-			votes:2,
-			time:3,
-			verified:true
-		},
-		{
-			user:"Ajay Gaur",	//id
-			question:1,
-			text:`<p>Hello</p><p>sfhgjk</p><p>dhfjkdfsf</p><p>djkfsdfsdf</p><p>fsdf</p>`,
-			//upvotes:4,
-			//downvotes:6,
-			id:2,
-			votes:-2,
-			time:4,
-			verified:true
-		}
 
-		],
+		init:function(){
+		var currentquestionid = localStorage.currentQuestionId;
+		var question = localStorage.questions[currentQuestionId-1];
+		var answersArray = question.answers;
+		answersArray.forEach(function(i){
+			details.id = answersArray[i].id;
+			details.questionId = localStorage.answers.questionId;
+			details.author = localStorage.answers.author;
+			details.text = localStorage.answers.text;
+			details.timestamp = localStorage.answers.timestamp;
+		});
+
+
+		},
+		addAnswer:function(answer){
+			localStorage.answers.push(answer);
+		}
+		//currentAnswer : null,
+
 };
+
+
 var answerController = {
 	init:function()
 	{
+		answerModel.init();
 		answerView.init();
 	},
 	getAnswers:function()
@@ -69,13 +69,15 @@ var answerController = {
 	addNewAnswer:function(text)
 	{
 		var newans = {};
-		newans.user="x";
-		newans.question=1;
+		newans.user=localStorage.author;
+		newans.question=localStorage.currentQuestionId;
 		newans.text=text;
 		newans.votes=0;
-		newans.time=2;
+		newans.time=new Date();
 		newans.verified=false;
+		newans.id = ++answerId;
 		answerModel.details.push(newans);
+		answerModel.addAnswer(newans);
 		//console.log(answerModel.details);
 		answerView.addNewAnswer(answerModel.details.length-1);
 	}
