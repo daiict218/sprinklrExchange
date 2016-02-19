@@ -86,59 +86,112 @@ var answerView = {
 		answers = answerController.getAnswers();
 		$(".noofanswers").text(answers.length);
 		this.render();
+		document.getElementsByClassName("answers")[0].addEventListener("click", function(e) {
+			//console.log("hmm")
 
-		$(".vote").click(function(e)		//will be changed once user is associated
-		{
-			var element = e.toElement;
-			
-			var updownid = element.id;
-			var tobechanged = updownid.slice(-1);
-			var downelement = document.getElementById("votedown"+tobechanged);
-			var upelement = document.getElementById("voteup"+tobechanged);
-			//console.log(downelement);
-			if(updownid.includes("up"))
-			{	
-				if(element.className.includes("grey"))
-				{
-					if(downelement.className.includes("grey"))
+			var element = e.target;
+			if(element.id.includes("voteup")||element.id.includes("votedown"))
+			{
+				var updownid = element.id;
+				var tobechanged = updownid.slice(-1);
+				var downelement = document.getElementById("votedown"+tobechanged);
+				var upelement = document.getElementById("voteup"+tobechanged);
+				if(updownid.includes("up"))
+				{	
+					if(element.className.includes("grey"))
 					{
-						answerController.changecount(tobechanged,1);
+						if(downelement.className.includes("grey"))
+						{
+							answerController.changecount(tobechanged,1);
+						}
+						else
+						{
+							answerController.changecount(tobechanged,2);
+							downelement.className = "fa fa-sort-desc fa-3x grey vote";
+						}
+						element.className = "fa fa-sort-asc fa-3x orange vote";	
 					}
 					else
 					{
-						answerController.changecount(tobechanged,2);
-						downelement.className = "fa fa-sort-desc fa-3x grey vote";
-					}
-					element.className = "fa fa-sort-asc fa-3x orange vote";	
-				}
-				else
-				{
-					element.className = "fa fa-sort-asc fa-3x grey vote";
-					answerController.changecount(tobechanged,-1);
-				}
-			}
-			else
-			{
-				if(element.className.includes("grey"))
-				{
-					if(upelement.className.includes("grey"))
-					{
+						element.className = "fa fa-sort-asc fa-3x grey vote";
 						answerController.changecount(tobechanged,-1);
 					}
-					else
-					{
-						answerController.changecount(tobechanged,-2);
-						upelement.className = "fa fa-sort-asc fa-3x grey vote";
-					}
-					element.className = "fa fa-sort-desc fa-3x orange vote";
 				}
 				else
 				{
-					element.className = "fa fa-sort-desc fa-3x grey vote";
-					answerController.changecount(tobechanged,1);
-				}	
+					if(element.className.includes("grey"))
+					{
+						if(upelement.className.includes("grey"))
+						{
+							answerController.changecount(tobechanged,-1);
+						}
+						else
+						{
+							answerController.changecount(tobechanged,-2);
+							upelement.className = "fa fa-sort-asc fa-3x grey vote";
+						}
+						element.className = "fa fa-sort-desc fa-3x orange vote";
+					}
+					else
+					{
+						element.className = "fa fa-sort-desc fa-3x grey vote";
+						answerController.changecount(tobechanged,1);
+					}	
+				}
 			}
 		});
+		// $(".vote").click(function(e)		//will be changed once user is associated
+		// {
+		// 	var element = e.toElement;
+			
+		// 	var updownid = element.id;
+		// 	var tobechanged = updownid.slice(-1);
+		// 	var downelement = document.getElementById("votedown"+tobechanged);
+		// 	var upelement = document.getElementById("voteup"+tobechanged);
+		// 	//console.log(downelement);
+		// 	if(updownid.includes("up"))
+		// 	{	
+		// 		if(element.className.includes("grey"))
+		// 		{
+		// 			if(downelement.className.includes("grey"))
+		// 			{
+		// 				answerController.changecount(tobechanged,1);
+		// 			}
+		// 			else
+		// 			{
+		// 				answerController.changecount(tobechanged,2);
+		// 				downelement.className = "fa fa-sort-desc fa-3x grey vote";
+		// 			}
+		// 			element.className = "fa fa-sort-asc fa-3x orange vote";	
+		// 		}
+		// 		else
+		// 		{
+		// 			element.className = "fa fa-sort-asc fa-3x grey vote";
+		// 			answerController.changecount(tobechanged,-1);
+		// 		}
+		// 	}
+		// 	else
+		// 	{
+		// 		if(element.className.includes("grey"))
+		// 		{
+		// 			if(upelement.className.includes("grey"))
+		// 			{
+		// 				answerController.changecount(tobechanged,-1);
+		// 			}
+		// 			else
+		// 			{
+		// 				answerController.changecount(tobechanged,-2);
+		// 				upelement.className = "fa fa-sort-asc fa-3x grey vote";
+		// 			}
+		// 			element.className = "fa fa-sort-desc fa-3x orange vote";
+		// 		}
+		// 		else
+		// 		{
+		// 			element.className = "fa fa-sort-desc fa-3x grey vote";
+		// 			answerController.changecount(tobechanged,1);
+		// 		}	
+		// 	}
+		// });
 		$("#btn-submit").click(function(e){
 			var text = document.getElementById('wmd-preview').innerHTML;
 			var errors = $('.inputtags__errors');
