@@ -58,7 +58,6 @@ body{
 }
 .question__summary__tags{
 	display: inline-block;
-	width: 300px;
 	line-height: 2.3em;
 }
 .question__summary__author{
