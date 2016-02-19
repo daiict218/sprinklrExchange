@@ -11,6 +11,15 @@
 
 	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.0.min.js"></script>
 	<script type="text/javascript" src="wmd-master/showdown.js"></script>
+	<script type="text/javascript" src="js/questions.js"></script>
+	<link href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css"
+    rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<link href="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/css/bootstrap-multiselect.css"
+    rel="stylesheet" type="text/css" />
+<script src="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/js/bootstrap-multiselect.js"
+    type="text/javascript"></script>
+
 	<title>
 		Sprinklr Exchange
 	</title>
@@ -122,25 +131,28 @@ Is there any way of getting this to print as a floating number? Nothing I've tri
 
 			<br/>
 		</div>
-		<div class="inputtags form__tags">
-			<div id="question_title">Tags</div>
-			<input id="input_element1" class="input_element" type="text">
-			<div class="inputtags__element">
-				/* Here we will show the tags */
-			</div>
-			<div class="inputtags__errors">
-				/* Here we will show the errors*/
-			</div>
-			<br>
-			<div id="inputtags__post">
-				<button class="btn-submit" id="btn-submit">
-					Post Your Question
-				</button>
-				<div id="discard">
-					discard
+			<div class="inputtags form__tags">
+				<select id="options" multiple="multiple">
+					
+				</select>
+				
+				<div class="inputtags__element">
+					
+				</div>
+				<div class="inputtags__errors">
+					
+				</div>
+				<br>
+				<div id="inputtags__post">
+					<button class="btn" id="btn-submit">
+						Post Your Answer
+					</button>
+					<div id="discard">
+						discard
+					</div>
 				</div>
 			</div>
-		</div>
+
 	</div>
 	</div>
 	<div class="sidebar">
@@ -211,7 +223,13 @@ Is there any way of getting this to print as a floating number? Nothing I've tri
 </div>
 <div id="footer"></div>
 <script type="text/javascript" src="wmd-master/wmd.js"></script>
-
+<script type="text/javascript">
+    $(function () {
+        $('#options').multiselect({
+            includeSelectAllOption: true,
+        });
+    });
+</script>
 <script>
 	$("#header").load("./header.html");
 	$("#footer").load("./footer.html");
