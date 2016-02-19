@@ -4,7 +4,7 @@ $(function(){
     var tags = ['JavaScript','HTML','CSS','Java','Swing','AngularJS','BackboneJS','React'];
     var model = {
         init: function(){
-            
+
         },
 
         add:function(title,text,tags){
@@ -14,7 +14,7 @@ $(function(){
             question.text = text;
             question.tags = tags;
             questions.push(question);
-            console.log(question.tags);
+            localStorage.questions = JSON.stringify(questions);
         },
         getAllQuestions: function() {
             return questions;
