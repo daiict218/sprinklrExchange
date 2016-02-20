@@ -4,24 +4,49 @@ $(function(){
 	var details = [];
 	var questions = [];
 	localStorage.author = "Karan Tankshali";
+	var ansArray = [];
+	var answersArray = [];
 	var answerModel = {
 		init:function(){
-		
 		questions = JSON.parse(localStorage.questions);
+		
+		
 		var currentquestionid = localStorage.currentQuestionId;
 		//console.log(currentquestionid);
 		var question = questions[parseInt(currentquestionid)-1];
 			//console.log(questions);
-		var answersArray = question.answers;
-			if(answersArray.length != 0) {
-				answersArray.forEach(function (i) {
+		
+		//var answersArray = question.answers;
+		//console.log(localStorage.answers)
+		//console.log(localStorage.answers+"here")
+		if (localStorage.answers!==undefined)
+		{		
+                ansArray = JSON.parse(localStorage.answers);
+               // console.log("hello");
+        }
+        for(var k = 0;k<ansArray.length;k++)
+        {
+        	//console.log(ansArray[k]);
+        	if(ansArray[k].question == parseInt(currentquestionid))
+        	{
+        		answersArray.push(ansArray[k]);
+        	}
+        }
 
+		//console.log(answersArray);
+			if(answersArray.length != 0) {
+					for(var i=0;i<answersArray.length;i++)
+					{
+					console.log(answersArray[i]);
+					details[i] = {};
 					details[i].id = answersArray[i].id;
-					details[i].questionId = localStorage.answers.questionId;
+					details[i].questionId = answersArray[i].question;
 					details[i].author = localStorage.answers.author;
-					details[i].text = JSON.parse(localStorage.answers.text);
-					details[i].timestamp = localStorage.answers.timestamp;
-				});
+					details[i].text = answersArray[i].text;
+					details[i].timestamp = answersArray[i].time;
+					details[i].votes = answersArray[i].votes;
+					console.log(details);
+				}
 			}
 
 
@@ -33,9 +58,9 @@ $(function(){
 			//a.push(answer);
 			if (!localStorage.answers==undefined)
                 answers = JSON.parse(localStorage.answers);
-            console.log(answers,"before");
+            //console.log(answers,"before");
             answers.push(answer);
-            console.log(answers);
+            //console.log(answers);
 			
             localStorage.answers = JSON.stringify(answers);
 			//ocalStorage.answers=JSON.stringify(a);
@@ -82,7 +107,11 @@ var answerController = {
 	},
 	changecount:function(i,change)
 	{
+		console.log(i);
 		details[i-1].votes += change;
+		var n = JSON.parse(localStorage.answers)[i-1];
+		n.votes = 1;
+		localStorage.answers[i-1] = JSON.stringify(n);
 		answerView.changecount(i);
 	},
 	addNewAnswer:function(text)
@@ -112,6 +141,10 @@ var answerController = {
 		//console.log(localStorage.questions[parseInt(localStorage.currentQuestionId)-1].title);
 		return JSON.parse(localStorage.questions)[parseInt(localStorage.currentQuestionId)-1].title;
 	},
+	getQuestionVotes:function()
+	{
+		return JSON.parse(localStorage.questions)[parseInt(localStorage.currentQuestionId)-1].votes;	
+	},
 	getText:function()
 	{
 		return JSON.parse(localStorage.questions)[parseInt(localStorage.currentQuestionId)-1].text;
@@ -125,7 +158,9 @@ var answerView = {
 	init:function()
 	{
 		$(".question-header__question-hyperlink").text(answerController.getQuestiontitle());
+		$("#questionvotes").text(answerController.getQuestionVotes());
 		document.getElementsByClassName("postcell__posttext")[0].innerHTML = answerController.getText();
+
 		var tag = document.createElement("div");
 		tag.className = "tag";
 		var posttags = document.getElementsByClassName("postcell__posttaglist")[0];
@@ -142,7 +177,7 @@ var answerView = {
 			$(".noofanswers").text(answerController.getNoOfAnswers());
 			this.render();
 			document.getElementsByClassName("content")[0].addEventListener("click", function (e) {
-				console.log("hmm")
+				//console.log("hmm")
 
 				var element = e.target;
 				if (element.id.includes("voteup") || element.id.includes("votedown")) {
