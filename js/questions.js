@@ -27,6 +27,8 @@ $(function(){
     // };
     // QuestionModel._counter = 0;
 
+
+    /* Constructor function for the question */
     var Question = function(title,text,tags,author){
         this.title = title;
         this.text = text;
@@ -38,13 +40,25 @@ $(function(){
         return quesId++;
     }
 
+
+    /*Some getters and setters for localStorage*/
+
+    var getAuthor = function(){
+        return localStorage.author;
+    };
+
+    var setAuthor = function(author){
+        localStorage.author = author;
+    }
+
+    /* Question model in the question */
     var model = {
         init: function(){
 
         },
 
         add:function(title,text,tags){
-            var question = new Question(title,text,tags,localStorage.author);
+            var question = new Question(title,text,tags,getAuthor());
             question.id = question.id();
             questions.push(question);
             localStorage.questions = JSON.stringify(questions);
