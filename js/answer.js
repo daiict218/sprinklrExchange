@@ -3,7 +3,8 @@ $(function(){
 	var answerId = 0;
 	var details = [];
 	var questions = [];
-	localStorage.author = "Karan Tankshali";
+	if(!localStorage.author)
+    	localStorage.author = "Anonynous";
 	var ansArray = [];
 	var answersArray = [];
 	var currentquestionid = 0;
@@ -166,6 +167,10 @@ var answerController = {
 	{
 		// console.log("ohh",Date.parse(JSON.parse(localStorage.questions)[parseInt(localStorage.currentQuestionId)-1].time));
 		return Date.parse(JSON.parse(localStorage.questions)[parseInt(localStorage.currentQuestionId)-1].time);
+	},
+	getAsker()
+	{
+	 	return JSON.parse(localStorage.questions)[parseInt(localStorage.currentQuestionId)-1].author;
 	}
 
 
@@ -182,6 +187,10 @@ var answerView = {
 		tag.className = "tag";
 		var posttags = document.getElementsByClassName("postcell__posttaglist")[0];
 		var tags = JSON.parse(localStorage.questions)[parseInt(localStorage.currentQuestionId)-1].tags;
+		var userinfo = document.createElement("div");
+		userinfo.className = "postcell__postfooter__info__userinfo";
+		userinfo.innerHTML = answerController.getAsker();
+		postfooter_info.appendChild(userinfo);
 		for(var j=0;j<tags.length;j++)
 		{
 			var tag = document.createElement("div");

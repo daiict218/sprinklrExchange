@@ -8,8 +8,14 @@ $(function(){
     {
         questions = JSON.parse(localStorage.questions);
     }
-    var quesId= questions.length+1;
-    var tags = ['JavaScript','HTML','CSS','Java','Swing','AngularJS','BackboneJS','React'];
+    var quesId= questions.length + 1;
+    var allTags = JSON.parse(localStorage.tags);
+    console.log(allTags);
+    var tags = [];
+    for (var i = allTags.length - 1; i >= 0; i--) {
+        tags[i] = allTags[i].tag_name;
+    };
+    console.log(tags);
     // var questionCollection = {
     //     init: function () {
     //         this.questions = data.map(function (datum) {
@@ -34,13 +40,15 @@ $(function(){
     //     return 'q' + QuestionModel._counter++;
     // };
     // QuestionModel._counter = 0;
-
+    if(!localStorage.author)
+        localStorage.author = "Anonynous";
 
     /* Constructor function for the question */
     var Question = function(title,text,tags,author){
         this.title = title;
         this.text = text;
         this.tags = tags;
+
         this.author = author;
         this.answers = [];
         this.votes = 0;
@@ -63,6 +71,10 @@ $(function(){
         localStorage.author = author;
     }
 
+    var getTags = function(){
+        return JSON.parse(localStorage.tags);
+    }
+
     /* Question model in the question */
     var model = {
         init: function(){
@@ -70,10 +82,20 @@ $(function(){
         },
 
         add:function(title,text,tags){
+            console.log(getAuthor());
             var question = new Question(title,text,tags,getAuthor());
             question.id = question.id();
             questions.push(question);
             localStorage.questions = JSON.stringify(questions);
+            var tagsArray = getTags();
+            for (var i = tagsArray.length - 1; i >= 0; i--) {
+                for(var j=tags.length-1;j>=0;j--){
+                    if(tags[j] == tagsArray[i].tag_name){
+                        tagsArray[i].questionId.push(question.id);
+                    }
+                }
+            };
+            localStorage.tags = JSON.stringify(tagsArray);
         },
         getAllQuestions: function() {
             return questions;
