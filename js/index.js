@@ -65,11 +65,11 @@ var view={
         view.render();
     },
     addHTML:function(elem,i,tagstr){
-        return '<div class="question__vav">'+'<div id="votesbtn'+i+'"class="question__vav__btn" data-id='+i+' >'+
+        return '<div class="question__vav">'+'<div id="votesbtn'+i+'"class="question__vav__btn" data-id='+i+' onclick="view.index2setter(this,'+i+')"> '+
             '                           <div class="mini-counts"><span class="x">'+elem.votes+'</span></div>'+
             '                           <div class="name">votes</div>'+
             '                       </div>'+
-            '               <div id="answerbtn'+i+'"class="question__vav__btn question__vav__btn--color">'+
+            '               <div id="answerbtn'+i+'"class="question__vav__btn question__vav__btn--color" onclick="view.index2setter(this,'+i+')">'+
             '               <div class="mini-counts"><span class="x--mod">'+elem.answers.length+'</span></div>'+
             '                       <div class="name--mod">answers</div>'+
             '                       </div>'+
@@ -79,7 +79,7 @@ var view={
             '                       </div>'+
             '            </div>'+
             '                   <div class="question__summary">'+
-            '                       <div class="question__summary__ques">'+
+            '                       <div class="question__summary__ques" onclick="view.index2setter(this,'+i+')">'+
             '                           <h3><a href="questionanswer.html"  class="question-link">'+elem.title+'</a></h3>'+
             '                       </div>'+
             '                       <div class="question__summary__tags">'+
@@ -122,11 +122,11 @@ var view={
             //console.log(c.textContent);
             var n=answerbtn.childNodes[3];
             if(parseInt(c.textContent)==0) {
-                console.log(element.title);
+               // console.log(element.title);
                 c.className = 'x';
                 n.className= 'name'
                 answerbtn.style.background='white';
-                console.log(answerbtn);
+                //console.log(answerbtn);
             }
             else {
                 console.log(element.title, "hello");
@@ -137,7 +137,9 @@ var view={
    index2setter: function(e,i){
         var questionSummary=octopus.getQuestions();
         questionSummary[parseInt(i)].views++;
-        localStorage.currentQuestionId=questionSummary[parseInt(i)].id;
+        console.log(i);
+        localStorage.currentQuestionId=JSON.stringify(questionSummary[parseInt(i)].id);
+        console.log('hello');
         console.log(localStorage.currentQuestionId);
        // console.log(elem);
        localStorage.questions=JSON.stringify(questionSummary);
