@@ -2,19 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28903c33-8663-4bf7-b437-7fb98a314add" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/js/index2.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/multiselect.html" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/header.css" afterPath="$PROJECT_DIR$/css/header.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/index.css" afterPath="$PROJECT_DIR$/css/index.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/index2.css" afterPath="$PROJECT_DIR$/css/index2.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/qa.css" afterPath="$PROJECT_DIR$/css/qa.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/header.html" afterPath="$PROJECT_DIR$/header.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index2.html" afterPath="$PROJECT_DIR$/index2.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/answer.js" afterPath="$PROJECT_DIR$/js/answer.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/index.js" afterPath="$PROJECT_DIR$/js/index.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/questions.js" afterPath="$PROJECT_DIR$/js/questions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/questionanswer.html" afterPath="$PROJECT_DIR$/questionanswer.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/tags.js" afterPath="$PROJECT_DIR$/js/tags.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tags.html" afterPath="$PROJECT_DIR$/tags.html" />
     </list>
     <ignored path="sprinklrExchange.iws" />
@@ -230,12 +221,12 @@
       <workItem from="1455703146243" duration="14000" />
       <workItem from="1455705868278" duration="422000" />
       <workItem from="1456004726991" duration="55000" />
-      <workItem from="1456148760154" duration="100000" />
+      <workItem from="1456148760154" duration="293000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="591000" />
+    <option name="totallyTimeSpent" value="784000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="961" extended-state="6" />
