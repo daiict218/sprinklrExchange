@@ -1,5 +1,5 @@
 $(function(){
-    var quesId= 1;
+    localStorage.quesId= 1;
     var questions= [];
     var tags = ['JavaScript','HTML','CSS','Java','Swing','AngularJS','BackboneJS','React'];
     // var questionCollection = {
@@ -34,14 +34,15 @@ $(function(){
         this.text = text;
         this.tags = tags;
         this.author = author;
+        this.answers = [];
     }
 
     Question.prototype.id = function(){
-        return quesId++;
+        return localStorage.quesId++;
     }
 
 
-    /*Some getters and setters for localStorage*/
+    /*getters and setters for localStorage*/
 
     var getAuthor = function(){
         return localStorage.author;
