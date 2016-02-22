@@ -1,6 +1,14 @@
 $(function(){
-    var quesId= 1;
-    var questions= [];
+    
+    var questions = [];
+    if(!localStorage.questions){
+        localStorage.questions = questions;
+    }
+    else
+    {
+        questions = JSON.parse(localStorage.questions);
+    }
+    var quesId= questions.length+1;
     var tags = ['JavaScript','HTML','CSS','Java','Swing','AngularJS','BackboneJS','React'];
     // var questionCollection = {
     //     init: function () {
@@ -95,7 +103,8 @@ $(function(){
             $('#btn-submit').click(function(e){
                 var title = $('#input_element1').val();
                 // console.log(title);
-                var text = $('#wmd-input').val();
+                var text = $('#wmd-preview').html();
+                console.log(text);
                 var errors = $('.inputtags__errors');
                 var elements = $('.inputtags__element');
                 var message = [];
@@ -114,6 +123,7 @@ $(function(){
                 }
                 else{
                     octopus.addNewQuestion(title,text,message);
+                    window.location.href="index.html";
                 }   
                 e.preventDefault();
             });

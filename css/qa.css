@@ -142,7 +142,11 @@ code
 {
 	max-height:250px;
 	overflow:auto;
+	display:inline-block;
+	vertical-align: top;
+
 }
+
 .green
 {
 	color:#009933;
