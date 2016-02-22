@@ -100,23 +100,30 @@ var answerController = {
 	},
 	getPostingTime:function(i)
 	{
-		console.log(details[i].time);
-		console.log(Date.parse(details[i].time));
+		//console.log(details[i].time);
+		//console.log(Date.parse(details[i].time));
 		return Date.parse(details[i].time);
 	},
 	getUserName:function(i)
 	{
 		return details[i].user;
 	},
-	changecount:function(i,change)
+	changeCount:function(i,change)
 	{
-		console.log(i);
+		//console.log(i);
 		details[i-1].votes += change;
 		var n = JSON.parse(localStorage.answers);
 		console.log(n,"n");
 		n[i-1].votes = details[i-1].votes;
 		localStorage.answers = JSON.stringify(n);
-		answerView.changecount(i);
+		answerView.changeCount(i);
+	},
+	changeQuestionCount:function(change)
+	{
+		 var n = JSON.parse(localStorage.questions);
+		 n[parseInt(localStorage.currentQuestionId)-1].votes += change;
+		 localStorage.questions = JSON.stringify(n);
+		 answerView.changeQuestionCount(); 
 	},
 	addNewAnswer:function(text)
 	{
@@ -194,7 +201,13 @@ var answerController = {
 	isAnswerVerified(i)
 	{
 		return details[i].verified;
+	},
+	getQuestionPostingTime()
+	{
+		console.log("ohh",Date.parse(JSON.parse(localStorage.questions)[parseInt(localStorage.currentQuestionId)-1].time));
+		return Date.parse(JSON.parse(localStorage.questions)[parseInt(localStorage.currentQuestionId)-1].time);
 	}
+
 
 };
 var answerView = {
@@ -203,7 +216,8 @@ var answerView = {
 		$(".question-header__question-hyperlink").text(answerController.getQuestiontitle());
 		$("#questionvotes").text(answerController.getQuestionVotes());
 		document.getElementsByClassName("postcell__posttext")[0].innerHTML = answerController.getText();
-
+		var postfooter_info = document.getElementsByClassName("postcell__postfooter__info")[0];
+		postfooter_info.textContent = "asked "+answerController.getTimeDifference(new Date(),answerController.getQuestionPostingTime());
 		var tag = document.createElement("div");
 		tag.className = "tag";
 		var posttags = document.getElementsByClassName("postcell__posttaglist")[0];
@@ -224,40 +238,88 @@ var answerView = {
 
 				var element = e.target;
 				if (element.id.includes("voteup") || element.id.includes("votedown")) {
-					var updownid = element.id;
-					var tobechanged = updownid.slice(-1);
-					var downelement = document.getElementById("votedown" + tobechanged);
-					var upelement = document.getElementById("voteup" + tobechanged);
-					if (updownid.includes("up")) {
-						if (element.className.includes("grey")) {
-							if (downelement.className.includes("grey")) {
-								answerController.changecount(tobechanged, 1);
+					var updownid;
+					var tobechanged;
+					var downelement;
+					var upelement;
+					if(element.id.includes("q"))
+					{	
+						updownid = element.id;
+						downelement = document.getElementById("qvotedown");
+						upelement = document.getElementById("qvoteup");
+						if (updownid.includes("up")) 
+						{
+							if (element.className.includes("grey")) 
+							{
+								if (downelement.className.includes("grey")) 
+								{
+									answerController.changeQuestionCount(1);
+								}
+								else {
+									answerController.changeQuestionCount(2);
+									downelement.className = "fa fa-sort-desc fa-3x grey vote";
+								}
+								element.className = "fa fa-sort-asc fa-3x orange vote";
 							}
 							else {
-								answerController.changecount(tobechanged, 2);
-								downelement.className = "fa fa-sort-desc fa-3x grey vote";
+								element.className = "fa fa-sort-asc fa-3x grey vote";
+								answerController.changeQuestionCount(-1);
 							}
-							element.className = "fa fa-sort-asc fa-3x orange vote";
 						}
 						else {
-							element.className = "fa fa-sort-asc fa-3x grey vote";
-							answerController.changecount(tobechanged, -1);
+							if (element.className.includes("grey")) {
+								if (upelement.className.includes("grey")) {
+									answerController.changeQuestionCount(-1);
+								}
+								else {
+									answerController.changeQuestionCount(-2);
+									upelement.className = "fa fa-sort-asc fa-3x grey vote";
+								}
+								element.className = "fa fa-sort-desc fa-3x orange vote";
+							}
+							else {
+								element.className = "fa fa-sort-desc fa-3x grey vote";
+								answerController.changeQuestionCount(1);
+							}
 						}
 					}
-					else {
-						if (element.className.includes("grey")) {
-							if (upelement.className.includes("grey")) {
-								answerController.changecount(tobechanged, -1);
+					else
+					{
+						updownid = element.id;
+						tobechanged = updownid.slice(-1);
+						downelement = document.getElementById("votedown" + tobechanged);
+						upelement = document.getElementById("voteup" + tobechanged);
+						if (updownid.includes("up")) {
+							if (element.className.includes("grey")) {
+								if (downelement.className.includes("grey")) {
+									answerController.changeCount(tobechanged, 1);
+								}
+								else {
+									answerController.changeCount(tobechanged, 2);
+									downelement.className = "fa fa-sort-desc fa-3x grey vote";
+								}
+								element.className = "fa fa-sort-asc fa-3x orange vote";
 							}
 							else {
-								answerController.changecount(tobechanged, -2);
-								upelement.className = "fa fa-sort-asc fa-3x grey vote";
+								element.className = "fa fa-sort-asc fa-3x grey vote";
+								answerController.changeCount(tobechanged, -1);
 							}
-							element.className = "fa fa-sort-desc fa-3x orange vote";
 						}
 						else {
-							element.className = "fa fa-sort-desc fa-3x grey vote";
-							answerController.changecount(tobechanged, 1);
+							if (element.className.includes("grey")) {
+								if (upelement.className.includes("grey")) {
+									answerController.changeCount(tobechanged, -1);
+								}
+								else {
+									answerController.changeCount(tobechanged, -2);
+									upelement.className = "fa fa-sort-asc fa-3x grey vote";
+								}
+								element.className = "fa fa-sort-desc fa-3x orange vote";
+							}
+							else {
+								element.className = "fa fa-sort-desc fa-3x grey vote";
+								answerController.changeCount(tobechanged, 1);
+							}
 						}
 					}
 				}
@@ -278,11 +340,11 @@ var answerView = {
 		// 		{
 		// 			if(downelement.className.includes("grey"))
 		// 			{
-		// 				answerController.changecount(tobechanged,1);
+		// 				answerController.changeCount(tobechanged,1);
 		// 			}
 		// 			else
 		// 			{
-		// 				answerController.changecount(tobechanged,2);
+		// 				answerController.changeCount(tobechanged,2);
 		// 				downelement.className = "fa fa-sort-desc fa-3x grey vote";
 		// 			}
 		// 			element.className = "fa fa-sort-asc fa-3x orange vote";	
@@ -290,7 +352,7 @@ var answerView = {
 		// 		else
 		// 		{
 		// 			element.className = "fa fa-sort-asc fa-3x grey vote";
-		// 			answerController.changecount(tobechanged,-1);
+		// 			answerController.changeCount(tobechanged,-1);
 		// 		}
 		// 	}
 		// 	else
@@ -299,11 +361,11 @@ var answerView = {
 		// 		{
 		// 			if(upelement.className.includes("grey"))
 		// 			{
-		// 				answerController.changecount(tobechanged,-1);
+		// 				answerController.changeCount(tobechanged,-1);
 		// 			}
 		// 			else
 		// 			{
-		// 				answerController.changecount(tobechanged,-2);
+		// 				answerController.changeCount(tobechanged,-2);
 		// 				upelement.className = "fa fa-sort-asc fa-3x grey vote";
 		// 			}
 		// 			element.className = "fa fa-sort-desc fa-3x orange vote";
@@ -311,7 +373,7 @@ var answerView = {
 		// 		else
 		// 		{
 		// 			element.className = "fa fa-sort-desc fa-3x grey vote";
-		// 			answerController.changecount(tobechanged,1);
+		// 			answerController.changeCount(tobechanged,1);
 		// 		}	
 		// 	}
 		// });
@@ -465,8 +527,11 @@ var answerView = {
 			postfooterinfo.appendChild(userinfo);
 			$(".noofanswers").text(answerController.getNoOfAnswers());
 	},
-
-	changecount:function(i)
+	changeQuestionCount:function()
+	{
+		$("#questionvotes").text(answerController.getQuestionVotes());
+	},
+	changeCount:function(i)
 	{
 		//console.log("Here");
 		$("#votecount"+(i)).text(answerController.getVoteCount(i-1));

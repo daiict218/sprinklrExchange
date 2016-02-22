@@ -48,7 +48,7 @@ $(function () {
             question.votes = 0;
             question.answers = [];
             question.views = 0;
-            if (questions.length > 0)
+            if (localStorage.questions!== undefined)
                 questions = JSON.parse(localStorage.questions);
             questions.push(question);
             localStorage.questions = JSON.stringify(questions);
