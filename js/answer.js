@@ -41,11 +41,12 @@ $(function(){
 					details[i] = {};
 					details[i].id = answersArray[i].id;
 					details[i].questionId = answersArray[i].question;
-					details[i].author = localStorage.answers.author;
+					details[i].user = answersArray[i].user;
 					details[i].text = answersArray[i].text;
-					details[i].timestamp = answersArray[i].time;
+					details[i].time = answersArray[i].time;
 					details[i].votes = answersArray[i].votes;
-					console.log(details);
+					details[i].verified = answersArray[i].verified;
+					console.log(details,"details");
 				}
 			}
 
@@ -99,7 +100,9 @@ var answerController = {
 	},
 	getPostingTime:function(i)
 	{
-		return details[i].time;
+		console.log(details[i].time);
+		console.log(Date.parse(details[i].time));
+		return Date.parse(details[i].time);
 	},
 	getUserName:function(i)
 	{
@@ -109,9 +112,10 @@ var answerController = {
 	{
 		console.log(i);
 		details[i-1].votes += change;
-		var n = JSON.parse(localStorage.answers)[i-1];
-		n.votes = 1;
-		localStorage.answers[i-1] = JSON.stringify(n);
+		var n = JSON.parse(localStorage.answers);
+		console.log(n,"n");
+		n[i-1].votes = details[i-1].votes;
+		localStorage.answers = JSON.stringify(n);
 		answerView.changecount(i);
 	},
 	addNewAnswer:function(text)
@@ -152,7 +156,46 @@ var answerController = {
 	getNoOfAnswers:function()
 	{
 		return answers.length;
+	},
+	getTimeDifference:function(current, previous) {
+    
+	    var msPerMinute = 60 * 1000;
+	    var msPerHour = msPerMinute * 60;
+	    var msPerDay = msPerHour * 24;
+	    var msPerMonth = msPerDay * 30;
+	    var msPerYear = msPerDay * 365;
+	    
+	    var elapsed = current - previous;
+	    
+	    if (elapsed < msPerMinute) {
+	         return Math.round(elapsed/1000) + ' seconds ago';   
+	    }
+	    
+	    else if (elapsed < msPerHour) {
+	         return Math.round(elapsed/msPerMinute) + ' minutes ago';   
+	    }
+	    
+	    else if (elapsed < msPerDay ) {
+	         return Math.round(elapsed/msPerHour ) + ' hours ago';   
+	    }
+
+	    else if (elapsed < msPerMonth) {
+	         return Math.round(elapsed/msPerDay) + ' days ago';   
+	    }
+	    
+	    else if (elapsed < msPerYear) {
+	         return Math.round(elapsed/msPerMonth) + ' months ago';   
+	    }
+	    
+	    else {
+	         return Math.round(elapsed/msPerYear ) + ' years ago';   
+	    }
+	},
+	isAnswerVerified(i)
+	{
+		return details[i].verified;
 	}
+
 };
 var answerView = {
 	init:function()
@@ -331,6 +374,15 @@ var answerView = {
 			vote.appendChild(votecount);
 			vote.appendChild(votedown);
 
+			if(answerController.isAnswerVerified(i))
+			{
+				var verified = document.createElement("div");
+				vote.appendChild(verified);
+				var varicon = document.createElement("i");
+				varicon.className = "fa fa-check fa-2x green";
+				verified.appendChild(varicon);
+			}
+
 			var posttext = document.createElement("div");
 			posttext.className = "postcell__posttext";
 			posttext.innerHTML = answerController.getAnswerText(i);
@@ -341,7 +393,7 @@ var answerView = {
 			postcell.appendChild(postfooter);
 			var postfooterinfo = document.createElement("div");
 			postfooterinfo.className = "postcell__postfooter__info";
-			postfooterinfo.textContent = " "+answerController.getPostingTime(i) + " ";
+			postfooterinfo.textContent = "answered "+answerController.getTimeDifference(new Date(),answerController.getPostingTime(i));
 			postfooter.appendChild(postfooterinfo);
 			var userinfo = document.createElement("div");
 			userinfo.className = "postcell__postfooter__info__userinfo";
@@ -387,6 +439,14 @@ var answerView = {
 			vote.appendChild(votecount);
 			vote.appendChild(votedown);
 
+			if(answerController.isAnswerVerified(i))
+			{
+				var verified = document.createElement("div");
+				vote.appendChild(verified);
+				var varicon = document.createElement("i");
+				varicon.className = "fa fa-check fa-2x green";
+				verified.appendChild(varicon);
+			}
 			var posttext = document.createElement("div");
 			posttext.className = "postcell__posttext";
 			posttext.innerHTML = answerController.getAnswerText(i);
@@ -397,7 +457,7 @@ var answerView = {
 			postcell.appendChild(postfooter);
 			var postfooterinfo = document.createElement("div");
 			postfooterinfo.className = "postcell__postfooter__info";
-			postfooterinfo.textContent = " "+answerController.getPostingTime(i) + " ";
+			postfooterinfo.textContent = "answered "+answerController.getTimeDifference(new Date(),answerController.getPostingTime(i));
 			postfooter.appendChild(postfooterinfo);
 			var userinfo = document.createElement("div");
 			userinfo.className = "postcell__postfooter__info__userinfo";

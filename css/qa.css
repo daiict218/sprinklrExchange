@@ -85,7 +85,7 @@ body
 	word-wrap: break-word;
 	font-size: 15px;
 	line-height: 1.3;
-	white-space:pre-wrap;
+	//white-space:pre-wrap;
 }
 .tag
 {
@@ -137,4 +137,13 @@ body
 	padding-bottom:18px;
 	font-weight:400;
 	border-bottom:1px solid #f69c55;
+}
+code
+{
+	max-height:250px;
+	overflow:auto;
+}
+.green
+{
+	color:#009933;
 }
