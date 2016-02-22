@@ -1,6 +1,9 @@
 $(function(){
     
     var questions = [];
+    if(!localStorage.author){
+        localStorage.author = "Anonymous";
+    }
     if(!localStorage.questions){
         localStorage.questions = questions;
     }
