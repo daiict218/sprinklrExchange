@@ -129,6 +129,20 @@ ul
 {
 	background-color: #f69c55;
 }
-a{
+#ques{
 	color:#ffffff;
+}
+#ques:link
+{
+	color:#ffffff;
+	text-decoration:none;
+}
+#ques:visited
+{
+	color:#ffffff;
+	text-decoration:none;
+}
+a:hover
+{	color:#ffffff;
+	text-decoration:none;
 }
