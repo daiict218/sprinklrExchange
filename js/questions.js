@@ -2,17 +2,50 @@ $(function(){
     var quesId= 1;
     var questions= [];
     var tags = ['JavaScript','HTML','CSS','Java','Swing','AngularJS','BackboneJS','React'];
+    // var questionCollection = {
+    //     init: function () {
+    //         this.questions = data.map(function (datum) {
+    //             new QuestionModel(datum);
+    //         });
+    //     },
+    //     add: function(datum){
+    //         this.questions.push(new QuestionModel())
+    //     }
+    // };
+    // var QuestionModel = function (questionProps) {
+    //     this.data = questionProps;
+    //     this.id = QuestionModel._getId();
+    // };
+    // QuestionModel.prototype = {
+    //     constructor: QuestionModel,
+    //     update: function (updatedProps) {
+    //         this.data = updatedProps;
+    //     }
+    // };
+    // QuestionModel._getId = function () {
+    //     return 'q' + QuestionModel._counter++;
+    // };
+    // QuestionModel._counter = 0;
+
+    var Question = function(title,text,tags,author){
+        this.title = title;
+        this.text = text;
+        this.tags = tags;
+        this.author = author;
+    }
+
+    Question.prototype.id = function(){
+        return quesId++;
+    }
+
     var model = {
         init: function(){
 
         },
 
         add:function(title,text,tags){
-            var question = {};
-            question.id = quesId++;
-            question.title = title;
-            question.text = text;
-            question.tags = tags;
+            var question = new Question(title,text,tags,localStorage.author);
+            question.id = question.id();
             questions.push(question);
             localStorage.questions = JSON.stringify(questions);
         },
