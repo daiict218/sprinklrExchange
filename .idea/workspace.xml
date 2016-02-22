@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="28903c33-8663-4bf7-b437-7fb98a314add" name="Default" comment="" />
+    <list default="true" id="28903c33-8663-4bf7-b437-7fb98a314add" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/tags.js" afterPath="$PROJECT_DIR$/js/tags.js" />
+    </list>
     <ignored path="sprinklrExchange.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -215,12 +218,12 @@
       <workItem from="1455703146243" duration="14000" />
       <workItem from="1455705868278" duration="422000" />
       <workItem from="1456004726991" duration="55000" />
-      <workItem from="1456148760154" duration="716000" />
+      <workItem from="1456148760154" duration="783000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1207000" />
+    <option name="totallyTimeSpent" value="1274000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="961" extended-state="6" />

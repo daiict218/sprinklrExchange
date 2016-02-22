@@ -96,10 +96,10 @@ $(function () {
 
         },
         getTag: function(iterator){
-            console.log(JSON.parse(localStorage.tags));
+            // console.log(JSON.parse(localStorage.tags));
             temp_array=JSON.parse(localStorage.tags);
             tag_return = temp_array[iterator];
-            console.log(temp_array);
+            // console.log(temp_array);
         },
         getTagSummary: function(){
             return tag_return.tag_summary;
@@ -124,7 +124,7 @@ $(function () {
     var octopus = {
         init: function() {
             model.init();
-            console.log("dsds");
+            // console.log("dsds");
             view.init();
         },
         addNewTag: function (new_tag_name,new_tag_summary) {
@@ -148,17 +148,19 @@ $(function () {
             return model.getlength();
         },
         tagSearch:function(subText,iterator){
-            // console.log(subText);
             var re1 = new RegExp(subText);
             octopus.getTagObject(iterator);
-            // console.log(tag_return);
             var sttrr=JSON.stringify(tag_return);
             var objectString=sttrr.toLowerCase();
-            // console.log(objectString);
-            // console.log("Hello world");
             return re1.test(objectString);
-        }
-
+        },
+        setNumberQuestions:function(id,number_questions){
+            tags_init.tags[id].numberQuestion = number_questions;
+        },
+        getQuestionOfTag:function(id){
+            // console.log(tags_init.tags[id].numberQuestion);
+            return tags_init.tags[id].numberQuestion;
+        }   
 
     };
 
@@ -166,6 +168,12 @@ $(function () {
     var view = {
         init: function () {
             view.render();
+
+            // CurrentTag will store the current tag clicked by the user.
+            $(".tag").click(function(){
+                localStorage.currentTag = this.id;
+                localStorage.numberQuestion = octopus.getQuestionOfTag(this.id);
+            });
             $("#tagfilter").keyup(function(){
                 var filterString=document.getElementById("tagfilter").value;
                 filterString = filterString.toLowerCase();
@@ -181,7 +189,7 @@ $(function () {
 
                         str = str + '<div class="tag-cell">' +
                             '<div class="tag-cell__tagname">' +
-                            '<a href="" class="tag" title="" rel="tag">' + octopus.getTagName() + '</a>' +
+                            '<a href="tagsQuestion.html" class="tag" title="" rel="tag" id='+tags_init.tags[i].tag_id+'>' + octopus.getTagName() + '</a>' +
                             '<span class="tag-cell__tagname__multiply-x">' + "x" + '</span>' +
                             '<span class="tag-cell__tagname__totaltags">' + octopus.getTotalQuestion() + '</span>' +
                             '</div>' +
@@ -201,17 +209,19 @@ $(function () {
             // console.log(len);
             var str="";
             for(var i=0;i<len;i++) {
-
+                
                 octopus.getTagObject(i);
-
+                // console.log(tags_init.tags[i].tag_id);
                 str =str+ '<div class="tag-cell">' +
                     '<div class="tag-cell__tagname">' +
-                    '<a href="" class="tag" title="" rel="tag">' + octopus.getTagName()+ '</a>' +
+                    '<a href="tagsQuestion.html" class="tag" title="" rel="tag" id='+tags_init.tags[i].tag_id+'>' + octopus.getTagName()+ '</a>' +
                     '<span class="tag-cell__tagname__multiply-x">' + "x" + '</span>' +
                     '<span class="tag-cell__tagname__totaltags">' + octopus.getTotalQuestion() + '</span>' +
                     '</div>' +
                     '<div class="tag-cell__excerpt">' + octopus.getTagSummary() +
                     '</div>' + '</div>';
+                    octopus.setNumberQuestions(i,octopus.getTotalQuestion());
+                    // console.log(tags_init.tags[i].numberQuestion);
             }
             elem1.innerHTML=str;
 

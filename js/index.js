@@ -137,6 +137,7 @@ var view={
    index2setter: function(e,i){
         var questionSummary=octopus.getQuestions();
         questionSummary[parseInt(i)].views++;
+        console.log(i);
         localStorage.currentQuestionId=questionSummary[parseInt(i)].id;
         console.log(localStorage.currentQuestionId);
        // console.log(elem);
