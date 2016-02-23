@@ -171,4 +171,3 @@ $(function () {
     };
     octopus.init();
 });
-

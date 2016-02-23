@@ -1,6 +1,7 @@
 $(function(){
     
     var questions = [];
+    // console.log("Hello world");
     if(!localStorage.author){
         localStorage.author = "Anonymous";
     }
@@ -11,14 +12,16 @@ $(function(){
     {
         questions = JSON.parse(localStorage.questions);
     }
+    // console.log("Hello world");
     var quesId= questions.length+1;
-    var allTags = JSON.parse(localStorage.tags);
-    console.log(allTags);
+    var allTags = tags_init.tags;
+    // console.log("Hello world");
+    // console.log(allTags);
     var tags = [];
     for (var i = allTags.length - 1; i >= 0; i--) {
         tags[i] = allTags[i].tag_name;
     };
-    console.log(tags);
+    // console.log("Hello world");
     // var questionCollection = {
     //     init: function () {
     //         this.questions = data.map(function (datum) {

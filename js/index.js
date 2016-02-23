@@ -1,6 +1,6 @@
 
-if(!localStorageGet("author")){
-    localStorageSet(author,"Anonymous")
+if(!localStorage.author){
+    localStorage.author = "Anonymous";
 }
 
 
@@ -73,6 +73,7 @@ var view={
         view.render();
     },
     addHTML:function(elem,i,tagstr){
+        console.log(elem,elem.author );
         return '<a href="questionanswer.html"><div class="question__vav">'+'<div id="votesbtn'+i+'"class="question__vav__btn" data-id='+i+'  onclick="view.index2setter(this,'+i+')">'+
             '                           <div class="mini-counts"><span class="x">'+elem.votes+'</span></div>'+
             '                           <div class="name">votes</div>'+
@@ -95,13 +96,14 @@ var view={
             '                       </div>'+
             '                       <div id="author'+i+'" class="question__summary__author">'+
             '                           <div class="author">'+
-            octopus.getTimeDifference(new Date(),Date.parse(elem.time))
+            octopus.getTimeDifference(new Date(),Date.parse(elem.time))+
             '                               <a href="#">'+elem.author+'</a>'+
             '                               </author>'+
             '                           </div>'+
             '                       </div>'+
             '                   </div>';
             //
+
     },
     render:function(){
         var listelem=document.getElementById('questionlist');

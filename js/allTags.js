@@ -59,3 +59,5 @@ var tags_init= {
 
         ]
     };
+    if(!localStorage.tags)
+        localStorage.tags = JSON.stringify(tags_init.tags);
