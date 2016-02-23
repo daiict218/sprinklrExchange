@@ -21,24 +21,15 @@ $(function(){
 
 		},
 		addAnswer:function(answer){
-			//var a = [];
-			//if(!question.answers==="")
-			//	{a=JSON.parse(question.answers);}
-			//a.push(answer);
 			if (!question.answers==undefined)
                 answers = JSON.parse(question.answers);
-            //console.log(answers,"before");
             answers.push(answer);
-            //console.log(answers);
-			
             question.answers = JSON.stringify(answers);
             var p = JSON.parse(localStorage.questions);
             p[currentquestionid-1].answers.push(answer);
             localStorage.questions = JSON.stringify(p);
-			//ocalStorage.answers=JSON.stringify(a);
 		}
-		//currentAnswer : null,
-
+		
 };
 
 
@@ -62,7 +53,6 @@ var answerController = {
 	},
 	getVoteCount:function(i)
 	{
-		//console.log(answerModel.details[i]);
 		return answersArray[i].votes;
 	},
 	getAnswerText:function(i)
@@ -71,8 +61,6 @@ var answerController = {
 	},
 	getPostingTime:function(i)
 	{
-		//console.log(details[i].time);
-		//console.log(Date.parse(details[i].time));
 		return Date.parse(answersArray[i].time);
 	},
 	getUserName:function(i)
@@ -94,12 +82,13 @@ var answerController = {
 		 localStorage.questions = JSON.stringify(n);
 		 answerView.changeQuestionCount(); 
 	},
-	addNewAnswer:function(text)
+	addNewAnswer:function(text,rawText)
 	{
 		var newans = {};
 		newans.user=localStorage.author;
 		newans.question=parseInt(localStorage.currentQuestionId);
 		newans.text=text;
+		newans.rawText = rawText;
 		newans.votes=0;
 		newans.time=new Date();
 		newans.verified=false;
@@ -109,8 +98,6 @@ var answerController = {
 	},
 	getQuestiontitle:function()
 	{
-		//consolensole.log(JSON.parse(localStorage.questions)[parseInt(localStorage.currentQuestionId)-1]);
-		//console.log(localStorage.questions[parseInt(localStorage.currentQuestionId)-1].title);
 		return JSON.parse(localStorage.questions)[parseInt(localStorage.currentQuestionId)-1].title;
 	},
 	getQuestionVotes:function()
@@ -191,6 +178,16 @@ var answerView = {
 		userinfo.className = "postcell__postfooter__info__userinfo";
 		userinfo.innerHTML = answerController.getAsker();
 		postfooter_info.appendChild(userinfo);
+		
+		var postfooter = $(".postcell__postfooter")[0];
+		var editdiv = document.createElement("div");
+		editdiv.className = "postedit";
+		postfooter.appendChild(editdiv);
+		var editLink = document.createElement("a");
+		editLink.className = "editLink";
+		editLink.id = "qeditLink";
+		editLink.innerText = "Edit";
+		editdiv.appendChild(editLink);
 		for(var j=0;j<tags.length;j++)
 		{
 			var tag = document.createElement("div");
@@ -293,61 +290,11 @@ var answerView = {
 					}
 				}
 			});
-		
-		// $(".vote").click(function(e)		//will be changed once user is associated
-		// {
-		// 	var element = e.toElement;
 			
-		// 	var updownid = element.id;
-		// 	var tobechanged = updownid.slice(-1);
-		// 	var downelement = document.getElementById("votedown"+tobechanged);
-		// 	var upelement = document.getElementById("voteup"+tobechanged);
-		// 	//console.log(downelement);
-		// 	if(updownid.includes("up"))
-		// 	{	
-		// 		if(element.className.includes("grey"))
-		// 		{
-		// 			if(downelement.className.includes("grey"))
-		// 			{
-		// 				answerController.changeCount(tobechanged,1);
-		// 			}
-		// 			else
-		// 			{
-		// 				answerController.changeCount(tobechanged,2);
-		// 				downelement.className = "fa fa-sort-desc fa-3x grey vote";
-		// 			}
-		// 			element.className = "fa fa-sort-asc fa-3x orange vote";	
-		// 		}
-		// 		else
-		// 		{
-		// 			element.className = "fa fa-sort-asc fa-3x grey vote";
-		// 			answerController.changeCount(tobechanged,-1);
-		// 		}
-		// 	}
-		// 	else
-		// 	{
-		// 		if(element.className.includes("grey"))
-		// 		{
-		// 			if(upelement.className.includes("grey"))
-		// 			{
-		// 				answerController.changeCount(tobechanged,-1);
-		// 			}
-		// 			else
-		// 			{
-		// 				answerController.changeCount(tobechanged,-2);
-		// 				upelement.className = "fa fa-sort-asc fa-3x grey vote";
-		// 			}
-		// 			element.className = "fa fa-sort-desc fa-3x orange vote";
-		// 		}
-		// 		else
-		// 		{
-		// 			element.className = "fa fa-sort-desc fa-3x grey vote";
-		// 			answerController.changeCount(tobechanged,1);
-		// 		}	
-		// 	}
-		// });
+		
 		$("#btn-submit").click(function(e){
 			var text = document.getElementById('wmd-preview').innerHTML;
+			var rawText = $('#wmd-input').val();
 			var errors = $('.inputtags__errors');
             var elements = $('.inputtags__element');
             
@@ -356,7 +303,7 @@ var answerView = {
             }
             else{
 				//console.log(text);
-                answerController.addNewAnswer(text);
+                answerController.addNewAnswer(text,rawText);
             }
             $('#wmd-input').val('');
             e.preventDefault();    
@@ -364,136 +311,62 @@ var answerView = {
 		$("#discard").click(function(e){
 			$('#wmd-input').val('');
 		});
+		document.getElementsByClassName("content")[0].addEventListener("click", function (e) {
+			var element = e.target;
+			console.log(element);
+			if(element.id.includes("editLink"))
+			{
 
+				localStorage.editAnswerId = element.id.substring(8);
+				window.location.href = "edit.html";
+
+			}
+		});	
+	},
+	appendAnswers:function(voteUpId,voteCountId,voteDownId,editLinkId,i)
+	{
+		return '<div class="answer-padding">'+
+				'<table>'+
+					'<tbody>'+
+					'<tr>'+
+						'<td class="votecell">'+
+							'<div class="votecell__vote">'+
+								'<i class="fa fa-sort-asc fa-3x grey" id="'+voteUpId+'"></i>'+
+								'<div class="votecount" id="'+voteCountId+'">'+answerController.getVoteCount(i)+'</div>'+
+								'<i class="fa fa-sort-desc fa-3x grey" id="'+voteDownId+'"></i>'+
+							'</div>'+
+						'</td>'+
+						'<td class="postcell">'+
+							'<div class="postcell__posttext">'+answerController.getAnswerText(i)+'</div>'+
+							'<div class="postcell__postfooter">'+
+								'<div class="postcell__postfooter__posteditdiv">'+
+									'<a class="postcell__postfooter__posteditdiv__editlink" id="'+editLinkId+'">Edit</a>'+
+								'</div>'+
+								'<div class="postcell__postfooter__info">'+
+									"answered "+answerController.getTimeDifference(new Date(),answerController.getPostingTime(i))+
+									'<div class="postcell__postfooter__info__userinfo">'+answerController.getUserName(i)+'</div>'+
+								'</div>'+
+							'</div>'+
+						'</td>'+
+					'</tr>'+
+					'</tbody>'+
+				'</table>'+
+			'</div>'
 	},
 	render:function()
 	{
+		var answershtml = '';
 		for(var i=0;i<answers.length;i++)
 		{
-			var answerpadding = document.createElement("div");
-			answerpadding.className = "answer-padding";
-			$(".answers").append(answerpadding);
-
-			var ta = document.createElement("table");
-			var tbo = document.createElement("tbody");
-			var tr = document.createElement("tr");
-			var votecell = document.createElement("td");
-			var postcell = document.createElement("td");
-			votecell.className = "votecell";
-			postcell.className = "postcell";
-			answerpadding.appendChild(ta);
-			ta.appendChild(tbo);
-			tbo.appendChild(tr);
-			tr.appendChild(votecell);
-			tr.appendChild(postcell);
-
-			var vote = document.createElement("div");
-			vote.className = "votecell__vote";
-			votecell.appendChild(vote);
-			var voteup = document.createElement("i");
-			voteup.className = "fa fa-sort-asc fa-3x grey vote";
-			voteup.id = "voteup"+(i+1);
-			var votedown = document.createElement("i");
-			votedown.className = "fa fa-sort-desc fa-3x grey vote";
-			votedown.id = "votedown"+(i+1);
-			var votecount = document.createElement("div");
-			votecount.className = "votecount";
-			votecount.id = "votecount"+(i+1);
-			votecount.innerHTML = answerController.getVoteCount(i);
-
-			vote.appendChild(voteup);
-			vote.appendChild(votecount);
-			vote.appendChild(votedown);
-
-			if(answerController.isAnswerVerified(i))
-			{
-				var verified = document.createElement("div");
-				vote.appendChild(verified);
-				var varicon = document.createElement("i");
-				varicon.className = "fa fa-check fa-2x green";
-				verified.appendChild(varicon);
-			}
-
-			var posttext = document.createElement("div");
-			posttext.className = "postcell__posttext";
-			posttext.innerHTML = answerController.getAnswerText(i);
-			postcell.appendChild(posttext);
-
-			var postfooter = document.createElement("div");
-			postfooter.className = "postcell__postfooter";
-			postcell.appendChild(postfooter);
-			var postfooterinfo = document.createElement("div");
-			postfooterinfo.className = "postcell__postfooter__info";
-			postfooterinfo.textContent = "answered "+answerController.getTimeDifference(new Date(),answerController.getPostingTime(i));
-			postfooter.appendChild(postfooterinfo);
-			var userinfo = document.createElement("div");
-			userinfo.className = "postcell__postfooter__info__userinfo";
-			userinfo.innerHTML = answerController.getUserName(i);
-			postfooterinfo.appendChild(userinfo);
-
-		}	
+			answershtml = answershtml + this.appendAnswers("voteup"+(i+1),"votecount"+(i+1),"votedown"+(i+1),"editLink"+(i+1),i);
+		}
+		$(".answers").append(answershtml);	
 	},
 	addNewAnswer:function(i)
 	{
-			var answerpadding = document.createElement("div");
-			answerpadding.className = "answer-padding";
-			$(".answers").append(answerpadding);
-
-			var ta = document.createElement("table");
-			var tbo = document.createElement("tbody");
-			var tr = document.createElement("tr");
-			var votecell = document.createElement("td");
-			var postcell = document.createElement("td");
-			votecell.className = "votecell";
-			postcell.className = "postcell";
-			answerpadding.appendChild(ta);
-			ta.appendChild(tbo);
-			tbo.appendChild(tr);
-			tr.appendChild(votecell);
-			tr.appendChild(postcell);
-
-			var vote = document.createElement("div");
-			vote.className = "votecell__vote";
-			votecell.appendChild(vote);
-			var voteup = document.createElement("i");
-			voteup.className = "fa fa-sort-asc fa-3x grey vote";
-			voteup.id = "voteup"+(i+1);
-			var votedown = document.createElement("i");
-			votedown.className = "fa fa-sort-desc fa-3x grey vote";
-			votedown.id = "votedown"+(i+1);
-			var votecount = document.createElement("div");
-			votecount.className = "votecount";
-			votecount.id = "votecount"+(i+1);
-			votecount.innerHTML = answerController.getVoteCount(i);
-
-			vote.appendChild(voteup);
-			vote.appendChild(votecount);
-			vote.appendChild(votedown);
-
-			if(answerController.isAnswerVerified(i))
-			{
-				var verified = document.createElement("div");
-				vote.appendChild(verified);
-				var varicon = document.createElement("i");
-				varicon.className = "fa fa-check fa-2x green";
-				verified.appendChild(varicon);
-			}
-			var posttext = document.createElement("div");
-			posttext.className = "postcell__posttext";
-			posttext.innerHTML = answerController.getAnswerText(i);
-			postcell.appendChild(posttext);
-
-			var postfooter = document.createElement("div");
-			postfooter.className = "postcell__postfooter";
-			postcell.appendChild(postfooter);
-			var postfooterinfo = document.createElement("div");
-			postfooterinfo.className = "postcell__postfooter__info";
-			postfooterinfo.textContent = "answered "+answerController.getTimeDifference(new Date(),answerController.getPostingTime(i));
-			postfooter.appendChild(postfooterinfo);
-			var userinfo = document.createElement("div");
-			userinfo.className = "postcell__postfooter__info__userinfo";
-			userinfo.innerHTML = answerController.getUserName(i);
-			postfooterinfo.appendChild(userinfo);
+		var appendhtml = this.appendAnswers("voteup"+(i+1),"votecount"+(i+1),"votedown"+(i+1),"editLink"+(i+1),i);
+			
+			$(".answers").append(appendhtml);	
 			$(".noofanswers").text(answerController.getNoOfAnswers());
 	},
 	changeQuestionCount:function()

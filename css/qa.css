@@ -146,8 +146,24 @@ code
 	vertical-align: top;
 
 }
-
+.postcell__postfooter__posteditdiv
+{
+	display:inline-block;
+	float:left;
+}
+.postcell__postfooter__posteditdiv__editlink
+{
+	color:#39739d;
+}
+.postcell__postfooter__posteditdiv__editlink:hover
+{
+	color:#39739d;
+}
 .green
 {
 	color:#009933;
+}
+.editblock
+{
+	display:none;
 }

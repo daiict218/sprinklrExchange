@@ -44,11 +44,11 @@ $(function(){
         localStorage.author = "Anonynous";
 
     /* Constructor function for the question */
-    var Question = function(title,text,tags,author){
+    var Question = function(title,text,tags,rawText,author){
         this.title = title;
         this.text = text;
         this.tags = tags;
-
+        this.rawText = rawText;
         this.author = author;
         this.answers = [];
         this.votes = 0;
@@ -81,9 +81,9 @@ $(function(){
 
         },
 
-        add:function(title,text,tags){
+        add:function(title,text,tags,rawText){
             console.log(getAuthor());
-            var question = new Question(title,text,tags,getAuthor());
+            var question = new Question(title,text,tags,rawText,getAuthor());
             question.id = question.id();
             questions.push(question);
             localStorage.questions = JSON.stringify(questions);
@@ -104,8 +104,8 @@ $(function(){
 
 
     var octopus = {
-        addNewQuestion:function(title,text,tags){
-            model.add(title,text,tags);
+        addNewQuestion:function(title,text,tags,rawText){
+            model.add(title,text,tags,rawText);
             view.render();
         },
 
@@ -126,7 +126,8 @@ $(function(){
                 var title = $('#input_element1').val();
                 // console.log(title);
                 var text = $('#wmd-preview').html();
-                console.log(text);
+                var rawText = $('#wmd-input').val();
+                console.log(rawText,"rt");
                 var errors = $('.inputtags__errors');
                 var elements = $('.inputtags__element');
                 var message = [];
@@ -144,7 +145,7 @@ $(function(){
                     errors.html("No tags selected");   
                 }
                 else{
-                    octopus.addNewQuestion(title,text,message);
+                    octopus.addNewQuestion(title,text,message,rawText);
                     window.location.href="index.html";
                 }   
                 e.preventDefault();
