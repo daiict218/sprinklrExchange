@@ -124,7 +124,6 @@ $(function(){
         init:function(){
             $('#btn-submit').click(function(e){
                 var title = $('#input_element1').val();
-                // console.log(title);
                 var text = $('#wmd-preview').html();
                 console.log(text);
                 var errors = $('.inputtags__errors');
@@ -152,13 +151,11 @@ $(function(){
             view.render();
         },
         render:function(){
-            // $('#viewTemp').html(octopus.getQuestions()[0]);
-           // console.log(questions);
-           var htmlStr = '';
-           for (var i = 0; i < tags.length; i++) {
-               htmlStr += "<option value="+(i+1)+">"+tags[i]+"</option>"
-           };        
-           //console.log(htmlStr);
+           var index = -1;
+           var htmlStr = tags.reduce(function(a,b){
+                index++;
+                return a + "<option value="+(index+1)+">"+b+"</option>"; 
+           },'');
            $("#options").html(htmlStr);
         }
     };

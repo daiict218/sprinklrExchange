@@ -1,10 +1,15 @@
+
+if(!localStorageGet("author")){
+    localStorageSet(author,"Anonymous")
+}
+
+
 var Model={
     init:function(){
-            if (!localStorage.questions) {
-                localStorage.questions = JSON.stringify([]);
-            }
-            this.questionSummary=JSON.parse(localStorage.questions);
-
+        if(!localStorageGet("questions")){
+            localStorageSet("questions",[]);
+        }
+        this.questionSummary = localStorageGet("questions");
     },
     questionSummary:[
     ],
@@ -12,9 +17,8 @@ var Model={
         return this.questionSummary;
     }
 
-};
-
-
+};//view onlcik
+//answes
 var octopus={
     init: function(){
             Model.init();
@@ -61,16 +65,19 @@ var octopus={
 
 var view={
     init:function(){
-        if(!localStorage.currentQuestionId)
-            localStorage.currentQuestionId= 1;
+        if(!localStorageGet("currentQuestionId")){
+            localStorageSet("currentQuestionId",1);
+        }
+        // if(!localStorage.currentQuestionId)
+        //     localStorage.currentQuestionId= 1;
         view.render();
     },
     addHTML:function(elem,i,tagstr){
-        return '<div class="question__vav">'+'<div id="votesbtn'+i+'"class="question__vav__btn" data-id='+i+' >'+
+        return '<a href="questionanswer.html"><div class="question__vav">'+'<div id="votesbtn'+i+'"class="question__vav__btn" data-id='+i+'  onclick="view.index2setter(this,'+i+')">'+
             '                           <div class="mini-counts"><span class="x">'+elem.votes+'</span></div>'+
             '                           <div class="name">votes</div>'+
             '                       </div>'+
-            '               <div id="answerbtn'+i+'"class="question__vav__btn question__vav__btn--color">'+
+            '               <div id="answerbtn'+i+'"class="question__vav__btn question__vav__btn--color" onclick="view.index2setter(this,'+i+')">'+
             '               <div class="mini-counts"><span class="x--mod">'+elem.answers.length+'</span></div>'+
             '                       <div class="name--mod">answers</div>'+
             '                       </div>'+
@@ -78,9 +85,9 @@ var view={
             '                           <div class="mini-counts"><span class="x">'+elem.views+'</span></div>'+
             '                           <div class="name">views</div>'+
             '                       </div>'+
-            '            </div>'+
+            '            </div></a>'+
             '                   <div class="question__summary">'+
-            '                       <div class="question__summary__ques">'+
+            '                       <div class="question__summary__ques" onclick="view.index2setter(this,'+i+')">'+
             '                           <h3><a href="questionanswer.html"  class="question-link">'+elem.title+'</a></h3>'+
             '                       </div>'+
             '                       <div class="question__summary__tags">'+
@@ -119,17 +126,18 @@ var view={
 
             var answerbtn = document.getElementsByClassName('question__vav__btn question__vav__btn--color')[index+1];
             var c=answerbtn.childNodes[1].childNodes[0];
-
+//console.log(answerbtn);
+            //console.log(c.textContent);
             var n=answerbtn.childNodes[3];
             if(parseInt(c.textContent)==0) {
-                console.log(element.title);
+                // console.log(element.title);
                 c.className = 'x';
                 n.className= 'name'
                 answerbtn.style.background='white';
-                console.log(answerbtn);
+                // console.log(answerbtn);
             }
             else {
-                console.log(element.title, "hello");
+                // console.log(element.title, "hello");
                 answerbtn.style.background = '#f69c55';
             }
         });
@@ -137,15 +145,14 @@ var view={
    index2setter: function(e,i){
         var questionSummary=octopus.getQuestions();
         questionSummary[parseInt(i)].views++;
-        console.log(i);
-        localStorage.currentQuestionId=questionSummary[parseInt(i)].id;
-        console.log(localStorage.currentQuestionId);
+        // console.log(questionSummary[parseInt(i)].id);
+        localStorageSet("currentQuestionId",questionSummary[parseInt(i)].id);
+        // localStorage.currentQuestionId=questionSummary[parseInt(i)].id;
+        // console.log(localStorage.currentQuestionId);
        // console.log(elem);
-       localStorage.questions=JSON.stringify(questionSummary);
+       localStorageSet("questions",questionSummary);
+       // localStorage.questions=JSON.stringify(questionSummary);
     }
 }
 octopus.init();
-
-if(!localStorage.tags){
-    localStorage.tags = JSON.stringify(tags_init.tags);
-}
+ 
