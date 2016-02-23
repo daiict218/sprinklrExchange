@@ -54,14 +54,14 @@ body
 	color:#777;
 	font-weight:900;
 }
-.grey
+.colorless
 {
 
 	cursor:pointer;
 	display:block;
 	color:#777;
 }
-.orange
+.colored
 {
 	cursor:pointer;
 	display:block;
