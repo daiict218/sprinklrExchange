@@ -6,11 +6,15 @@ $(function(){
     // questionselem.tags.forEach(function(element,index,a){
     //             tagstr+='<a href="#" class="tags">'+element+'</a>';
     //         });
-    tagstr = "";
+    var tagstr;
     var htmlStr = "";
     var listelem=document.getElementById('questionlist');
     tags[tagId].questionId.forEach (function(elem,i,array) {
         console.log(elem);
+        tagstr="";
+       questions[elem-1].tags.forEach(function(element,index,a){
+           tagstr+='<a href="#" class="tags">'+element+'</a>';
+       });
         var questionblock= document.createElement('div');
         questionblock.className='question';
         questionblock.id='question'+i;
