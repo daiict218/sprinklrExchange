@@ -1,5 +1,5 @@
 $(function(){
-	var answers = [];
+	//var answers = [];
 	var answerId = 0;
 	var details = [];
 	var questions = [];
@@ -10,24 +10,50 @@ $(function(){
 	var currentQuestionId = 0;
 	var question = "";
 var answerModel = {
+		answers:[],
 		init:function(){
 		questions = JSON.parse(localStorage.questions);
 		
 		currentQuestionId = localStorage.currentQuestionId;
-		//console.log(currentQuestionId);
 		question = questions[parseInt(currentQuestionId)-1];
-		//console.log(question.answers);
 		answersArray = question.answers;
 
 		},
 		addAnswer:function(answer){
 			if (!question.answers)
-                answers = JSON.parse(question.answers);
-            answers.push(answer);
-            question.answers = JSON.stringify(answers);
+            {    
+            	answeerModel.answers = JSON.parse(question.answers);
+            }
+            answerModel.answers.push(answer);
+            question.answers = JSON.stringify(answerModel.answers);
             var tempQuestions = JSON.parse(localStorage.questions);
             tempQuestions[currentQuestionId-1].answers.push(answer);
             localStorage.questions = JSON.stringify(tempQuestions);
+		},
+		getQuestiontitle:function()
+		{
+			return question.title;
+		},
+		getQuestionVotes:function()
+		{
+			return question.votes;	
+		},
+		getText:function()
+		{
+			return question.text;
+		},
+		getQuestionPostingTime:function()
+		{
+			// console.log("ohh",Date.parse(JSON.parse(localStorage.questions)[parseInt(localStorage.currentQuestionId)-1].time));
+			return Date.parse(question.time);
+		},
+		getAsker:function()
+		{
+		 	return question.author;
+		},
+		getTags:function()
+		{
+			return question.tags;
 		}
 		
 };
@@ -39,7 +65,7 @@ var answerController = {
 		answerModel.init();
 		answerView.init();
 	},
-	getAnswers:function()
+	getAnswersArray:function()
 	{
 		return answersArray;
 	},
@@ -77,9 +103,9 @@ var answerController = {
 	},
 	changeQuestionCount:function(change)
 	{
-		 var n = JSON.parse(localStorage.questions);
-		 n[parseInt(localStorage.currentQuestionId)-1].votes += change;
-		 localStorage.questions = JSON.stringify(n);
+		 var tempQuestions = JSON.parse(localStorage.questions);
+		 tempQuestions[parseInt(localStorage.currentQuestionId)-1].votes += change;
+		 localStorage.questions = JSON.stringify(tempQuestions);
 		 answerView.changeQuestionCount(); 
 	},
 	addNewAnswer:function(text,rawText)
@@ -98,19 +124,23 @@ var answerController = {
 	},
 	getQuestiontitle:function()
 	{
-		return JSON.parse(localStorage.questions)[parseInt(localStorage.currentQuestionId)-1].title;
+		return answerModel.getQuestiontitle();
 	},
 	getQuestionVotes:function()
 	{
-		return JSON.parse(localStorage.questions)[parseInt(localStorage.currentQuestionId)-1].votes;	
+		return answerModel.getQuestionVotes();	
 	},
 	getText:function()
 	{
-		return JSON.parse(localStorage.questions)[parseInt(localStorage.currentQuestionId)-1].text;
+		return answerModel.getText();
+	},
+	getAnswers:function()
+	{
+		return answerModel.answers;
 	},
 	getNoOfAnswers:function()
 	{
-		return answers.length;
+		return answerModel.answers.length;
 	},
 	getTimeDifference:function(current, previous) {
     
@@ -148,16 +178,19 @@ var answerController = {
 	},
 	getQuestionPostingTime:function()
 	{
-		// console.log("ohh",Date.parse(JSON.parse(localStorage.questions)[parseInt(localStorage.currentQuestionId)-1].time));
-		return Date.parse(JSON.parse(localStorage.questions)[parseInt(localStorage.currentQuestionId)-1].time);
+		return answerModel.getQuestionPostingTime();
 	},
 	getAsker:function()
 	{
-	 	return JSON.parse(localStorage.questions)[parseInt(localStorage.currentQuestionId)-1].author;
+	 	return answerModel.getAsker();
 	},
 	getTags:function()
 	{
-		return JSON.parse(localStorage.questions)[parseInt(localStorage.currentQuestionId)-1].tags;
+		return answerModel.getTags();
+	},
+	setAnswers:function(answers)
+	{
+		answerModel.answers = answers;
 	}
 
 };
@@ -171,11 +204,55 @@ var answerView = {
 		this.addTags();
 		this.addPostFooterInfo();
 		
-		answers = answerController.getAnswers();
+		answerController.setAnswers(answerController.getAnswersArray());
 
 		$(".noofanswers").text(answerController.getNoOfAnswers());
 		this.render();
-			
+		this.eventHandlers();
+		
+		
+
+/*	Not decided whether to include or not
+
+		document.getElementsByClassName("content")[0].addEventListener("click", function (e) {
+			var element = e.target;
+			console.log(element);
+			if(element.id.includes("editLink"))
+			{
+
+				localStorage.editAnswerId = element.id.substring(8);
+				window.location.href = "edit.html";
+
+			}
+		});	
+*/
+	},
+
+	eventHandlers:function()
+	{
+		this.voteCountHandler();
+		$("#btn-submit").click(function(e){
+			var text = $('#wmd-preview').html(),rawText = $('#wmd-input').val(),errors = $('.inputtags__errors'),elements = $('.inputtags__element');
+            
+            if(text === ""){
+                    errors.html("Empty Body");   
+            }
+            else{
+				//console.log(text);
+                answerController.addNewAnswer(text,rawText);
+            }
+            $('#wmd-input').val('');
+            e.preventDefault();    
+		});
+
+
+		$("#discard").click(function(e){
+			$('#wmd-input').val('');
+		});
+	},
+
+	voteCountHandler:function()
+	{
 		$(".content")[0].addEventListener("click", function (e) 
 		{
 				
@@ -265,73 +342,44 @@ var answerView = {
 			});
 			
 
-/*event handlers*/
-		
-		$("#btn-submit").click(function(e){
-			var text = $('#wmd-preview').html(),rawText = $('#wmd-input').val(),errors = $('.inputtags__errors'),elements = $('.inputtags__element');
-            
-            if(text === ""){
-                    errors.html("Empty Body");   
-            }
-            else{
-				//console.log(text);
-                answerController.addNewAnswer(text,rawText);
-            }
-            $('#wmd-input').val('');
-            e.preventDefault();    
-		});
-
-
-		$("#discard").click(function(e){
-			$('#wmd-input').val('');
-		});
-
-/*	Not decided whether to include or not
-
-		document.getElementsByClassName("content")[0].addEventListener("click", function (e) {
-			var element = e.target;
-			console.log(element);
-			if(element.id.includes("editLink"))
-			{
-
-				localStorage.editAnswerId = element.id.substring(8);
-				window.location.href = "edit.html";
-
-			}
-		});	
-*/
 	},
 
-
-	appendAnswerString:function(voteUpId,voteCountId,voteDownId,editLinkId,index)
+	appendAnswerString:function(tempObject)
 	{
 		return '<div class="answer-padding">'+
 					'<div class="votecell">'+
 						'<div class="votecell__vote">'+
-							'<i class="fa fa-sort-asc fa-3x colorless" id="'+voteUpId+'"></i>'+
-							'<div class="votecount" id="'+voteCountId+'">'+answerController.getVoteCount(index)+'</div>'+
-							'<i class="fa fa-sort-desc fa-3x colorless" id="'+voteDownId+'"></i>'+
+							'<i class="fa fa-sort-asc fa-3x colorless" id="'+tempObject.voteUpId+'"></i>'+
+							'<div class="votecount" id="'+tempObject.voteCountId+'">'+answerController.getVoteCount(tempObject.index)+'</div>'+
+							'<i class="fa fa-sort-desc fa-3x colorless" id="'+tempObject.voteDownId+'"></i>'+
 						'</div>'+
 					'</div>'+
 					'<div class="postcell">'+
-						'<div class="postcell__posttext">'+answerController.getAnswerText(index)+'</div>'+
+						'<div class="postcell__posttext">'+answerController.getAnswerText(tempObject.index)+'</div>'+
 						'<div class="postcell__postfooter clearfix">'+
 							'<div class="postcell__postfooter__info">'+
-								"answered "+answerController.getTimeDifference(new Date(),answerController.getPostingTime(index))+
-								'<div class="postcell__postfooter__info__userinfo">'+answerController.getUserName(index)+'</div>'+
+								"answered "+answerController.getTimeDifference(new Date(),answerController.getPostingTime(tempObject.index))+
+								'<div class="postcell__postfooter__info__userinfo">'+answerController.getUserName(tempObject.index)+'</div>'+
 							'</div>'+
 						'</div>'+
 					'</div>'+
 				'</div>'
 	},
 
-
+	
 	render:function()
 	{
 		var allAnswersHtmlString = '';
-		for(var index=0;index<answers.length;index++)
+		var tempObject = {};		//to pass 5 arguments
+		for(var index=0;index<answerController.getNoOfAnswers();index++)
 		{
-			allAnswersHtmlString = allAnswersHtmlString + this.appendAnswerString("voteup"+(index+1),"votecount"+(index+1),"votedown"+(index+1),"editLink"+(index+1),index);
+			
+			tempObject.voteUpId = "voteup"+(index+1);
+			tempObject.voteCountId = "votecount"+(index+1);
+			tempObject.voteDownId = "votedown"+(index+1);
+			tempObject.editLinkId = "editLink"+(index+1);
+			tempObject.index = index;
+			allAnswersHtmlString = allAnswersHtmlString + this.appendAnswerString(tempObject);
 		}
 		$(".answers").append(allAnswersHtmlString);	
 	},
@@ -339,7 +387,14 @@ var answerView = {
 
 	addNewAnswer:function(index)
 	{
-		var newAnswerHtmlString = this.appendAnswerString("voteup"+(index+1),"votecount"+(index+1),"votedown"+(index+1),"editLink"+(index+1),index);
+			var tempObject = {};	//to pass 5 arguments
+			tempObject.voteUpId = "voteup"+(index+1);
+			tempObject.voteCountId = "votecount"+(index+1);
+			tempObject.voteDownId = "votedown"+(index+1);
+			tempObject.editLinkId = "editLink"+(index+1);
+			tempObject.index = index;
+			
+		var newAnswerHtmlString = this.appendAnswerString(tempObject);
 			
 			$(".answers").append(newAnswerHtmlString);	
 			$(".noofanswers").text(answerController.getNoOfAnswers());

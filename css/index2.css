@@ -132,7 +132,7 @@ body{
 	background-color: #FFF8DC;
 	padding: 20px;
 	width: 330px;
-	height: 259px;
+	//height: 259px;
 }
 .tips{
 	padding-top: 10px;
@@ -140,7 +140,7 @@ body{
 }
 #newbie-lower{
 	margin-top: 20px;
-	height: 500px;
+	//height: 500px;
 }
 .newbietext{
 	display: inline-block;
