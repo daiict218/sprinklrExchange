@@ -1,59 +1,85 @@
 $(function(){
-	//var answers = [];
-	var answerId = 0;
-	var details = [];
-	var questions = [];
-	if(!localStorage.author)
-    	localStorage.author = "Anonynous";
-	var ansArray = [];
-	var answersArray = [];
-	var currentQuestionId = 0;
-	var question = "";
+	
+	//var answersArray = [];
+	
 var answerModel = {
-		answers:[],
-		init:function(){
-		questions = JSON.parse(localStorage.questions);
+		answers : [],
+		nextAnswerId : 0,
+		currentQuestionId : 0,
+		question : "",
+		answersArray:[],
 		
-		currentQuestionId = localStorage.currentQuestionId;
-		question = questions[parseInt(currentQuestionId)-1];
-		answersArray = question.answers;
+		init:function(){
+			if(!localStorage.author)
+	    		localStorage.author = "Anonynous";
+		
+			questions = JSON.parse(localStorage.questions);
+			
+			answerModel.currentQuestionId = localStorage.currentQuestionId;
+			
+			answerModel.question = questions[parseInt(answerModel.currentQuestionId)-1];
+			
+			answerModel.answersArray = answerModel.question.answers;
 
 		},
 		addAnswer:function(answer){
-			if (!question.answers)
+			if (!answerModel.question.answers)
             {    
-            	answeerModel.answers = JSON.parse(question.answers);
+            	answeerModel.answers = JSON.parse(answerModel.question.answers);
             }
             answerModel.answers.push(answer);
-            question.answers = JSON.stringify(answerModel.answers);
+            answerModel.question.answers = JSON.stringify(answerModel.answers);
             var tempQuestions = JSON.parse(localStorage.questions);
-            tempQuestions[currentQuestionId-1].answers.push(answer);
+            tempQuestions[answerModel.currentQuestionId-1].answers.push(answer);
             localStorage.questions = JSON.stringify(tempQuestions);
 		},
 		getQuestiontitle:function()
 		{
-			return question.title;
+			return answerModel.question.title;
 		},
 		getQuestionVotes:function()
 		{
-			return question.votes;	
+			return answerModel.question.votes;	
 		},
 		getText:function()
 		{
-			return question.text;
+			return answerModel.question.text;
 		},
 		getQuestionPostingTime:function()
 		{
 			// console.log("ohh",Date.parse(JSON.parse(localStorage.questions)[parseInt(localStorage.currentQuestionId)-1].time));
-			return Date.parse(question.time);
+			return Date.parse(answerModel.question.time);
 		},
 		getAsker:function()
 		{
-		 	return question.author;
+		 	return answerModel.question.author;
 		},
 		getTags:function()
 		{
-			return question.tags;
+			return answerModel.question.tags;
+		},
+		changeCount:function(index,change)
+		{
+			answerModel.answersArray[index-1].votes += change;
+			var tempQuestions = JSON.parse(localStorage.questions);
+			tempQuestions[parseInt(answerModel.currentQuestionId)-1].answers[index-1].votes = answerModel.answersArray[index-1].votes;
+			localStorage.questions = JSON.stringify(tempQuestions);
+		},
+		changeQuestionCount:function(change)
+		{
+			answerModel.question.votes +=change;
+			var tempQuestions = JSON.parse(localStorage.questions);
+			tempQuestions[parseInt(localStorage.currentQuestionId)-1].votes += change;
+			localStorage.questions = JSON.stringify(tempQuestions);
+			
+		},
+		getAuthor:function()
+		{
+			return localStorage.author;
+		},
+		getCurrentQuestionId:function()
+		{
+			return parseInt(localStorage.currentQuestionId);
 		}
 		
 };
@@ -67,7 +93,7 @@ var answerController = {
 	},
 	getAnswersArray:function()
 	{
-		return answersArray;
+		return answerModel.answersArray;
 	},
 	getCurrentAnswer:function()
 	{
@@ -79,48 +105,43 @@ var answerController = {
 	},
 	getVoteCount:function(index)
 	{
-		return answersArray[index].votes;
+		return answerModel.answersArray[index].votes;
 	},
 	getAnswerText:function(index)
 	{
-		return answersArray[index].text;
+		return answerModel.answersArray[index].text;
 	},
 	getPostingTime:function(index)
 	{
-		return Date.parse(answersArray[index].time);
+		return Date.parse(answerModel.answersArray[index].time);
 	},
 	getUserName:function(index)
 	{
-		return answersArray[index].user;
+		return answerModel.answersArray[index].user;
 	},
 	changeCount:function(index,change)
 	{
-		answersArray[index-1].votes += change;
-		var tempQuestions = JSON.parse(localStorage.questions);
-		tempQuestions[parseInt(currentQuestionId)-1].answers[index-1].votes = answersArray[index-1].votes;
-		localStorage.questions = JSON.stringify(tempQuestions);
+		answerModel.changeCount(index,change);
 		answerView.changeCount(index);
 	},
 	changeQuestionCount:function(change)
 	{
-		 var tempQuestions = JSON.parse(localStorage.questions);
-		 tempQuestions[parseInt(localStorage.currentQuestionId)-1].votes += change;
-		 localStorage.questions = JSON.stringify(tempQuestions);
-		 answerView.changeQuestionCount(); 
+		answerModel.changeQuestionCount(change);
+		answerView.changeQuestionCount(); 
 	},
 	addNewAnswer:function(text,rawText)
 	{
 		var newAnswer = {};
-		newAnswer.user=localStorage.author;
-		newAnswer.question=parseInt(localStorage.currentQuestionId);
+		newAnswer.user=answerModel.getAuthor();
+		newAnswer.question=answerModel.getCurrentQuestionId();
 		newAnswer.text=text;
 		newAnswer.rawText = rawText;
 		newAnswer.votes=0;
 		newAnswer.time=new Date();
 		newAnswer.verified=false;
-		newAnswer.id = ++answerId;
+		newAnswer.id = ++answerModel.nextAnswerId;
 		answerModel.addAnswer(newAnswer);
-		answerView.addNewAnswer(answersArray.length-1);
+		answerView.addNewAnswer(answerModel.answersArray.length-1);
 	},
 	getQuestiontitle:function()
 	{
@@ -174,7 +195,7 @@ var answerController = {
 	},
 	isAnswerVerified:function(index)	//After Backend Support and User Integration
 	{
-		return answersArray[index].verified;
+		return answerModel.answersArray[index].verified;
 	},
 	getQuestionPostingTime:function()
 	{
