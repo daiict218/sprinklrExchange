@@ -307,7 +307,7 @@ var answerView = {
 					var upDownId = element.id,toBeChanged,downElement,upElement;
 					if(element.id.includes("q"))
 					{	
-						toBeChanged = null;
+						toBeChanged = 0;
 						downElement = $("#qvotedown")[0];
 						upElement = $("#qvoteup")[0];
 						if (upDownId.includes("up")) 
@@ -397,12 +397,96 @@ var answerView = {
 							}
 						}
 					}
+					//answerView.voteCountHelper(upDownId,toBeChanged,downElement,upElement,elemen);
 				}
 			});
 			
 
 	},
-
+	/* Can also make use of helper function
+	voteCountHelper:function(upDownId,toBeChanged,downElement,upElement,element)
+	{
+						if (upDownId.includes("up")) {
+							if (!answerController.hasVotedUp(toBeChanged)) {
+								if (!answerController.hasVotedDown(toBeChanged)) {
+									if(toBeChanged!=0)
+									{	
+										answerController.changeCount(toBeChanged, 1);
+									}
+									else
+									{
+										answerController.changeQuestionCount(1);
+									}
+								}
+								else {
+									if(toBeChanged!=0)
+									{	
+										answerController.changeCount(toBeChanged, 2);
+									}
+									else
+									{
+										answerController.changeQuestionCount(2);
+									}
+									answerController.notVotedDown(toBeChanged);
+									downElement.className = "fa fa-sort-desc fa-3x colorless vote";
+								}
+								element.className = "fa fa-sort-asc fa-3x colored vote";
+								answerController.votedUp(toBeChanged);
+							}
+							else {
+								element.className = "fa fa-sort-asc fa-3x colorless vote";
+									if(toBeChanged!=0)
+									{	
+										answerController.changeCount(toBeChanged, -1);
+									}
+									else
+									{
+										answerController.changeQuestionCount(-1);
+									}
+									answerController.notVotedUp(toBeChanged);
+							}
+						}
+						else {
+							if (!answerController.hasVotedDown(toBeChanged)) {
+								if (!answerController.hasVotedUp(toBeChanged)) {
+									if(toBeChanged!=0)
+									{	
+										answerController.changeCount(toBeChanged, -1);
+									}
+									else
+									{
+										answerController.changeQuestionCount(-1);
+									}
+								}
+								else {
+									if(toBeChanged!=0)
+									{	
+										answerController.changeCount(toBeChanged, -2);
+									}
+									else
+									{
+										answerController.changeQuestionCount(-2);
+									}
+									answerController.notVotedUp(toBeChanged)
+									upElement.className = "fa fa-sort-asc fa-3x colorless vote";
+								}
+								element.className = "fa fa-sort-desc fa-3x colored vote";
+								answerController.votedDown(toBeChanged);
+							}
+							else {
+								element.className = "fa fa-sort-desc fa-3x colorless vote";
+																	if(toBeChanged!=0)
+									{	
+										answerController.changeCount(toBeChanged, 1);
+									}
+									else
+									{
+										answerController.changeQuestionCount(1);
+									}
+									answerController.notVotedDown(toBeChanged);
+							}
+						}
+	},*/
 	appendAnswerString:function(tempObject)
 	{
 		return '<div class="answer-padding">'+
