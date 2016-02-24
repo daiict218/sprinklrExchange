@@ -4,9 +4,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/qa.css">
-    <meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id" content="472834415640-o419551t0kpu4jfl6h0pj7v64frcfsmi.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.0.min.js"></script>
+
     <title>
         Sprinklr Exchange
     </title>
@@ -26,15 +25,9 @@
 
                 <form class="searchform" id="search">
                     <i class="fa fa-search" id="searchicon"></i>
-                    <input class="searchform__searchbox" maxlength="240" placeholder="Search Q&A">
+                    <input class="searchform__searchbox" id="searchAll" maxlength="240" placeholder="Search Q&A">
                 </form>
             </div>
-            <div class="g-signin2" id ="signin" data-onsuccess="onSignIn" data-theme="dark" data-width="150" data-height="23"></div>
-            <button class="signout">
-                <a href="#" onclick="signOut()">Signout</a>
-            </button>
-            <div id="profile-name"></div>
-
         </div>
     </div>
 </div>
@@ -45,13 +38,12 @@
         </div>
         <div class="header__tabs">
             <ul>
-                <li class="header__tabs__options"><a  id="questions">Questions</a></li>
-                <li class="header__tabs__options"><a id="questions">Tags</a></li>
-                <li class="header__tabs__options"><a id="questions">Ask Question</a></li>
+                <li class="header__tabs__options"><a href="index.html" id="ques">Questions</a></li>
+                <li class="header__tabs__options"><a href="tags.html" id="ques">Tags</a></li>
+                <li class="header__tabs__options"><a href="index2.html" id="ques">Ask Question</a></li>
 
             </ul>
         </div>
-
     </div>
     <div class="content">
 
@@ -60,30 +52,5 @@
 <div class="footer">
 
 </div>
-<script>
-    function signOut() {
-        var auth2 = gapi.auth2.getAuthInstance();
-        auth2.signOut().then(function () {
-            console.log('User signed out.');
-            document.getElementById("profile-name").innerHTML="";
-        });
-    }
-</script>
-<script>
-    function onSignIn(googleUser) {
-        // Useful data for your client-side scripts:
-        var profile = googleUser.getBasicProfile();
-        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-        console.log("Name: " + profile.getName());
-        console.log("Image URL: " + profile.getImageUrl());
-        console.log("Email: " + profile.getEmail());
-        document.getElementById("profile-name").innerHTML=profile.getName();
-
-
-        // The ID token you need to pass to your backend:
-        var id_token = googleUser.getAuthResponse().id_token;
-        console.log("ID Token: " + id_token);
-
-    };
-</script>
 </body>
+<script type="text/javascript" src="js/header.js"></script>
