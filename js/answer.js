@@ -8,7 +8,8 @@ var answerModel = {
 		currentQuestionId : 0,
 		question : "",
 		answersArray:[],
-		
+		hasVotedUp:[],	//0th index for question
+		hasVotedDown:[],	
 		init:function(){
 			if(!localStorage.author)
 	    		localStorage.author = "Anonynous";
@@ -212,6 +213,30 @@ var answerController = {
 	setAnswers:function(answers)
 	{
 		answerModel.answers = answers;
+	},
+	votedUp:function(index)
+	{
+		answerModel.hasVotedUp[index] = true;
+	},
+	votedDown:function(index)
+	{
+		answerModel.hasVotedDown[index] = true;
+	},
+	notVotedUp:function(index)
+	{
+		answerModel.hasVotedUp[index] = false;
+	},
+	notVotedDown:function(index)
+	{
+		answerModel.hasVotedDown[index] = false;
+	},
+	hasVotedUp:function(index)
+	{
+		return !!(answerModel.hasVotedUp[index]);
+	},
+	hasVotedDown:function(index)
+	{
+		return !!(answerModel.hasVotedDown[index]);
 	}
 
 };
@@ -227,7 +252,7 @@ var answerView = {
 		
 		answerController.setAnswers(answerController.getAnswersArray());
 
-		$(".noofanswers").text(answerController.getNoOfAnswers());
+		$(".no-of-answers").text(answerController.getNoOfAnswers());
 		this.render();
 		this.eventHandlers();
 		
@@ -287,37 +312,44 @@ var answerView = {
 						upElement = $("#qvoteup")[0];
 						if (upDownId.includes("up")) 
 						{
-							if (element.className.includes("colorless")) 
+							//answerController.votedUp(0);
+							if (!answerController.hasVotedUp(0)) 
 							{
-								if (downElement.className.includes("colorless")) 
+								if (!answerController.hasVotedDown(0)) 
 								{
 									answerController.changeQuestionCount(1);
 								}
 								else {
 									answerController.changeQuestionCount(2);
+									answerController.notVotedDown(0);
 									downElement.className = "fa fa-sort-desc fa-3x colorless vote";
 								}
 								element.className = "fa fa-sort-asc fa-3x colored vote";
+								answerController.votedUp(0);
 							}
 							else {
 								element.className = "fa fa-sort-asc fa-3x colorless vote";
 								answerController.changeQuestionCount(-1);
+								answerController.notVotedUp(0);
 							}
 						}
 						else {
-							if (element.className.includes("colorless")) {
-								if (upElement.className.includes("colorless")) {
+							if (!answerController.hasVotedDown(0)) {
+								if (!answerController.hasVotedUp(0)) {
 									answerController.changeQuestionCount(-1);
 								}
 								else {
 									answerController.changeQuestionCount(-2);
+									answerController.notVotedUp(0)
 									upElement.className = "fa fa-sort-asc fa-3x colorless vote";
 								}
 								element.className = "fa fa-sort-desc fa-3x colored vote";
+								answerController.votedDown(0);
 							}
 							else {
 								element.className = "fa fa-sort-desc fa-3x colorless vote";
 								answerController.changeQuestionCount(1);
+								answerController.notVotedDown(0);
 							}
 						}
 					}
@@ -327,35 +359,41 @@ var answerView = {
 						downElement = $("#votedown" + toBeChanged)[0];
 						upElement = $("#voteup" + toBeChanged)[0];
 						if (upDownId.includes("up")) {
-							if (element.className.includes("colorless")) {
-								if (downElement.className.includes("colorless")) {
+							if (!answerController.hasVotedUp(toBeChanged)) {
+								if (!answerController.hasVotedDown(toBeChanged)) {
 									answerController.changeCount(toBeChanged, 1);
 								}
 								else {
 									answerController.changeCount(toBeChanged, 2);
+									answerController.notVotedDown(toBeChanged);
 									downElement.className = "fa fa-sort-desc fa-3x colorless vote";
 								}
 								element.className = "fa fa-sort-asc fa-3x colored vote";
+								answerController.votedUp(toBeChanged);
 							}
 							else {
 								element.className = "fa fa-sort-asc fa-3x colorless vote";
 								answerController.changeCount(toBeChanged, -1);
+								answerController.notVotedUp(toBeChanged);
 							}
 						}
 						else {
-							if (element.className.includes("colorless")) {
-								if (upElement.className.includes("colorless")) {
+							if (!answerController.hasVotedDown(toBeChanged)) {
+								if (!answerController.hasVotedUp(toBeChanged)) {
 									answerController.changeCount(toBeChanged, -1);
 								}
 								else {
 									answerController.changeCount(toBeChanged, -2);
+									answerController.notVotedUp(toBeChanged)
 									upElement.className = "fa fa-sort-asc fa-3x colorless vote";
 								}
 								element.className = "fa fa-sort-desc fa-3x colored vote";
+								answerController.votedDown(toBeChanged);
 							}
 							else {
 								element.className = "fa fa-sort-desc fa-3x colorless vote";
 								answerController.changeCount(toBeChanged, 1);
+								answerController.notVotedDown(toBeChanged);
 							}
 						}
 					}
@@ -392,16 +430,16 @@ var answerView = {
 	{
 		var allAnswersHtmlString = '';
 		var tempObject = {};		//to pass 5 arguments
-		for(var index=0;index<answerController.getNoOfAnswers();index++)
-		{
-			
+		answerController.getAnswers().forEach(function(element,index,array){
+
 			tempObject.voteUpId = "voteup"+(index+1);
 			tempObject.voteCountId = "votecount"+(index+1);
 			tempObject.voteDownId = "votedown"+(index+1);
 			tempObject.editLinkId = "editLink"+(index+1);
 			tempObject.index = index;
-			allAnswersHtmlString = allAnswersHtmlString + this.appendAnswerString(tempObject);
-		}
+			allAnswersHtmlString = allAnswersHtmlString + answerView.appendAnswerString(tempObject);
+
+		});
 		$(".answers").append(allAnswersHtmlString);	
 	},
 
@@ -418,17 +456,15 @@ var answerView = {
 		var newAnswerHtmlString = this.appendAnswerString(tempObject);
 			
 			$(".answers").append(newAnswerHtmlString);	
-			$(".noofanswers").text(answerController.getNoOfAnswers());
+			$(".no-of-answers").text(answerController.getNoOfAnswers());
 	},
 
 	addTags:function()
 	{
 		var tagshtml = '',tags = answerController.getTags();
-		for(var index=0;index<tags.length;index++)
-		{
-			tagshtml = tagshtml + this.appendTag(tags[index]);
-		}
-		//console.log(tagshtml);
+		tags.forEach(function(element,index,array){
+			tagshtml = tagshtml + answerView.appendTag(tags[index]);
+		});
 		$(".postcell__posttaglist").html(tagshtml);
 	},
 
