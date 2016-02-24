@@ -61,12 +61,6 @@ body
 	display:block;
 	color:#777;
 }
-.orange
-{
-	cursor:pointer;
-	display:block;
-	color:#f69c55;	
-}
 .star
 {
 	font-size:1.5em;
@@ -85,7 +79,7 @@ body
 	word-wrap: break-word;
 	font-size: 15px;
 	line-height: 1.3;
-	//white-space:pre-wrap;
+	white-space:pre-wrap;
 }
 .tag
 {
@@ -96,7 +90,6 @@ body
 	font-size:12px;
 	padding:0.4em 0.5em;
 	cursor:pointer;
-	margin-right:4px;
 }
 .postcell__postfooter__info
 {
@@ -128,26 +121,4 @@ body
 {
 	padding:15px 0 15px 0;
 	border-bottom:1px solid #e5e5e5;
-}
-.addanswer__header
-{
-	padding-top:20px;
-	font-size:18px;
-	line-height: 1.3;
-	padding-bottom:18px;
-	font-weight:400;
-	border-bottom:1px solid #f69c55;
-}
-code
-{
-	max-height:250px;
-	overflow:auto;
-	display:inline-block;
-	vertical-align: top;
-
-}
-
-.green
-{
-	color:#009933;
 }
