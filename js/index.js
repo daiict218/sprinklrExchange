@@ -4,7 +4,7 @@ if(!localStorage.author){
 }
 
 
-var Model={
+var model={
     init:function(){
         if(!localStorageGet("questions")){
             localStorageSet("questions",[]);
@@ -17,143 +17,132 @@ var Model={
         return this.questionSummary;
     }
 
-};//view onlcik
-//answes
+};
 var octopus={
     init: function(){
-            Model.init();
+            model.init();
             view.init();
         },
     getQuestions: function(){
-           return  Model.getallQuestions();
-    },
+           return  model.getallQuestions();
+    }
+};
+var utilityFunctions={
     getTimeDifference:function(current, previous) {
-    
+
         var msPerMinute = 60 * 1000;
         var msPerHour = msPerMinute * 60;
         var msPerDay = msPerHour * 24;
         var msPerMonth = msPerDay * 30;
         var msPerYear = msPerDay * 365;
-        
+
         var elapsed = current - previous;
-        
+
         if (elapsed < msPerMinute) {
-             return Math.round(elapsed/1000) + ' seconds ago';   
+            return Math.round(elapsed/1000) + ' seconds ago';
         }
-        
+
         else if (elapsed < msPerHour) {
-             return Math.round(elapsed/msPerMinute) + ' minutes ago';   
+            return Math.round(elapsed/msPerMinute) + ' minutes ago';
         }
-        
+
         else if (elapsed < msPerDay ) {
-             return Math.round(elapsed/msPerHour ) + ' hours ago';   
+            return Math.round(elapsed/msPerHour ) + ' hours ago';
         }
 
         else if (elapsed < msPerMonth) {
-             return Math.round(elapsed/msPerDay) + ' days ago';   
+            return Math.round(elapsed/msPerDay) + ' days ago';
         }
-        
-        else if (elapsed < msPerYear) {
-             return Math.round(elapsed/msPerMonth) + ' months ago';   
-        }
-        
-        else {
-             return Math.round(elapsed/msPerYear ) + ' years ago';   
-        }
-    },
-};
 
+        else if (elapsed < msPerYear) {
+            return Math.round(elapsed/msPerMonth) + ' months ago';
+        }
+
+        else {
+            return Math.round(elapsed/msPerYear ) + ' years ago';
+        }
+    }
+}
 var view={
     init:function(){
         if(!localStorageGet("currentQuestionId")){
             localStorageSet("currentQuestionId",1);
         }
-        // if(!localStorage.currentQuestionId)
-        //     localStorage.currentQuestionId= 1;
-        view.render();
+        this.listelem=document.getElementById('questionlist');
+
+            this.listelem.addEventListener('click',function (e){
+                console.log(e.target,"hellohi", e.target.parentNode);
+                console.log(e.target.parentNode.dataset.id,'what is this')
+                var x= e.target;
+                console.log(x, "second",x.parentNode);
+                while(x.dataset.id===undefined){
+                    console.log(x.parentNode);
+                    x= x.parentNode;
+                }
+                var questionSummary=octopus.getQuestions();
+                questionSummary[parseInt(x.dataset.id)].views++;
+                localStorageSet("currentQuestionId",questionSummary[parseInt(x.dataset.id)].id);
+                localStorageSet("questions",questionSummary);
+            });
+
+        this.render();
     },
     addHTML:function(elem,i,tagstr){
-        console.log(elem,elem.author );
-        return '<a href="questionanswer.html"><div class="question__vav">'+'<div id="votesbtn'+i+'"class="question__vav__btn" data-id='+i+'  onclick="view.index2setter(this,'+i+')">'+
-            '                           <div class="mini-counts"><span class="x">'+elem.votes+'</span></div>'+
-            '                           <div class="name">votes</div>'+
-            '                       </div>'+
-            '               <div id="answerbtn'+i+'"class="question__vav__btn question__vav__btn--color" onclick="view.index2setter(this,'+i+')">'+
-            '               <div class="mini-counts"><span class="x--mod">'+elem.answers.length+'</span></div>'+
-            '                       <div class="name--mod">answers</div>'+
-            '                       </div>'+
-            '                       <div id="viewbtn'+i+'" class="question__vav__btn" onclick="view.index2setter(this,'+i+')">'+
-            '                           <div class="mini-counts"><span class="x">'+elem.views+'</span></div>'+
-            '                           <div class="name">views</div>'+
-            '                       </div>'+
+        return '<div class="question" data-id="'+i+'"><a href="questionanswer.html"><div class="question__vav">'+view.votesBtnRender(elem.votes)+
+                                 view.answerBtnRender(elem.answers.length)+
+                view.viewsBtnRender(elem.views)+
             '            </div></a>'+
             '                   <div class="question__summary">'+
-            '                       <div class="question__summary__ques" onclick="view.index2setter(this,'+i+')">'+
+            '                       <div class="question__summary__ques" >'+
             '                           <h3><a href="questionanswer.html"  class="question-link">'+elem.title+'</a></h3>'+
             '                       </div>'+
             '                       <div class="question__summary__tags">'+
             tagstr+
             '                       </div>'+
-            '                       <div id="author'+i+'" class="question__summary__author">'+
+            '                       <div class="question__summary__author">'+
             '                           <div class="author">'+
-            octopus.getTimeDifference(new Date(),Date.parse(elem.time))+
+            utilityFunctions.getTimeDifference(new Date(),Date.parse(elem.time))+
             '                               <a href="#">'+elem.author+'</a>'+
             '                               </author>'+
             '                           </div>'+
             '                       </div>'+
-            '                   </div>';
-            //
+            '                   </div>' +
+            '                  </div>';
+
 
     },
     render:function(){
-        var listelem=document.getElementById('questionlist');
+        var htmlstr='';
         var questionSummary =octopus.getQuestions();
         questionSummary.forEach(function(elem,i,array){
-            //create one question and append it to question list
-          //questiondiv
-            var questionblock= document.createElement('div');
-            var htmlstr='';
             var tagstr='';
             elem.tags.forEach(function(element,index,a){
                 tagstr+='<a href="#" class="tags">'+element+'</a>';
             });
-            questionblock.className='question';
-            questionblock.id='question'+i;
-                htmlstr=view.addHTML(elem,i,tagstr);
-            questionblock.innerHTML=htmlstr;
-            listelem.appendChild(questionblock);
-        });
+            htmlstr+=view.addHTML(elem,i,tagstr);
 
-        questionSummary.forEach(function(element,index,a){
-
-            var answerbtn = document.getElementsByClassName('question__vav__btn question__vav__btn--color')[index+1];
-            var c=answerbtn.childNodes[1].childNodes[0];
-//console.log(answerbtn);
-            //console.log(c.textContent);
-            var n=answerbtn.childNodes[3];
-            if(parseInt(c.textContent)==0) {
-                // console.log(element.title);
-                c.className = 'x';
-                n.className= 'name'
-                answerbtn.style.background='white';
-                // console.log(answerbtn);
-            }
-            else {
-                // console.log(element.title, "hello");
-                answerbtn.style.background = '#f69c55';
-            }
         });
+        this.listelem.innerHTML=htmlstr;
     },
-   index2setter: function(e,i){
-        var questionSummary=octopus.getQuestions();
-        questionSummary[parseInt(i)].views++;
-        // console.log(questionSummary[parseInt(i)].id);
-        localStorageSet("currentQuestionId",questionSummary[parseInt(i)].id);
-        // localStorage.currentQuestionId=questionSummary[parseInt(i)].id;
-        // console.log(localStorage.currentQuestionId);
-       // console.log(elem);
-       localStorageSet("questions",questionSummary);
-       // localStorage.questions=JSON.stringify(questionSummary);
+    answerBtnRender:function(length){
+        var flag=!length;
+       return '               <div id="answerbtn" '+((flag)? "class=question__vav__btn": "class=question__vav__btn--color")+'>'+
+        '               <div class="mini-counts"><span class="x">'+length+'</span></div>'+
+        '                       <div class="name">answers</div>'+
+        '                       </div>';
+    },
+
+    viewsBtnRender: function(views){
+        return '                       <div  class="question__vav__btn">'+
+        '                           <div class="mini-counts"><span class="x">'+views+'</span></div>'+
+        '                           <div class="name">views</div>'+
+        '                       </div>';
+    },
+    votesBtnRender: function(votes){
+        return '<div  class="question__vav__btn"  >'+
+            '                           <div class="mini-counts"><span class="x">'+votes+'</span></div>'+
+            '                           <div class="name">votes</div>'+
+            '</div>';
     }
 }
 octopus.init();

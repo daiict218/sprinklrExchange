@@ -1,69 +1,70 @@
- model={
-        init:function(){
-            this.questions = JSON.parse(localStorage.questions);
-            this.tags = JSON.parse(localStorage.tags);
-            this.tagId = localStorage.currentTag;
-        },
-        question:[],
-        tags:[]
-    };
-    octopus={
-        init:function(){
-            model.init();
-            view.init();
-        },
-        getQuestions: function () {
-            return model.questions;
-        },
-        getTags: function(){
-            return model.tags;
-        },
-        getTagId :function(){
-            return model.tagId;
+model={
+    init:function(){
+        this.questions = JSON.parse(localStorage.questions);
+        this.searchResult = JSON.parse(localStorage.searchResult);
+        //console.log(this.searchResult);
+            //this.tagId = localStorage.currentTag;
+    },
+    question:[],
+    tags:[]
+};
+octopus={
+    init:function(){
+        model.init();
+        view.init();
+    },
+    getQuestions: function () {
+        return model.questions;
+    },
+    getsearchResult: function(){
+        return model.searchResult;
+    },
+    getTagId :function(){
+        return model.tagId;
+    }
+
+};
+var utilityFunctions={
+    getTimeDifference:function(current, previous) {
+
+        var msPerMinute = 60 * 1000;
+        var msPerHour = msPerMinute * 60;
+        var msPerDay = msPerHour * 24;
+        var msPerMonth = msPerDay * 30;
+        var msPerYear = msPerDay * 365;
+
+        var elapsed = current - previous;
+
+        if (elapsed < msPerMinute) {
+            return Math.round(elapsed/1000) + ' seconds ago';
         }
 
-    };
- var utilityFunctions={
-     getTimeDifference:function(current, previous) {
+        else if (elapsed < msPerHour) {
+            return Math.round(elapsed/msPerMinute) + ' minutes ago';
+        }
 
-         var msPerMinute = 60 * 1000;
-         var msPerHour = msPerMinute * 60;
-         var msPerDay = msPerHour * 24;
-         var msPerMonth = msPerDay * 30;
-         var msPerYear = msPerDay * 365;
+        else if (elapsed < msPerDay ) {
+            return Math.round(elapsed/msPerHour ) + ' hours ago';
+        }
 
-         var elapsed = current - previous;
+        else if (elapsed < msPerMonth) {
+            return Math.round(elapsed/msPerDay) + ' days ago';
+        }
 
-         if (elapsed < msPerMinute) {
-             return Math.round(elapsed/1000) + ' seconds ago';
-         }
+        else if (elapsed < msPerYear) {
+            return Math.round(elapsed/msPerMonth) + ' months ago';
+        }
 
-         else if (elapsed < msPerHour) {
-             return Math.round(elapsed/msPerMinute) + ' minutes ago';
-         }
-
-         else if (elapsed < msPerDay ) {
-             return Math.round(elapsed/msPerHour ) + ' hours ago';
-         }
-
-         else if (elapsed < msPerMonth) {
-             return Math.round(elapsed/msPerDay) + ' days ago';
-         }
-
-         else if (elapsed < msPerYear) {
-             return Math.round(elapsed/msPerMonth) + ' months ago';
-         }
-
-         else {
-             return Math.round(elapsed/msPerYear ) + ' years ago';
-         }
-     }
- };
+        else {
+            return Math.round(elapsed/msPerYear ) + ' years ago';
+        }
+    }
+};
 
 var view={
     init:function(){
-        if(!localStorageGet("currentQuestionId")){
-            localStorageSet("currentQuestionId",1);
+        if(!localStorage.currentQuestionId){
+            localStorage.currentQuestionId=1;
         }
         this.listelem=document.getElementById('questionlist');
 
@@ -109,8 +110,9 @@ var view={
 
     },
     render:function(){
-        var htmlstr='',questionSummary =octopus.getQuestions(),tags=octopus.getTags(),tagId=octopus.getTagId();
-        tags[tagId].questionId.forEach(function(elem,i,array){
+        var htmlstr='',questionSummary =octopus.getQuestions(),searchResult=octopus.getsearchResult();
+        console.log(searchResult,"ssss");
+        searchResult.forEach(function(elem,i,array){
             var tagstr='';
             questionSummary[elem-1].tags.forEach(function(element,index,a){
                 tagstr+='<a href="#" class="tags">'+element+'</a>';
