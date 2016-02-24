@@ -1,6 +1,10 @@
 $(function(){
     
     var questions = [];
+    // console.log("Hello world");
+    if(!localStorage.author){
+        localStorage.author = "Anonymous";
+    }
     if(!localStorage.questions){
         localStorage.questions = questions;
     }
@@ -8,14 +12,16 @@ $(function(){
     {
         questions = JSON.parse(localStorage.questions);
     }
-    var quesId= questions.length + 1;
-    var allTags = JSON.parse(localStorage.tags);
-    console.log(allTags);
+    // console.log("Hello world");
+    var quesId= questions.length+1;
+    var allTags = tags_init.tags;
+    // console.log("Hello world");
+    // console.log(allTags);
     var tags = [];
     for (var i = allTags.length - 1; i >= 0; i--) {
         tags[i] = allTags[i].tag_name;
     };
-    console.log(tags);
+    // console.log("Hello world");
     // var questionCollection = {
     //     init: function () {
     //         this.questions = data.map(function (datum) {
@@ -40,15 +46,13 @@ $(function(){
     //     return 'q' + QuestionModel._counter++;
     // };
     // QuestionModel._counter = 0;
-    if(!localStorage.author)
-        localStorage.author = "Anonynous";
+
 
     /* Constructor function for the question */
-    var Question = function(title,text,tags,rawText,author){
+    var Question = function(title,text,tags,author){
         this.title = title;
         this.text = text;
         this.tags = tags;
-        this.rawText = rawText;
         this.author = author;
         this.answers = [];
         this.votes = 0;
@@ -81,9 +85,8 @@ $(function(){
 
         },
 
-        add:function(title,text,tags,rawText){
-            console.log(getAuthor());
-            var question = new Question(title,text,tags,rawText,getAuthor());
+        add:function(title,text,tags){
+            var question = new Question(title,text,tags,getAuthor());
             question.id = question.id();
             questions.push(question);
             localStorage.questions = JSON.stringify(questions);
@@ -104,8 +107,8 @@ $(function(){
 
 
     var octopus = {
-        addNewQuestion:function(title,text,tags,rawText){
-            model.add(title,text,tags,rawText);
+        addNewQuestion:function(title,text,tags){
+            model.add(title,text,tags);
             view.render();
         },
 
@@ -124,10 +127,8 @@ $(function(){
         init:function(){
             $('#btn-submit').click(function(e){
                 var title = $('#input_element1').val();
-                // console.log(title);
                 var text = $('#wmd-preview').html();
-                var rawText = $('#wmd-input').val();
-                console.log(rawText,"rt");
+                console.log(text);
                 var errors = $('.inputtags__errors');
                 var elements = $('.inputtags__element');
                 var message = [];
@@ -145,7 +146,7 @@ $(function(){
                     errors.html("No tags selected");   
                 }
                 else{
-                    octopus.addNewQuestion(title,text,message,rawText);
+                    octopus.addNewQuestion(title,text,message);
                     window.location.href="index.html";
                 }   
                 e.preventDefault();
@@ -153,13 +154,11 @@ $(function(){
             view.render();
         },
         render:function(){
-            // $('#viewTemp').html(octopus.getQuestions()[0]);
-           // console.log(questions);
-           var htmlStr = '';
-           for (var i = 0; i < tags.length; i++) {
-               htmlStr += "<option value="+(i+1)+">"+tags[i]+"</option>"
-           };        
-           //console.log(htmlStr);
+           var index = -1;
+           var htmlStr = tags.reduce(function(a,b){
+                index++;
+                return a + "<option value="+(index+1)+">"+b+"</option>"; 
+           },'');
            $("#options").html(htmlStr);
         }
     };

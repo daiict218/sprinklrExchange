@@ -9,10 +9,10 @@
     -ms-box-sizing: border-box;
     box-sizing: border-box;
 }
+
 .footer{
     background-color:rgb(36,39,41);
-    heigh:auto ;
-
+    height:auto;
 }
 .footer__footerwrap{
      width: 1060px;
@@ -55,4 +55,9 @@ padding-top: 15px;
     font-weight: 400;
     text-align: left;
     color: #767d84;
+}
+body{
+    margin:0;
+    padding:0;
+    height:100vh;
 }

@@ -7,7 +7,7 @@
 
 	<link rel="stylesheet" href="css/index2.css">
 	<link rel="stylesheet" href="css/qa.css">
-
+	<link rel="stylesheet" href="css/header.css">
 
 	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.0.min.js"></script>
 	<script type="text/javascript" src="wmd-master/showdown.js"></script>
@@ -21,17 +21,16 @@
 	</title>
 </head>
 <body>
+<div class="wrapper">	
 <div id="header"></div>
-<div class="content clearfix">
+<div class="content clearfix footerfix">
 	<div class="question-header">
 		<h1><a href="#" class="question-header__question-hyperlink"></a></h1>
 	</div>
 	<div class="mainbar">
 		<div class="question">
-			<table>
-				<tbody>
-				<tr>
-					<td class="votecell">
+			
+					<div class="votecell">
 						<div class="votecell__vote">
 							<i class="fa fa-sort-asc fa-3x colorless vote" id="qvoteup"></i>
 							<div class="votecount" id="questionvotes"></div>
@@ -39,28 +38,25 @@
 							<!--<i class = "fa fa-star-o star"></i>
 							<div class="starcount">3</div>-->
 						</div>
-					</td>
-					<td class="postcell">
+					</div>
+					<div class="postcell">
 						<div class="postcell__posttext">
 						</div>
 						<div class="postcell__posttaglist">
 							<!--<div class="tag">Python</div>
 							<div class="tag">Maths</div>-->
 						</div>
-						<div class="postcell__postfooter">
-							<div class="postcell__postfooter__posteditdiv">
+						<div class="postcell__postfooter clearfix">
+						<!--	<div class="postcell__postfooter__posteditdiv">
 									<a class="postcell__postfooter__posteditdiv__editlink" id ="qeditlink">Edit</a>
-								</div>
+							</div>-->
 							<div class="postcell__postfooter__info">
 											
-								<div class="postcell__postfooter__info__userinfo">Karan Tankshali</div>
+								<!-- <div class="postcell__postfooter__info__userinfo">Karan Tankshali</div> -->
 							</div>
 
 						</div>
-					</td>
-				</tr>
-				</tbody>
-			</table>
+					</div>
 		</div>
 
 		<div class="answers">
@@ -85,10 +81,7 @@
 
 			<br/>
 		</div>
-		<div class="inputtags__errors">
-					
-		</div>
-		<div id="inputtags__post">
+		<div id="wmd__footer">
 			<button class="btn" id="btn-submit">
 						Post Your Answer
 			</button>
@@ -165,8 +158,8 @@
 	</div>
 
 </div>
-<div id="footer"></div>
-
+<div id="footer" class="clearfix"></div>
+</div>
 
 <script>
 	$("#header").load("./header.html");

@@ -1,13 +1,19 @@
 <html>
 <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/tags.css">
+    <link rel="stylesheet" href="css/header.css">
+
     <title>Include Common Files</title>
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.0.min.js"></script>
+    <script type="text/javascript" src="js/allTags.js"></script>
+    <script type="text/javascript" src="js/localStorage.js"></script>
 
 </head>
 <body>
+<div class="wrapper">   
 <div id="header"></div>
-<div id="container">
+<div id="container" class="clearfix footerfix">
     <div class="content">
         <div class="subheader"><h1>Tags</h1></div>
         <div class="page-desc" class="page-desc">
@@ -23,7 +29,8 @@
     </div>
 </div>
 <div id="check"></div>
-<div id="footer"> </div>
+<div id="footer" class="clearfix"> </div>
+</div>
 <script>
     $("#header").load("header.html");
     $("#footer").load("footer.html");

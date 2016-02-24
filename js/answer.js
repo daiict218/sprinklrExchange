@@ -7,16 +7,16 @@ $(function(){
     	localStorage.author = "Anonynous";
 	var ansArray = [];
 	var answersArray = [];
-	var currentquestionid = 0;
+	var currentQuestionId = 0;
 	var question = "";
 var answerModel = {
 		init:function(){
 		questions = JSON.parse(localStorage.questions);
 		
-		currentquestionid = localStorage.currentQuestionId;
-		//console.log(currentquestionid);
-		question = questions[parseInt(currentquestionid)-1];
-		console.log(question.answers);
+		currentQuestionId = localStorage.currentQuestionId;
+		//console.log(currentQuestionId);
+		question = questions[parseInt(currentQuestionId)-1];
+		//console.log(question.answers);
 		answersArray = question.answers;
 
 		},
@@ -25,9 +25,9 @@ var answerModel = {
                 answers = JSON.parse(question.answers);
             answers.push(answer);
             question.answers = JSON.stringify(answers);
-            var p = JSON.parse(localStorage.questions);
-            p[currentquestionid-1].answers.push(answer);
-            localStorage.questions = JSON.stringify(p);
+            var tempQuestions = JSON.parse(localStorage.questions);
+            tempQuestions[currentQuestionId-1].answers.push(answer);
+            localStorage.questions = JSON.stringify(tempQuestions);
 		}
 		
 };
@@ -51,29 +51,29 @@ var answerController = {
 	{
 		answerModel.currentAnswer = answer;
 	},
-	getVoteCount:function(i)
+	getVoteCount:function(index)
 	{
-		return answersArray[i].votes;
+		return answersArray[index].votes;
 	},
-	getAnswerText:function(i)
+	getAnswerText:function(index)
 	{
-		return answersArray[i].text;
+		return answersArray[index].text;
 	},
-	getPostingTime:function(i)
+	getPostingTime:function(index)
 	{
-		return Date.parse(answersArray[i].time);
+		return Date.parse(answersArray[index].time);
 	},
-	getUserName:function(i)
+	getUserName:function(index)
 	{
-		return answersArray[i].user;
+		return answersArray[index].user;
 	},
-	changeCount:function(i,change)
+	changeCount:function(index,change)
 	{
-		answersArray[i-1].votes += change;
-		var n = JSON.parse(localStorage.questions);
-		n[parseInt(currentquestionid)-1].answers[i-1].votes = answersArray[i-1].votes;
-		localStorage.questions = JSON.stringify(n);
-		answerView.changeCount(i);
+		answersArray[index-1].votes += change;
+		var tempQuestions = JSON.parse(localStorage.questions);
+		tempQuestions[parseInt(currentQuestionId)-1].answers[index-1].votes = answersArray[index-1].votes;
+		localStorage.questions = JSON.stringify(tempQuestions);
+		answerView.changeCount(index);
 	},
 	changeQuestionCount:function(change)
 	{
@@ -84,16 +84,16 @@ var answerController = {
 	},
 	addNewAnswer:function(text,rawText)
 	{
-		var newans = {};
-		newans.user=localStorage.author;
-		newans.question=parseInt(localStorage.currentQuestionId);
-		newans.text=text;
-		newans.rawText = rawText;
-		newans.votes=0;
-		newans.time=new Date();
-		newans.verified=false;
-		newans.id = ++answerId;
-		answerModel.addAnswer(newans);
+		var newAnswer = {};
+		newAnswer.user=localStorage.author;
+		newAnswer.question=parseInt(localStorage.currentQuestionId);
+		newAnswer.text=text;
+		newAnswer.rawText = rawText;
+		newAnswer.votes=0;
+		newAnswer.time=new Date();
+		newAnswer.verified=false;
+		newAnswer.id = ++answerId;
+		answerModel.addAnswer(newAnswer);
 		answerView.addNewAnswer(answersArray.length-1);
 	},
 	getQuestiontitle:function()
@@ -114,11 +114,7 @@ var answerController = {
 	},
 	getTimeDifference:function(current, previous) {
     
-	    var msPerMinute = 60 * 1000;
-	    var msPerHour = msPerMinute * 60;
-	    var msPerDay = msPerHour * 24;
-	    var msPerMonth = msPerDay * 30;
-	    var msPerYear = msPerDay * 365;
+	    var msPerMinute = 60 * 1000,msPerHour = msPerMinute * 60,msPerDay = msPerHour * 24,msPerMonth = msPerDay * 30,msPerYear = msPerDay * 365;
 	    
 	    var elapsed = current - previous;
 	    
@@ -146,9 +142,9 @@ var answerController = {
 	         return Math.round(elapsed/msPerYear ) + ' years ago';   
 	    }
 	},
-	isAnswerVerified:function(i)
+	isAnswerVerified:function(index)	//After Backend Support and User Integration
 	{
-		return answersArray[i].verified;
+		return answersArray[index].verified;
 	},
 	getQuestionPostingTime:function()
 	{
@@ -272,10 +268,7 @@ var answerView = {
 /*event handlers*/
 		
 		$("#btn-submit").click(function(e){
-			var text = $('#wmd-preview').html();
-			var rawText = $('#wmd-input').val();
-			var errors = $('.inputtags__errors');
-            var elements = $('.inputtags__element');
+			var text = $('#wmd-preview').html(),rawText = $('#wmd-input').val(),errors = $('.inputtags__errors'),elements = $('.inputtags__element');
             
             if(text === ""){
                     errors.html("Empty Body");   
@@ -293,6 +286,7 @@ var answerView = {
 			$('#wmd-input').val('');
 		});
 
+/*	Not decided whether to include or not
 
 		document.getElementsByClassName("content")[0].addEventListener("click", function (e) {
 			var element = e.target;
@@ -305,69 +299,60 @@ var answerView = {
 
 			}
 		});	
+*/
 	},
 
 
-	appendAnswers:function(voteUpId,voteCountId,voteDownId,editLinkId,i)
+	appendAnswerString:function(voteUpId,voteCountId,voteDownId,editLinkId,index)
 	{
 		return '<div class="answer-padding">'+
-				'<table>'+
-					'<tbody>'+
-					'<tr>'+
-						'<td class="votecell">'+
-							'<div class="votecell__vote">'+
-								'<i class="fa fa-sort-asc fa-3x colorless" id="'+voteUpId+'"></i>'+
-								'<div class="votecount" id="'+voteCountId+'">'+answerController.getVoteCount(i)+'</div>'+
-								'<i class="fa fa-sort-desc fa-3x colorless" id="'+voteDownId+'"></i>'+
+					'<div class="votecell">'+
+						'<div class="votecell__vote">'+
+							'<i class="fa fa-sort-asc fa-3x colorless" id="'+voteUpId+'"></i>'+
+							'<div class="votecount" id="'+voteCountId+'">'+answerController.getVoteCount(index)+'</div>'+
+							'<i class="fa fa-sort-desc fa-3x colorless" id="'+voteDownId+'"></i>'+
+						'</div>'+
+					'</div>'+
+					'<div class="postcell">'+
+						'<div class="postcell__posttext">'+answerController.getAnswerText(index)+'</div>'+
+						'<div class="postcell__postfooter clearfix">'+
+							'<div class="postcell__postfooter__info">'+
+								"answered "+answerController.getTimeDifference(new Date(),answerController.getPostingTime(index))+
+								'<div class="postcell__postfooter__info__userinfo">'+answerController.getUserName(index)+'</div>'+
 							'</div>'+
-						'</td>'+
-						'<td class="postcell">'+
-							'<div class="postcell__posttext">'+answerController.getAnswerText(i)+'</div>'+
-							'<div class="postcell__postfooter">'+
-								'<div class="postcell__postfooter__posteditdiv">'+
-									'<a class="postcell__postfooter__posteditdiv__editlink" id="'+editLinkId+'">Edit</a>'+
-								'</div>'+
-								'<div class="postcell__postfooter__info">'+
-									"answered "+answerController.getTimeDifference(new Date(),answerController.getPostingTime(i))+
-									'<div class="postcell__postfooter__info__userinfo">'+answerController.getUserName(i)+'</div>'+
-								'</div>'+
-							'</div>'+
-						'</td>'+
-					'</tr>'+
-					'</tbody>'+
-				'</table>'+
-			'</div>'
+						'</div>'+
+					'</div>'+
+				'</div>'
 	},
 
 
 	render:function()
 	{
-		var answershtml = '';
-		for(var i=0;i<answers.length;i++)
+		var allAnswersHtmlString = '';
+		for(var index=0;index<answers.length;index++)
 		{
-			answershtml = answershtml + this.appendAnswers("voteup"+(i+1),"votecount"+(i+1),"votedown"+(i+1),"editLink"+(i+1),i);
+			allAnswersHtmlString = allAnswersHtmlString + this.appendAnswerString("voteup"+(index+1),"votecount"+(index+1),"votedown"+(index+1),"editLink"+(index+1),index);
 		}
-		$(".answers").append(answershtml);	
+		$(".answers").append(allAnswersHtmlString);	
 	},
 
 
-	addNewAnswer:function(i)
+	addNewAnswer:function(index)
 	{
-		var appendhtml = this.appendAnswers("voteup"+(i+1),"votecount"+(i+1),"votedown"+(i+1),"editLink"+(i+1),i);
+		var newAnswerHtmlString = this.appendAnswerString("voteup"+(index+1),"votecount"+(index+1),"votedown"+(index+1),"editLink"+(index+1),index);
 			
-			$(".answers").append(appendhtml);	
+			$(".answers").append(newAnswerHtmlString);	
 			$(".noofanswers").text(answerController.getNoOfAnswers());
 	},
 
 	addTags:function()
 	{
-		var tagshtml = '';
-		var tags = answerController.getTags();
-		for(var i=0;i<tags.length;i++)
+		var tagshtml = '',tags = answerController.getTags();
+		for(var index=0;index<tags.length;index++)
 		{
-			tagshtml = tagshtml + this.appendTag(tags[i]);
+			tagshtml = tagshtml + this.appendTag(tags[index]);
 		}
-		console.log(tagshtml);
+		//console.log(tagshtml);
 		$(".postcell__posttaglist").html(tagshtml);
 	},
 
@@ -383,13 +368,13 @@ var answerView = {
 
 	addPostFooterInfo:function()
 	{
-		postFooterHtml =  'asked '+answerController.getTimeDifference(new Date(),answerController.getQuestionPostingTime())+'<div class="postcell__postfooter__info__userinfo">'+answerController.getAsker();+'</div>';
+		var postFooterHtml =  'asked '+answerController.getTimeDifference(new Date(),answerController.getQuestionPostingTime())+'<div class="postcell__postfooter__info__userinfo">'+answerController.getAsker();+'</div>';
 		$(".postcell__postfooter__info").html(postFooterHtml);
 	},
-	changeCount:function(i)
+	changeCount:function(index)
 	{
 		//console.log("Here");
-		$("#votecount"+(i)).text(answerController.getVoteCount(i-1));
+		$("#votecount"+(index)).text(answerController.getVoteCount(index-1));
 	}
 };
 answerController.init();
