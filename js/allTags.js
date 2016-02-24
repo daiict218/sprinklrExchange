@@ -61,3 +61,8 @@ var tags_init= {
     };
     if(!localStorage.tags)
         localStorage.tags = JSON.stringify(tags_init.tags);
+    allTags = tags_init.tags;
+    tags = [];
+    for (var i = allTags.length - 1; i >= 0; i--) {
+        tags[i] = allTags[i].tag_name;
+    };
