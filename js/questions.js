@@ -1,7 +1,6 @@
 $(function(){
     
     var questions = [];
-    // console.log("Hello world");
     if(!localStorage.author){
         localStorage.author = "Anonymous";
     }
@@ -21,31 +20,7 @@ $(function(){
     for (var i = allTags.length - 1; i >= 0; i--) {
         tags[i] = allTags[i].tag_name;
     };
-    // console.log("Hello world");
-    // var questionCollection = {
-    //     init: function () {
-    //         this.questions = data.map(function (datum) {
-    //             new QuestionModel(datum);
-    //         });
-    //     },
-    //     add: function(datum){
-    //         this.questions.push(new QuestionModel())
-    //     }
-    // };
-    // var QuestionModel = function (questionProps) {
-    //     this.data = questionProps;
-    //     this.id = QuestionModel._getId();
-    // };
-    // QuestionModel.prototype = {
-    //     constructor: QuestionModel,
-    //     update: function (updatedProps) {
-    //         this.data = updatedProps;
-    //     }
-    // };
-    // QuestionModel._getId = function () {
-    //     return 'q' + QuestionModel._counter++;
-    // };
-    // QuestionModel._counter = 0;
+    
 
 
     /* Constructor function for the question */
@@ -125,12 +100,14 @@ $(function(){
 
     var view = {
         init:function(){
-            $('#btn-submit').click(function(e){
-                var title = $('#input_element1').val();
-                var text = $('#wmd-preview').html();
-                console.log(text);
-                var errors = $('.inputtags__errors');
-                var elements = $('.inputtags__element');
+            var button = $('#btn-submit');
+            var dom = $('.mainbar');
+            button.click(function(e){
+                var title = dom.find("#input_element1").val();
+                console.log(title);
+                var text = dom.find("#wmd-preview").html();
+                var errors = dom.find('.inputtags__errors');
+                var elements = dom.find('.inputtags__element');
                 var message = [];
                 var selected = $("#options option:selected");
                 selected.each(function (i) {

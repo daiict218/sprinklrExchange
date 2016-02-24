@@ -1,25 +1,8 @@
-$(function(){
-	var answers = [];
-	var answerId = 0;
-	var details = [];
-	var questions = [];
+$(function(){ //todo:remove
 	if(!localStorage.author)
     	localStorage.author = "Anonynous";
-	var ansArray = [];
-	var answersArray = [];
-	var currentquestionid = 0;
-	var question = "";
 var answerModel = {
-		init:function(){
-		questions = JSON.parse(localStorage.questions);
-		
-		currentquestionid = localStorage.currentQuestionId;
-		//console.log(currentquestionid);
-		question = questions[parseInt(currentquestionid)-1];
-		console.log(question.answers);
-		answersArray = question.answers;
-
-		},
+		init:function(){},
 		addAnswer:function(answer){
 			if (!question.answers)
                 answers = JSON.parse(question.answers);
@@ -29,7 +12,6 @@ var answerModel = {
             p[currentquestionid-1].answers.push(answer);
             localStorage.questions = JSON.stringify(p);
 		}
-		
 };
 
 
@@ -49,6 +31,7 @@ var answerController = {
 	},
 	setCurrentAnswer:function(answer)
 	{
+		//setter
 		answerModel.currentAnswer = answer;
 	},
 	getVoteCount:function(i)
@@ -150,16 +133,16 @@ var answerController = {
 	{
 		return answersArray[i].verified;
 	},
-	getQuestionPostingTime:function()
+	getQuestionPostingTime:function()//Model
 	{
 		// console.log("ohh",Date.parse(JSON.parse(localStorage.questions)[parseInt(localStorage.currentQuestionId)-1].time));
 		return Date.parse(JSON.parse(localStorage.questions)[parseInt(localStorage.currentQuestionId)-1].time);
 	},
-	getAsker:function()
+	getAsker:function()//Model
 	{
 	 	return JSON.parse(localStorage.questions)[parseInt(localStorage.currentQuestionId)-1].author;
 	},
-	getTags:function()
+	getTags:function()//Model
 	{
 		return JSON.parse(localStorage.questions)[parseInt(localStorage.currentQuestionId)-1].tags;
 	}

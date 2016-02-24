@@ -2,16 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28903c33-8663-4bf7-b437-7fb98a314add" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/qa.css" afterPath="$PROJECT_DIR$/css/qa.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/header.html" afterPath="$PROJECT_DIR$/header.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index2.html" afterPath="$PROJECT_DIR$/index2.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/allTags.js" afterPath="$PROJECT_DIR$/js/allTags.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/answer.js" afterPath="$PROJECT_DIR$/js/answer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/index.js" afterPath="$PROJECT_DIR$/js/index.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/questions.js" afterPath="$PROJECT_DIR$/js/questions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/tags.js" afterPath="$PROJECT_DIR$/js/tags.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/questionanswer.html" afterPath="$PROJECT_DIR$/questionanswer.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tags.html" afterPath="$PROJECT_DIR$/tags.html" />
     </list>
     <ignored path="sprinklrExchange.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -76,8 +68,8 @@
       <file leaf-file-name="tagsQuestion.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/tagsQuestion.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.24911033">
-              <caret line="14" column="23" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
+            <state vertical-scroll-proportion="0.17793594">
+              <caret line="10" column="57" selection-start-line="10" selection-start-column="57" selection-end-line="10" selection-end-column="57" />
               <folding>
                 <marker date="1456230024000" expanded="true" signature="2013:2864" placeholder="..." />
                 <marker date="1456230024000" expanded="true" signature="2506:2823" placeholder="..." />
@@ -285,12 +277,12 @@
       <workItem from="1455703146243" duration="14000" />
       <workItem from="1455705868278" duration="422000" />
       <workItem from="1456004726991" duration="55000" />
-      <workItem from="1456148760154" duration="1085000" />
+      <workItem from="1456148760154" duration="1684000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1576000" />
+    <option name="totallyTimeSpent" value="2175000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="961" extended-state="6" />
@@ -366,8 +358,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/tagsQuestion.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24911033">
-          <caret line="14" column="23" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
+        <state vertical-scroll-proportion="0.17793594">
+          <caret line="10" column="57" selection-start-line="10" selection-start-column="57" selection-end-line="10" selection-end-column="57" />
           <folding>
             <marker date="1456230024000" expanded="true" signature="2013:2864" placeholder="..." />
             <marker date="1456230024000" expanded="true" signature="2506:2823" placeholder="..." />
