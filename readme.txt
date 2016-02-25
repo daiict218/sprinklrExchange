@@ -1,1 +1,1 @@
-sprinklrExchange is a question answer forum for internal queries which are specific to the company and solutio to the queries are best answered by peer employees , our main inspiration is from stackoverflow.
+sprinklrExchangeChange
