@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/tag-it.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
+    <link href="css/jquery.tagit.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<ul id="myTags">
+    <!-- Existing list items will be pre-added to the tags -->
+    <li>Tag1</li>
+    <li>Tag2</li>
+    <li>Tag3</li>
+    <li>Tag4</li>
+    <li>Tag5</li>
+</ul>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#myTags").tagit();
+    });
+</script>
+</body>
+</html>
