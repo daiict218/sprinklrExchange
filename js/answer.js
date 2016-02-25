@@ -120,7 +120,7 @@ var answerController = {
 	{
 		return answerModel.answersArray[index].user;
 	},
-	changeCount:function(index,change)
+	/*changeCount:function(index,change)
 	{
 		answerModel.changeCount(index,change);
 		answerView.changeCount(index);
@@ -129,6 +129,19 @@ var answerController = {
 	{
 		answerModel.changeQuestionCount(change);
 		answerView.changeQuestionCount(); 
+	},*/
+	changeVoteCount:function(index,change)
+	{
+		if(index==0)
+		{
+			answerModel.changeQuestionCount(change);
+			answerView.changeQuestionCount();
+		}
+		else
+		{
+			answerModel.changeCount(index,change);
+			answerView.changeCount(index);
+		}
 	},
 	addNewAnswer:function(text,rawText)
 	{
@@ -309,184 +322,64 @@ var answerView = {
 					{	
 						toBeChanged = 0;
 						downElement = $("#qvotedown")[0];
-						upElement = $("#qvoteup")[0];
-						if (upDownId.includes("up")) 
-						{
-							//answerController.votedUp(0);
-							if (!answerController.hasVotedUp(0)) 
-							{
-								if (!answerController.hasVotedDown(0)) 
-								{
-									answerController.changeQuestionCount(1);
-								}
-								else {
-									answerController.changeQuestionCount(2);
-									answerController.notVotedDown(0);
-									downElement.className = "fa fa-sort-desc fa-3x colorless vote";
-								}
-								element.className = "fa fa-sort-asc fa-3x colored vote";
-								answerController.votedUp(0);
-							}
-							else {
-								element.className = "fa fa-sort-asc fa-3x colorless vote";
-								answerController.changeQuestionCount(-1);
-								answerController.notVotedUp(0);
-							}
-						}
-						else {
-							if (!answerController.hasVotedDown(0)) {
-								if (!answerController.hasVotedUp(0)) {
-									answerController.changeQuestionCount(-1);
-								}
-								else {
-									answerController.changeQuestionCount(-2);
-									answerController.notVotedUp(0)
-									upElement.className = "fa fa-sort-asc fa-3x colorless vote";
-								}
-								element.className = "fa fa-sort-desc fa-3x colored vote";
-								answerController.votedDown(0);
-							}
-							else {
-								element.className = "fa fa-sort-desc fa-3x colorless vote";
-								answerController.changeQuestionCount(1);
-								answerController.notVotedDown(0);
-							}
-						}
+						upElement = $("#qvoteup")[0];	
 					}
 					else
 					{
 						toBeChanged = upDownId.slice(-1);
 						downElement = $("#votedown" + toBeChanged)[0];
 						upElement = $("#voteup" + toBeChanged)[0];
-						if (upDownId.includes("up")) {
-							if (!answerController.hasVotedUp(toBeChanged)) {
-								if (!answerController.hasVotedDown(toBeChanged)) {
-									answerController.changeCount(toBeChanged, 1);
-								}
-								else {
-									answerController.changeCount(toBeChanged, 2);
-									answerController.notVotedDown(toBeChanged);
-									downElement.className = "fa fa-sort-desc fa-3x colorless vote";
-								}
-								element.className = "fa fa-sort-asc fa-3x colored vote";
-								answerController.votedUp(toBeChanged);
-							}
-							else {
-								element.className = "fa fa-sort-asc fa-3x colorless vote";
-								answerController.changeCount(toBeChanged, -1);
-								answerController.notVotedUp(toBeChanged);
-							}
-						}
-						else {
-							if (!answerController.hasVotedDown(toBeChanged)) {
-								if (!answerController.hasVotedUp(toBeChanged)) {
-									answerController.changeCount(toBeChanged, -1);
-								}
-								else {
-									answerController.changeCount(toBeChanged, -2);
-									answerController.notVotedUp(toBeChanged)
-									upElement.className = "fa fa-sort-asc fa-3x colorless vote";
-								}
-								element.className = "fa fa-sort-desc fa-3x colored vote";
-								answerController.votedDown(toBeChanged);
-							}
-							else {
-								element.className = "fa fa-sort-desc fa-3x colorless vote";
-								answerController.changeCount(toBeChanged, 1);
-								answerController.notVotedDown(toBeChanged);
-							}
-						}
 					}
-					//answerView.voteCountHelper(upDownId,toBeChanged,downElement,upElement,elemen);
+					var vote = {upDownId,toBeChanged,downElement,upElement,element};
+					answerView.voteCountHelper(vote);
 				}
-			});
+		});
 			
 
 	},
-	/* Can also make use of helper function
-	voteCountHelper:function(upDownId,toBeChanged,downElement,upElement,element)
+	voteCountHelper:function(vote)
 	{
-						if (upDownId.includes("up")) {
-							if (!answerController.hasVotedUp(toBeChanged)) {
-								if (!answerController.hasVotedDown(toBeChanged)) {
-									if(toBeChanged!=0)
-									{	
-										answerController.changeCount(toBeChanged, 1);
-									}
-									else
-									{
-										answerController.changeQuestionCount(1);
-									}
-								}
-								else {
-									if(toBeChanged!=0)
-									{	
-										answerController.changeCount(toBeChanged, 2);
-									}
-									else
-									{
-										answerController.changeQuestionCount(2);
-									}
-									answerController.notVotedDown(toBeChanged);
-									downElement.className = "fa fa-sort-desc fa-3x colorless vote";
-								}
-								element.className = "fa fa-sort-asc fa-3x colored vote";
-								answerController.votedUp(toBeChanged);
-							}
-							else {
-								element.className = "fa fa-sort-asc fa-3x colorless vote";
-									if(toBeChanged!=0)
-									{	
-										answerController.changeCount(toBeChanged, -1);
-									}
-									else
-									{
-										answerController.changeQuestionCount(-1);
-									}
-									answerController.notVotedUp(toBeChanged);
-							}
-						}
-						else {
-							if (!answerController.hasVotedDown(toBeChanged)) {
-								if (!answerController.hasVotedUp(toBeChanged)) {
-									if(toBeChanged!=0)
-									{	
-										answerController.changeCount(toBeChanged, -1);
-									}
-									else
-									{
-										answerController.changeQuestionCount(-1);
-									}
-								}
-								else {
-									if(toBeChanged!=0)
-									{	
-										answerController.changeCount(toBeChanged, -2);
-									}
-									else
-									{
-										answerController.changeQuestionCount(-2);
-									}
-									answerController.notVotedUp(toBeChanged)
-									upElement.className = "fa fa-sort-asc fa-3x colorless vote";
-								}
-								element.className = "fa fa-sort-desc fa-3x colored vote";
-								answerController.votedDown(toBeChanged);
-							}
-							else {
-								element.className = "fa fa-sort-desc fa-3x colorless vote";
-																	if(toBeChanged!=0)
-									{	
-										answerController.changeCount(toBeChanged, 1);
-									}
-									else
-									{
-										answerController.changeQuestionCount(1);
-									}
-									answerController.notVotedDown(toBeChanged);
-							}
-						}
-	},*/
+		if (vote.upDownId.includes("up")) {
+			if (!answerController.hasVotedUp(vote.toBeChanged)) {
+				if (!answerController.hasVotedDown(vote.toBeChanged)) {
+					answerController.changeVoteCount(vote.toBeChanged, 1);
+
+				}
+				else {
+					answerController.changeVoteCount(vote.toBeChanged, 2);
+					answerController.notVotedDown(vote.toBeChanged);
+					vote.downElement.className = "fa fa-sort-desc fa-3x colorless vote";
+				}
+				vote.element.className = "fa fa-sort-asc fa-3x colored vote";
+				answerController.votedUp(vote.toBeChanged);
+			}
+			else {
+				vote.element.className = "fa fa-sort-asc fa-3x colorless vote";
+				answerController.changeVoteCount(vote.toBeChanged, -1);
+				answerController.notVotedUp(vote.toBeChanged);
+			}
+		}
+		else {
+			if (!answerController.hasVotedDown(vote.toBeChanged)) {
+				if (!answerController.hasVotedUp(vote.toBeChanged)) {
+					answerController.changeVoteCount(vote.toBeChanged, -1);
+
+				}
+				else {
+					answerController.changeVoteCount(vote.toBeChanged, -2);
+					answerController.notVotedUp(vote.toBeChanged)
+					vote.upElement.className = "fa fa-sort-asc fa-3x colorless vote";
+				}
+				vote.element.className = "fa fa-sort-desc fa-3x colored vote";
+				answerController.votedDown(vote.toBeChanged);
+			}
+			else {
+				vote.element.className = "fa fa-sort-desc fa-3x colorless vote";
+				answerController.changeVoteCount(vote.toBeChanged, 1)
+				answerController.notVotedDown(vote.toBeChanged);
+			}
+		}
+	},
 	appendAnswerString:function(tempObject)
 	{
 		return '<div class="answer-padding">'+
