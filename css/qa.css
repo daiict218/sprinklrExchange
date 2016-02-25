@@ -1,0 +1,188 @@
+*{
+	font-family: Arial,'Helvetica Neue',Helvetica,sans-serif;
+	margin: 0;
+	padding: 0;
+}
+body
+{
+	height:100vh;
+	margin:0px;
+}
+.content{
+	box-sizing: content-box;
+	margin: 0 auto;
+	padding: 10px 15px;
+	position: relative;
+	width: 1060px;
+}
+.question-header .question-header__question-hyperlink
+{
+	color:#222426;
+	font-size:24px;
+	font-weight:normal;
+	line-height:1.3;
+	text-decoration:none;
+}
+.question-header
+{
+	border-bottom:1px solid #e5e5e5;
+}
+.mainbar
+{
+	float: left;
+	margin: 15px 0 15px 0;
+	padding: 0;
+	width: 728px;
+}
+.sidebar
+{
+	float: right;
+	margin: 0;
+	margin: 15px 0 15px 0;
+	overflow: hidden;
+	width: 320px;
+}
+.votecell, .postcell
+{
+	display:inline-block;
+	vertical-align:top;
+}
+.votecell .votecell__vote
+{
+	min-width:46px;
+	padding-right:15px;
+}
+.votecell__vote
+{
+	color:#777;
+	font-weight:900;
+	text-align:center;
+}
+.colorless
+{
+	color:#777;
+	cursor:pointer;
+	display:block;
+}
+.colored
+{
+	color:#f69c55;	
+	cursor:pointer;
+	display:block;
+}
+.star
+{
+	font-size:1.5em;
+	margin-top:15px;
+}
+.starcount
+{
+	color:#f69c55;
+	font-weight:normal;
+	margin-top:10px;
+}
+.postcell__posttext
+{
+	font-size: 15px;
+	line-height: 1.3;
+	margin-bottom: 5px;
+	width: 660px;
+	word-wrap: break-word;
+	//white-space:pre-wrap;
+}
+.tag
+{
+	background-color:#e1ecf4;
+	color: #39739d;
+	cursor:pointer;
+	display:inline-block;
+	font-size:12px;
+	margin-right:4px;
+	padding:0.4em 0.5em;
+	vertical-align:top;
+}
+.postcell__postfooter__info
+{
+	background-color:#e1ecf4;
+	color:#9ea3a9;
+	display:inline-block;
+	float:right;
+	font-size:12px;
+	margin-top:5px;
+	padding:0.4em 0.5em;
+	vertical-align:top;
+
+}
+.postcell__postfooter__info__userinfo
+{
+	color: #39739d;
+}
+.answer-heading
+{
+	color:#444;
+	font-size:18px;
+	font-weight:normal;
+}
+.answer-header
+{
+	border-bottom:1px solid #f69c55;
+}
+.answer-padding
+{
+	border-bottom:1px solid #e5e5e5;
+	padding:15px 0 15px 0;
+}
+.addanswer__header
+{
+	border-bottom:1px solid #f69c55;
+	font-size:18px;
+	font-weight:400;
+	line-height: 1.3;
+	padding-bottom:18px;
+	padding-top:20px;
+}
+code
+{
+	display:inline-block;
+	max-height:250px;
+	overflow:auto;
+	vertical-align: top;
+
+}
+.postcell__postfooter__posteditdiv
+{
+	display:inline-block;
+	float:left;
+}
+.postcell__postfooter__posteditdiv__editlink
+{
+	color:#39739d;
+}
+.postcell__postfooter__posteditdiv__editlink:hover
+{
+	color:#39739d;
+}
+.green
+{
+	color:#009933;
+}
+.editblock
+{
+	display:none;
+}
+.footerfix
+{
+	padding-bottom:210px;
+}
+#footer{
+    bottom:0;
+    height:200px;
+    left:0;
+    position:absolute;
+    width:100%;
+}
+.wrapper
+{
+	min-height:100%;
+	position:relative;
+}
