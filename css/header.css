@@ -134,11 +134,14 @@ ul {
     background-color: #f69c55;
 }
 
-a {
+#header a {
     color: #ffffff;
     text-decoration:none;
 }
-
+#header a:hover{
+    color:#ffffff;
+    text-decoration: none;
+}
 .g-signin2 {
     display: inline-block;
    padding-top: 9px;
