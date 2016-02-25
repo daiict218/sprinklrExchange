@@ -56,7 +56,7 @@ $(function(){
             var tagsArray = model.getTags();
             for (var i = tagsArray.length - 1; i >= 0; i--) {
                 for(var j=tags.length-1;j>=0;j--){
-                    if(tags[j] == tagsArray[i].tag_name){
+                    if(tags[j] == tagsArray[i].tagName){
                         tagsArray[i].questionId.push(question.id);
                     }
                 }
