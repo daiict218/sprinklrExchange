@@ -1,5 +1,8 @@
 model={
     init:function(){
+        if(!localStorage.currentQuestionId){
+            localStorage.currentQuestionId = 1;
+        }
         this.questions = JSON.parse(localStorage.questions);
         this.searchResult = JSON.parse(localStorage.searchResult);
         //this.tagId = localStorage.currentTag;
@@ -60,9 +63,7 @@ var utilityFunctions={
 
 var view={
     init:function(){
-        if(!localStorageGet("currentQuestionId")){
-            localStorageSet("currentQuestionId",1);
-        }
+
         this.listelem=document.getElementById('questionlist');
 
         this.listelem.addEventListener('click',function (e){
@@ -122,28 +123,25 @@ var view={
         this.listelem.innerHTML=htmlstr;
     },
     answerBtnRender:function(length){
-        var flag;
-        if(length==0)
-            flag=1;
-        else
-            flag=0;
-        return '               <div id="answerbtn" '+((flag)? "class=question__vav__btn": "class=question__vav__btn--color")+'>'+
+        var flag=!length;
+        return '               <div id="answerbtn" data-flagger="1"'+((flag)? "class=question__vav__btn": "class=question__vav__btn--color")+'>'+
             '               <div class="mini-counts"><span class="x">'+length+'</span></div>'+
             '                       <div class="name">answers</div>'+
             '                       </div>';
     },
 
     viewsBtnRender: function(views){
-        return '                       <div  class="question__vav__btn">'+
+        return '                       <div  class="question__vav__btn" data-flagger="1">'+
             '                           <div class="mini-counts"><span class="x">'+views+'</span></div>'+
             '                           <div class="name">views</div>'+
             '                       </div>';
     },
     votesBtnRender: function(votes){
-        return '<div  class="question__vav__btn"  >'+
+        return '<div  class="question__vav__btn" data-flagger="1">'+
             '                           <div class="mini-counts"><span class="x">'+votes+'</span></div>'+
             '                           <div class="name">votes</div>'+
             '</div>';
     }
+
 }
 octopus.init();

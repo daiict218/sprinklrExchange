@@ -38,29 +38,29 @@ $(function () {
 
     var view = {
         init: function () {
-            //console.log('ghdjweghwjegw');
+            console.log('ghdjweghwjegw');
             $("#searchAll").keyup(function(e) {
 
                 var filterString = document.getElementById("searchAll").value;
                 filterString = filterString.toLowerCase();
-                
-                    var len = octopus.getQuestionLength();
-                    var questionArray=model.getQuestionArray();
-                    var resultArray=[];
-                    for (var i = 0; i < len; i++) {
 
-                        if (octopus.search(filterString, i,questionArray)) {
-                            resultArray.push(i+1);
 
-                        }
+                var len = octopus.getQuestionLength();
+                var questionArray=model.getQuestionArray();
+                var resultArray=[];
+                for (var i = 0; i < len; i++) {
+
+                    if (octopus.search(filterString, i,questionArray)) {
+                        resultArray.push(i+1);
 
                     }
 
-                    //console.log(resultArray);
-                    localStorage.searchResult=JSON.stringify(resultArray);
-                    console.log(localStorage.searchResult);
+                }
 
-                    //console.log(localStorage.searchResult,'gddddddd');
+                console.log(resultArray);
+                localStorage.searchResult=JSON.stringify(resultArray);
+
+                console.log(localStorage.searchResult,'gddddddd');
             });
         }
     };

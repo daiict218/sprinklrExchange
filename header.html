@@ -8,6 +8,8 @@
     <meta name="google-signin-client_id"
           content="472834415640-o419551t0kpu4jfl6h0pj7v64frcfsmi.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.0.min.js"></script>
+    <script src="js/header.js"></script>
     <title>
         Sprinklr Exchange
     </title>
@@ -20,7 +22,7 @@
     <div class="topbar__topbarholder">
         <div class="topbar__topbarholder__rightcorner">
             <div class="topbar__topbarholder__rightcorner__profile">
-                <img class="topbar__topbarholder__rightcorner__profile__profileimage" id="image_url" src="img/profile.png">
+                <img class="topbar__topbarholder__rightcorner__profile__profileimage" id="image_url">
 
             </div>
 
@@ -35,7 +37,7 @@
 
                 <form class="searchform" id="search" action="searchresult.html">
                     <i class="fa fa-search" id="searchicon"></i>
-                    <input class="searchform__searchbox" maxlength="240" placeholder="Search Q&A">
+                    <input id="searchAll" class="searchform__searchbox" maxlength="240" placeholder="Search Q&A">
                 </form>
             </div>
 
