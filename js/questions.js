@@ -1,4 +1,5 @@
 $(function(){
+<<<<<<< HEAD
 
     var quesId;
     if(localStorage.questions!==undefined){
@@ -12,6 +13,28 @@ $(function(){
     //console.log(JSON.parse(localStorage.questions).id);
     var questions= [];
     var tags = ['JavaScript','HTML','CSS','Java','Swing','AngularJS','BackboneJS','React'];
+=======
+    
+    var questions = [];
+    if(!localStorage.author){
+        localStorage.author = "Anonymous";
+    }
+    if(!localStorage.questions){
+        localStorage.questions = questions;
+    }
+    else
+    {
+        questions = JSON.parse(localStorage.questions);
+    }
+    var quesId= questions.length+1;
+    var allTags = JSON.parse(localStorage.tags);
+    console.log(allTags);
+    var tags = [];
+    for (var i = allTags.length - 1; i >= 0; i--) {
+        tags[i] = allTags[i].tag_name;
+    };
+    console.log(tags);
+>>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e
     // var questionCollection = {
     //     init: function () {
     //         this.questions = data.map(function (datum) {
@@ -43,12 +66,20 @@ $(function(){
         this.title = title;
         this.text = text;
         this.tags = tags;
+<<<<<<< HEAD
         this.answers = [];
         this.author = author;
         this.views=0;
         this.votes=0;
         this.time= new Date();
         
+=======
+        this.author = author;
+        this.answers = [];
+        this.votes = 0;
+        this.views = 0;
+        this.time = new Date();
+>>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e
     }
 
     Question.prototype.id = function(){
@@ -66,6 +97,13 @@ $(function(){
         localStorage.author = author;
     }
 
+<<<<<<< HEAD
+=======
+    var getTags = function(){
+        return JSON.parse(localStorage.tags);
+    }
+
+>>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e
     /* Question model in the question */
     var model = {
         init: function(){
@@ -75,6 +113,7 @@ $(function(){
         add:function(title,text,tags){
             var question = new Question(title,text,tags,getAuthor());
             question.id = question.id();
+<<<<<<< HEAD
             //localStorage.questions.maxid=JSON.stringify(quesId);
             if(localStorage.questions!==undefined)
             questions=JSON.parse(localStorage.questions);
@@ -84,6 +123,19 @@ $(function(){
             //console.log('hello');
             //console.log(quesId);
             localStorage.maxid=quesId;
+=======
+            questions.push(question);
+            localStorage.questions = JSON.stringify(questions);
+            var tagsArray = getTags();
+            for (var i = tagsArray.length - 1; i >= 0; i--) {
+                for(var j=tags.length-1;j>=0;j--){
+                    if(tags[j] == tagsArray[i].tag_name){
+                        tagsArray[i].questionId.push(question.id);
+                    }
+                }
+            };
+            localStorage.tags = JSON.stringify(tagsArray);
+>>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e
         },
         getAllQuestions: function() {
             return questions;
@@ -113,7 +165,12 @@ $(function(){
             $('#btn-submit').click(function(e){
                 var title = $('#input_element1').val();
                 // console.log(title);
+<<<<<<< HEAD
                 var text = $('#wmd-input').val();
+=======
+                var text = $('#wmd-preview').html();
+                console.log(text);
+>>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e
                 var errors = $('.inputtags__errors');
                 var elements = $('.inputtags__element');
                 var message = [];
@@ -132,6 +189,10 @@ $(function(){
                 }
                 else{
                     octopus.addNewQuestion(title,text,message);
+<<<<<<< HEAD
+=======
+                    window.location.href="index.html";
+>>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e
                 }   
                 e.preventDefault();
             });

@@ -85,7 +85,11 @@ body
 	word-wrap: break-word;
 	font-size: 15px;
 	line-height: 1.3;
+<<<<<<< HEAD
 	white-space:pre-wrap;
+=======
+	//white-space:pre-wrap;
+>>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e
 }
 .tag
 {
@@ -138,3 +142,19 @@ body
 	font-weight:400;
 	border-bottom:1px solid #f69c55;
 }
+<<<<<<< HEAD
+=======
+code
+{
+	max-height:250px;
+	overflow:auto;
+	display:inline-block;
+	vertical-align: top;
+
+}
+
+.green
+{
+	color:#009933;
+}
+>>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e

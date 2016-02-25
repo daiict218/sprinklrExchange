@@ -14,9 +14,14 @@ body
 .topbar__topbarholder
 {
 	margin:0 auto;
+<<<<<<< HEAD
 	width:900px;
 	box-sizing:content-box;
 
+=======
+	width:1060px;
+	box-sizing:content-box;
+>>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e
 }
 .toplogo
 {
@@ -40,13 +45,19 @@ body
 	display:inline-block;
 	vertical-align: top;
 	cursor:pointer;
+<<<<<<< HEAD
 	margin-top:5px;
+=======
+>>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e
 }
 .topbar__topbarholder__rightcorner__profile__profileimage
 {
 	max-width:100%;
 	max-height:100%;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e
 }
 .topbar__topbarholder__rightcorner__searchcontainer
 {
@@ -61,7 +72,11 @@ body
 	max-width:188px;
 	line-height:1.5;
 	font-size: 13px;
+<<<<<<< HEAD
 	margin-top:11px;
+=======
+	margin-top:5px;
+>>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e
 	padding-left:25px;
 
 }
@@ -132,6 +147,7 @@ ul
 {
 	background-color: #f69c55;
 }
+<<<<<<< HEAD
 a{
 	color:#ffffff;
 }
@@ -166,3 +182,22 @@ a{
 	margin-left:3px;
 }
 
+=======
+#ques{
+	color:#ffffff;
+}
+#ques:link
+{
+	color:#ffffff;
+	text-decoration:none;
+}
+#ques:visited
+{
+	color:#ffffff;
+	text-decoration:none;
+}
+a:hover
+{	color:#ffffff;
+	text-decoration:none;
+}
+>>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -9,7 +12,10 @@
       </MavenGeneralSettings>
     </option>
   </component>
+<<<<<<< HEAD
 >>>>>>> 323f24f2643f5e47261a0691e204df13523ee5d0
+=======
+>>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
@@ -20,6 +26,7 @@
     <ConfirmationsSetting value="0" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
+<<<<<<< HEAD
   <component name="ProjectPlainTextFileTypeManager">
     <file url="file://$PROJECT_DIR$/login.html" />
   </component>
@@ -43,4 +50,7 @@
     </states>
   </component>
 >>>>>>> 323f24f2643f5e47261a0691e204df13523ee5d0
+=======
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" default="true" assert-keyword="true" jdk-15="true" />
+>>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e
 </project>
