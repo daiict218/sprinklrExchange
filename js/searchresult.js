@@ -89,12 +89,12 @@ var view={
     },
     addHTML:function(elem,i,tagstr){
         return '<div class="question" data-id="'+i+'"><a href="questionanswer.html"><div class="question__vav">'+view.votesBtnRender(elem.votes)+
-                                 view.answerBtnRender(elem.answers.length)+
-                view.viewsBtnRender(elem.views)+
+            view.answerBtnRender(elem.answers.length)+
+            view.viewsBtnRender(elem.views)+
             '            </div></a>'+
             '                   <div class="question__summary">'+
-            '                       <div class="question__summary__ques">'+
-            '                           <h3><a href="questionanswer.html" data-flagger="1"  class="question-link">'+elem.title+'</a></h3>'+
+            '                       <div class="question__summary__ques" >'+
+            '                           <h3><a href="questionanswer.html"  class="question-link">'+elem.title+'</a></h3>'+
             '                       </div>'+
             '                       <div class="question__summary__tags">'+
             tagstr+
@@ -111,7 +111,6 @@ var view={
 
 
     },
-
     render:function(){
         var htmlstr='',questionSummary =octopus.getQuestions(),searchResult=octopus.getsearchResult();
         searchResult.forEach(function(elem,i,array){
@@ -125,17 +124,17 @@ var view={
     },
     answerBtnRender:function(length){
         var flag=!length;
-       return '               <div id="answerbtn" data-flagger="1"'+((flag)? "class=question__vav__btn": "class=question__vav__btn--color")+'>'+
-        '               <div class="mini-counts"><span class="x">'+length+'</span></div>'+
-        '                       <div class="name">answers</div>'+
-        '                       </div>';
+        return '               <div id="answerbtn" data-flagger="1"'+((flag)? "class=question__vav__btn": "class=question__vav__btn--color")+'>'+
+            '               <div class="mini-counts"><span class="x">'+length+'</span></div>'+
+            '                       <div class="name">answers</div>'+
+            '                       </div>';
     },
 
     viewsBtnRender: function(views){
         return '                       <div  class="question__vav__btn" data-flagger="1">'+
-        '                           <div class="mini-counts"><span class="x">'+views+'</span></div>'+
-        '                           <div class="name">views</div>'+
-        '                       </div>';
+            '                           <div class="mini-counts"><span class="x">'+views+'</span></div>'+
+            '                           <div class="name">views</div>'+
+            '                       </div>';
     },
     votesBtnRender: function(votes){
         return '<div  class="question__vav__btn" data-flagger="1">'+
@@ -143,5 +142,6 @@ var view={
             '                           <div class="name">votes</div>'+
             '</div>';
     }
+
 }
 octopus.init();
