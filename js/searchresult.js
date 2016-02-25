@@ -1,8 +1,5 @@
 model={
     init:function(){
-        if(!localStorage.currentQuestionId){
-            localStorage.currentQuestionId = 1;
-        }
         this.questions = JSON.parse(localStorage.questions);
         this.searchResult = JSON.parse(localStorage.searchResult);
         //this.tagId = localStorage.currentTag;
@@ -63,7 +60,9 @@ var utilityFunctions={
 
 var view={
     init:function(){
-
+        if(!localStorageGet("currentQuestionId")){
+            localStorageSet("currentQuestionId",1);
+        }
         this.listelem=document.getElementById('questionlist');
 
         this.listelem.addEventListener('click',function (e){
@@ -89,12 +88,12 @@ var view={
     },
     addHTML:function(elem,i,tagstr){
         return '<div class="question" data-id="'+i+'"><a href="questionanswer.html"><div class="question__vav">'+view.votesBtnRender(elem.votes)+
-                                 view.answerBtnRender(elem.answers.length)+
-                view.viewsBtnRender(elem.views)+
+            view.answerBtnRender(elem.answers.length)+
+            view.viewsBtnRender(elem.views)+
             '            </div></a>'+
             '                   <div class="question__summary">'+
-            '                       <div class="question__summary__ques">'+
-            '                           <h3><a href="questionanswer.html" data-flagger="1"  class="question-link">'+elem.title+'</a></h3>'+
+            '                       <div class="question__summary__ques" >'+
+            '                           <h3><a href="questionanswer.html"  class="question-link">'+elem.title+'</a></h3>'+
             '                       </div>'+
             '                       <div class="question__summary__tags">'+
             tagstr+
@@ -111,7 +110,6 @@ var view={
 
 
     },
-
     render:function(){
         var htmlstr='',questionSummary =octopus.getQuestions(),searchResult=octopus.getsearchResult();
         searchResult.forEach(function(elem,i,array){
@@ -124,21 +122,25 @@ var view={
         this.listelem.innerHTML=htmlstr;
     },
     answerBtnRender:function(length){
-        var flag=!length;
-       return '               <div id="answerbtn" data-flagger="1"'+((flag)? "class=question__vav__btn": "class=question__vav__btn--color")+'>'+
-        '               <div class="mini-counts"><span class="x">'+length+'</span></div>'+
-        '                       <div class="name">answers</div>'+
-        '                       </div>';
+        var flag;
+        if(length==0)
+            flag=1;
+        else
+            flag=0;
+        return '               <div id="answerbtn" '+((flag)? "class=question__vav__btn": "class=question__vav__btn--color")+'>'+
+            '               <div class="mini-counts"><span class="x">'+length+'</span></div>'+
+            '                       <div class="name">answers</div>'+
+            '                       </div>';
     },
 
     viewsBtnRender: function(views){
-        return '                       <div  class="question__vav__btn" data-flagger="1">'+
-        '                           <div class="mini-counts"><span class="x">'+views+'</span></div>'+
-        '                           <div class="name">views</div>'+
-        '                       </div>';
+        return '                       <div  class="question__vav__btn">'+
+            '                           <div class="mini-counts"><span class="x">'+views+'</span></div>'+
+            '                           <div class="name">views</div>'+
+            '                       </div>';
     },
     votesBtnRender: function(votes){
-        return '<div  class="question__vav__btn" data-flagger="1">'+
+        return '<div  class="question__vav__btn"  >'+
             '                           <div class="mini-counts"><span class="x">'+votes+'</span></div>'+
             '                           <div class="name">votes</div>'+
             '</div>';

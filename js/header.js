@@ -58,7 +58,7 @@ $(function () {
 
                     //console.log(resultArray);
                     localStorage.searchResult=JSON.stringify(resultArray);
-                
+                    console.log(localStorage.searchResult);
 
                     //console.log(localStorage.searchResult,'gddddddd');
             });
