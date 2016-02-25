@@ -1,30 +1,5 @@
 $(function(){
-    
-    var questions = [];
-    if(!localStorage.author){
-        localStorage.author = "Anonymous";
-    }
-    if(!localStorage.questions){
-        localStorage.questions = questions;
-    }
-    else
-    {
-        questions = JSON.parse(localStorage.questions);
-    }
-    // console.log("Hello world");
-    var quesId= questions.length+1;
-    var allTags = tags_init.tags;
-    // console.log("Hello world");
-    // console.log(allTags);
-    var tags = [];
-    for (var i = allTags.length - 1; i >= 0; i--) {
-        tags[i] = allTags[i].tag_name;
-    };
-    
-
-
-    /* Constructor function for the question */
-    var Question = function(title,text,tags,author){
+    var Question= function(title,text,tags,author){
         this.title = title;
         this.text = text;
         this.tags = tags;
@@ -35,48 +10,62 @@ $(function(){
         this.time = new Date();
     }
 
-    Question.prototype.id = function(){
-        return quesId++;
+    if(!localStorage.questions){
+        Question.prototype.quesId = 1;
+    }
+    else{
+        Question.prototype.quesId = JSON.parse(localStorage.questions).length+1;
     }
 
-
-    /*Some getters and setters for localStorage*/
-
-    var getAuthor = function(){
-        return localStorage.author;
-    };
-
-    var setAuthor = function(author){
-        localStorage.author = author;
-    }
-
-    var getTags = function(){
-        return JSON.parse(localStorage.tags);
-    }
-
-    /* Question model in the question */
     var model = {
-        init: function(){
 
+        init: function(){
+            if(!localStorage.author){
+                localStorage.author = "Anonymous";
+            }
+            if(!localStorage.questions){
+                localStorage.questions = JSON.stringify([]);
+            }
+            else
+            {
+                questions = JSON.parse(localStorage.questions);
+            }
+        },
+
+        getAuthor: function(){
+            return localStorage.author;
+        },
+
+        setAuthor: function(author){
+            localStorage.author = author;
+        },
+
+        getTags: function(){
+            return JSON.parse(localStorage.tags);
         },
 
         add:function(title,text,tags){
-            var question = new Question(title,text,tags,getAuthor());
-            question.id = question.id();
+            // console.log("hello world");
+            var question = new Question(title,text,tags,model.getAuthor());
+            question.id = Question.prototype.quesId;
+            // console.log(question.id);
+            var questions = JSON.parse(localStorage.questions);
             questions.push(question);
             localStorage.questions = JSON.stringify(questions);
-            var tagsArray = getTags();
+            // localStorage.questions = JSON.stringify(JSON.parse(localStorage.questions).push(question));
+            var tagsArray = model.getTags();
             for (var i = tagsArray.length - 1; i >= 0; i--) {
                 for(var j=tags.length-1;j>=0;j--){
-                    if(tags[j] == tagsArray[i].tag_name){
+                    if(tags[j] == tagsArray[i].tagName){
                         tagsArray[i].questionId.push(question.id);
                     }
                 }
             };
+            Question.quesId++;
             localStorage.tags = JSON.stringify(tagsArray);
         },
         getAllQuestions: function() {
-            return questions;
+            return model.questions;
         }
     };
 
@@ -104,7 +93,7 @@ $(function(){
             var dom = $('.mainbar');
             button.click(function(e){
                 var title = dom.find("#input_element1").val();
-                console.log(title);
+                // console.log(title);
                 var text = dom.find("#wmd-preview").html();
                 var errors = dom.find('.inputtags__errors');
                 var elements = dom.find('.inputtags__element');

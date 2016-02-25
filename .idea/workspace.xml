@@ -2,8 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28903c33-8663-4bf7-b437-7fb98a314add" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/footer.css" afterPath="$PROJECT_DIR$/css/footer.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/header.css" afterPath="$PROJECT_DIR$/css/header.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/index.css" afterPath="$PROJECT_DIR$/css/index.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/qa.css" afterPath="$PROJECT_DIR$/css/qa.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/tags.css" afterPath="$PROJECT_DIR$/css/tags.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/header.html" afterPath="$PROJECT_DIR$/header.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index2.html" afterPath="$PROJECT_DIR$/index2.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/allTags.js" afterPath="$PROJECT_DIR$/js/allTags.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/answer.js" afterPath="$PROJECT_DIR$/js/answer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/localStorage.js" afterPath="$PROJECT_DIR$/js/localStorage.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/questions.js" afterPath="$PROJECT_DIR$/js/questions.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/tagsQuestion.js" afterPath="$PROJECT_DIR$/js/tagsQuestion.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/questionanswer.html" afterPath="$PROJECT_DIR$/questionanswer.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tags.html" afterPath="$PROJECT_DIR$/tags.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tagsQuestion.html" afterPath="$PROJECT_DIR$/tagsQuestion.html" />
     </list>
     <ignored path="sprinklrExchange.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,8 +43,8 @@
       <file leaf-file-name="index2.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index2.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-20.625">
-              <caret line="39" column="35" selection-start-line="39" selection-start-column="35" selection-end-line="39" selection-end-column="35" />
+            <state vertical-scroll-proportion="-21.875">
+              <caret line="41" column="35" selection-start-line="41" selection-start-column="35" selection-end-line="41" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -39,7 +54,7 @@
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-0.0">
-              <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -48,8 +63,8 @@
       <file leaf-file-name="tags.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tags.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0">
-              <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+            <state vertical-scroll-proportion="-1.875">
+              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -59,7 +74,7 @@
         <entry file="file://$PROJECT_DIR$/tagsQuestion.html">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-0.0">
-              <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+              <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -71,9 +86,9 @@
             <state vertical-scroll-proportion="0.17793594">
               <caret line="10" column="57" selection-start-line="10" selection-start-column="57" selection-end-line="10" selection-end-column="57" />
               <folding>
-                <marker date="1456230024000" expanded="true" signature="2013:2864" placeholder="..." />
-                <marker date="1456230024000" expanded="true" signature="2506:2823" placeholder="..." />
-                <marker date="1456230024000" expanded="true" signature="2569:2778" placeholder="..." />
+                <marker date="1456252968000" expanded="true" signature="2013:2864" placeholder="..." />
+                <marker date="1456252968000" expanded="true" signature="2506:2823" placeholder="..." />
+                <marker date="1456252968000" expanded="true" signature="2569:2778" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -277,12 +292,12 @@
       <workItem from="1455703146243" duration="14000" />
       <workItem from="1455705868278" duration="422000" />
       <workItem from="1456004726991" duration="55000" />
-      <workItem from="1456148760154" duration="1684000" />
+      <workItem from="1456148760154" duration="1690000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2175000" />
+    <option name="totallyTimeSpent" value="2181000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="961" extended-state="6" />
@@ -326,8 +341,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/index2.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-20.625">
-          <caret line="39" column="35" selection-start-line="39" selection-start-column="35" selection-end-line="39" selection-end-column="35" />
+        <state vertical-scroll-proportion="-21.875">
+          <caret line="41" column="35" selection-start-line="41" selection-start-column="35" selection-end-line="41" selection-end-column="35" />
           <folding />
         </state>
       </provider>
@@ -335,15 +350,15 @@
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tags.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+        <state vertical-scroll-proportion="-1.875">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -351,7 +366,7 @@
     <entry file="file://$PROJECT_DIR$/tagsQuestion.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -361,9 +376,9 @@
         <state vertical-scroll-proportion="0.17793594">
           <caret line="10" column="57" selection-start-line="10" selection-start-column="57" selection-end-line="10" selection-end-column="57" />
           <folding>
-            <marker date="1456230024000" expanded="true" signature="2013:2864" placeholder="..." />
-            <marker date="1456230024000" expanded="true" signature="2506:2823" placeholder="..." />
-            <marker date="1456230024000" expanded="true" signature="2569:2778" placeholder="..." />
+            <marker date="1456252968000" expanded="true" signature="2013:2864" placeholder="..." />
+            <marker date="1456252968000" expanded="true" signature="2506:2823" placeholder="..." />
+            <marker date="1456252968000" expanded="true" signature="2569:2778" placeholder="..." />
           </folding>
         </state>
       </provider>

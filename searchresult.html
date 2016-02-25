@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Sprinklr Exchange</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/header.css">
+    
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.0.min.js"></script>
+    <script src="js/header.js"></script>
+
+
+</head>
+<body>
+<div id="header"></div>
+<div class="container clearfix">
+    <div class="content">
+        <div class="mainbar">
+            <div class="subheader">
+                <h1 class="questionheader">Questions</h1>
+            </div>
+            <div id='questionlist' class="questionlist">
+                <div id='question1' class="question">
+                    <div class="question__vav">
+                        <div id='votesbtn'class="question__vav__btn">
+                            <div class="mini-counts"><span class="x">-2</span></div>
+                            <div class="name">votes</div>
+                        </div>
+                        <div id='answerbtn' class="question__vav__btn question__vav__btn--color">
+                            <div class="mini-counts"><span class="x--mod">1</span></div>
+                            <div class="name--mod">answers</div>
+                        </div>
+                        <div id='viewbtn' class="question__vav__btn">
+                            <div class="mini-counts"><span class="x">12</span></div>
+                            <div class="name">views</div>
+                        </div>
+                    </div>
+                    <div class="question__summary">
+                        <div class="question__summary__ques">
+                            <h3><a href="#" class="question-link">React native android application has stopped</a></h3>
+                        </div>
+                        <div class="question__summary__tags">
+                            <a href="#" class="tags">JavaScript</a>
+                            <a href="#" class="tags">Android</a>
+                            <a href="#" class="tags">React Native</a>
+                        </div>
+                        <div id='author1' class="question__summary__author">
+                            <div class="author">
+                                asked 24 secs ago
+                                <a href="#">Jithin</a>
+                                </author>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="footer"></div>
+<script src="js/searchresult.js"></script>
+</body>
+<script>
+    $("#header").load("./header.html");
+    $("#footer").load("./footer.html");
+</script>
+</html>

@@ -6,6 +6,7 @@ body
 {
 	margin:0px;
 	font-family: Arial,'Helvetica Neue',Helvetica,sans-serif;
+	height:100vh;
 }
 .topbar
 {
@@ -143,6 +144,21 @@ ul
 	text-decoration:none;
 }
 a:hover
-{	color:#ffffff;
-	text-decoration:none;
+{	text-decoration:none;
+}
+.footerfix
+{
+	padding-bottom:210px;
+}
+#footer{
+    height:200px;
+    width:100%;
+    position:absolute;
+    bottom:0;
+    left:0;
+}
+.wrapper
+{
+	position:relative;
+	min-height:100%;
 }

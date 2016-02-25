@@ -1,173 +1,131 @@
 $(function () {
-    var currentTagId=0;
-    var tag_array=[];
-    var tag_return={};
-    var temp_array=[];
-    var tags = {};
-
-    if(!localStorage.tags){
-        localStorage.tags = JSON.stringify(tags_init.tags);
-    }
-
-
-
     var model = {
+        currentTagId: 0,
+        tagArray: [],
+        tagReturn: {},
+        cacheArray: [],
         init: function () {
-            //localStorage.tags=JSON.stringify(tags_init.tags);
-            localStorage.currentTagId=8;
+            try {
+                if (!localStorage.getItem("tags")) {
+                    localStorage.setItem("tags", JSON.stringify(model.tags));
+                }
+            }
+            catch (e) {
+                console.log(e.message);
+            }
+            try {
+                model.cacheArray = JSON.parse(localStorage.getItem("tags"));
+            }
+            catch (e){
+                console.log(e.message);
+            }
         },
-
-        add: function (new_tag_name,new_tag_summary) {
-            var tag = {};
-            tag.tag_name=new_tag_name;
-            tag.tag_summary=new_tag_summary;
-            tag.tag_id=localStorage.currentTagId;
-            tag.total_questions=0;
-            currentTagId=parseInt(localStorage.currentTagId);
-
-            tag_array=JSON.parse(localStorage.tags);
-            tag_array.push(tag);
-            localStorage.tags=JSON.stringify(tag_array);
-            localStorage.currentTagId=parseInt(localStorage.currentTagId)+1;
-
-
+        getTagSummary: function (iterator) {
+            return model.cacheArray[iterator].tagSummary;
         },
-        getTag: function(iterator){
-            // console.log(JSON.parse(localStorage.tags));
-            temp_array=JSON.parse(localStorage.tags);
-            tag_return = temp_array[iterator];
-            // console.log(temp_array);
+        getTagName: function (iterator) {
+            return model.cacheArray[iterator].tagName;
         },
-        getTagSummary: function(){
-            return tag_return.tag_summary;
+        getTotalQuestion: function (iterator) {
+            return model.cacheArray[iterator].questionId.length;
         },
-        getTagName: function(){
-            return tag_return.tag_name;
-        },
-        getTotalQuestion: function(){
-            // console.log(tag_return);
-            return tag_return.questionId.length;
-        },
-        getlength: function(){
-            return parseInt(localStorage.currentTagId);
-        },
-        getTotalData:function(){
-            return localStorage.tags;
+        getTagId:function(iterator){
+            return model.cacheArray[iterator].tagId;
         }
-
     };
-
-
     var octopus = {
-        init: function() {
+        init: function () {
             model.init();
-            // console.log("dsds");
             view.init();
         },
-        addNewTag: function (new_tag_name,new_tag_summary) {
-            model.add(new_tag_name,new_tag_summary);
-            view.render();
+        getTagArray: function () {
+            return model.cacheArray;
+        },
+        getTag:function(iterator)
+        {
+            return model.cacheArray[iterator];
+        },
+        getTagSummary: function (iterator) {
+            return model.getTagSummary(iterator);
+        },
+        getTagName: function (iterator) {
+            return model.getTagName(iterator);
+        },
+        getTotalQuestion: function (iterator) {
+            return model.getTotalQuestion(iterator);
+        },
+        getTagId:function(iterator){
+             return model.getTagId(iterator);
         },
 
         getTagObject: function (iterator) {
-            model.getTag(iterator);
+            var tagObject = {
+                tagName: octopus.getTagName(iterator),
+                tagSummary: octopus.getTagSummary(iterator),
+                totalQuestions: octopus.getTotalQuestion(iterator),
+                tagId:octopus.getTagId(iterator)
+            }
+            return tagObject;
         },
-        getTagSummary: function(){
-            return model.getTagSummary();
-        },
-        getTagName: function(){
-            return model.getTagName();
-        },
-        getTotalQuestion: function(){
-            return model.getTotalQuestion();
-        },
-        getLength: function(){
-            return model.getlength();
-        },
-        tagSearch:function(subText,iterator){
+        tagSearch: function (subText, iterator) {
+            try {
+                var tagString = JSON.stringify(octopus.getTag(iterator)).toLowerCase();
+            }
+            catch (e) {
+                var tagString = "";
+                console.log(e.message);
+            }
             var re1 = new RegExp(subText);
-            octopus.getTagObject(iterator);
-            var sttrr=JSON.stringify(tag_return);
-            var objectString=sttrr.toLowerCase();
-            return re1.test(objectString);
-        },
-        setNumberQuestions:function(id,number_questions){
-            tags_init.tags[id].numberQuestion = number_questions;
-        },
-        getQuestionOfTag:function(id){
-            // console.log(tags_init.tags[id].numberQuestion);
-            return tags_init.tags[id].numberQuestion;
-        }   
-
+            return re1.test(tagString);
+        }
     };
-
-
     var view = {
         init: function () {
             view.render();
-
-            // CurrentTag will store the current tag clicked by the user.
             $(".tag").click(function(){
-                localStorage.currentTag = this.id;
-                localStorage.numberQuestion = octopus.getQuestionOfTag(this.id);
+                var tagID=$(this).attr('id');
+                localStorage.currentTag=tagID;
+                console.log($(this).attr('id'));
             });
-            $("#tagfilter").keyup(function(){
-                var filterString=document.getElementById("tagfilter").value;
-                filterString = filterString.toLowerCase();
-                // console.log("here"+filterString);
-                var elem1 = document.getElementById("tags-browser");
-                var len=octopus.getLength();
-                // console.log(len);
-                var str="";
-                for(var i=0;i<len;i++) {
-
-                    if (octopus.tagSearch(filterString,i)) {
-                        octopus.getTagObject(i);
-
-                        str = str + '<div class="tag-cell">' +
-                            '<div class="tag-cell__tagname">' +
-                            '<a href="tagsQuestion.html" class="tag" title="" rel="tag" id='+tags_init.tags[i].tag_id+'>' + octopus.getTagName() + '</a>' +
-                            '<span class="tag-cell__tagname__multiply-x">' + "x" + '</span>' +
-                            '<span class="tag-cell__tagname__totaltags">' + octopus.getTotalQuestion() + '</span>' +
-                            '</div>' +
-                            '<div class="tag-cell__excerpt">' + octopus.getTagSummary() +
-                            '</div>' + '</div>';
+            $("#tagfilter").keyup(function () {
+                var searchString = view.getSearchString();
+                console.log(searchString);
+                var innerString = "";
+                octopus.getTagArray().forEach(function (object, iterator) {
+                    if (octopus.tagSearch(searchString, iterator)) {
+                        var tagObject = octopus.getTagObject(iterator);
+                        innerString = innerString + view.getHTMLString(tagObject);
                     }
-                    elem1.innerHTML = str;
-                }
-
+                });
+                view.putString(innerString);
             });
-            // console.log("dsfds");
-
         },
         render: function () {
-            var elem1 = document.getElementById("tags-browser");
-            var len=octopus.getLength();
-            // console.log(len);
-            var str="";
-            for(var i=0;i<len;i++) {
+            var innerStringRender = "";
+            octopus.getTagArray().forEach(function (object, iterator) {
+                var tagObject = octopus.getTagObject(iterator);
+                innerStringRender = innerStringRender + view.getHTMLString(tagObject);
+            });
+            view.putString(innerStringRender);
+        },
+        getHTMLString: function (tagObject) {
+            var HTMLString = '<div class="tag-cell">' +
+                '<div class="tag-cell__tagname">' +
+                '<a href="tagsQuestion.html" class="tag"'+'id='+tagObject.tagId+' title="" rel="tag">' + tagObject.tagName + '</a>' +
+                '<span class="tag-cell__tagname__multiply-x">' + "x" + '</span>' +
+                '<span class="tag-cell__tagname__totaltags">' + tagObject.totalQuestions + '</span>' +
+                '</div>' +
+                '<div class="tag-cell__excerpt">' + tagObject.tagSummary +
+                '</div>' + '</div>';
                 
-                octopus.getTagObject(i);
-                // console.log(tags_init.tags[i].tag_id);
-                str =str+ '<div class="tag-cell">' +
-                    '<div class="tag-cell__tagname">' +
-                    '<a href="tagsQuestion.html" class="tag" title="" rel="tag" id='+tags_init.tags[i].tag_id+'>' + octopus.getTagName()+ '</a>' +
-                    '<span class="tag-cell__tagname__multiply-x">' + "x" + '</span>' +
-                    '<span class="tag-cell__tagname__totaltags">' + octopus.getTotalQuestion() + '</span>' +
-                    '</div>' +
-                    '<div class="tag-cell__excerpt">' + octopus.getTagSummary() +
-                    '</div>' + '</div>';
-                    octopus.setNumberQuestions(i,octopus.getTotalQuestion());
-                    // console.log(tags_init.tags[i].numberQuestion);
-            }
-            elem1.innerHTML=str;
-
+            return HTMLString;
+        },
+        putString: function (innerString) {
+            document.getElementById("tags-browser").innerHTML = innerString;
+        },
+        getSearchString: function () {
+            return document.getElementById("tagfilter").value.toLowerCase();
         }
-
-
-
-
-
     };
     octopus.init();
 });

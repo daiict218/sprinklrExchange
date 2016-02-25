@@ -1,5 +1,6 @@
 html, body{
-    overflow: hidden;
+    //overflow: hidden;
+    height:100vh;
 }
 .content{
     margin: 0 auto;
@@ -82,4 +83,24 @@ p
 {
     clear: both;
     margin-bottom: 1em;
+}
+a
+{
+    text-decoration: none;
+}
+.footerfix
+{
+    padding-bottom:210px;
+}
+#footer{
+    height:200px;
+    width:100%;
+    position:absolute;
+    bottom:0;
+    left:0;
+}
+.wrapper
+{
+    position:relative;
+    min-height:100%;
 }

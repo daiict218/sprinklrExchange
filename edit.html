@@ -3,15 +3,10 @@
 <head>
 	<meta charset="utf-8">
 	<title>SprinklrExchange</title>
-	<script>
-	// console.log("Hello world");</script>
-	
-	<script type="text/javascript" src="js/allTags.js"></script>
-	<script type="text/javascript" src="js/localStorage.js"></script>
 	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.0.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="wmd-master/wmd.css" />
 	<script type="text/javascript" src="wmd-master/showdown.js"></script>
-	<script type="text/javascript" src="js/questions.js"></script>
+	<script type="text/javascript" src="js/edit.js"></script>
 	<link href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css"
 		  rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
@@ -20,16 +15,14 @@
 	<script src="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/js/bootstrap-multiselect.js"
 			type="text/javascript"></script>
 	<link rel="stylesheet" href="css/index2.css">
-	<link rel="stylesheet" href="css/header.css">
-
 
 	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
 <body>
-<div class="wrapper">	
+
 <div id="header"></div>
-<div class="container clearfix footerfix">
+<div class="container">
 	<div class="content">
 		<div class="mainbar">
 			<form id="form" class="form" method="post">
@@ -59,7 +52,7 @@
 				<br>
 				<div id="inputtags__post">
 					<button class="btn" id="btn-submit">
-						Post Your Question
+						Edit Question
 					</button>
 					<div id="discard">
 						discard
@@ -134,7 +127,6 @@
 	</div>
 </div>
 <div id="footer"></div>
-</div>
 <script type="text/javascript" src="wmd-master/wmd.js"></script>
 <script>
 	$("#header").load("./header.html");
