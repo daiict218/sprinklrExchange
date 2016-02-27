@@ -147,7 +147,7 @@ code
 	max-height:250px;
 	overflow:auto;
 	vertical-align: top;
-
+	width:100%;
 }
 .postcell__postfooter__posteditdiv
 {
