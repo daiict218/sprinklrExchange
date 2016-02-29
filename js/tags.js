@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * Created by avinashsrivastava on 19/02/16.
  */
@@ -64,11 +65,14 @@ elem1.innerHTML=str;
 =======
 =======
 >>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e
+=======
+>>>>>>> b01cb19e00f564264d44538a59214479beef9a1c
 $(function () {
     var currentTagId=0;
     var tag_array=[];
     var tag_return={};
     var temp_array=[];
+<<<<<<< HEAD
 <<<<<<< HEAD
     var tags_init= {
         tags:[
@@ -177,6 +181,10 @@ $(function () {
         init: function () {
             localStorage.tags=JSON.stringify(tags_init.tags);
 =======
+=======
+    var tags = {};
+
+>>>>>>> b01cb19e00f564264d44538a59214479beef9a1c
     if(!localStorage.tags){
         localStorage.tags = JSON.stringify(tags_init.tags);
     }
@@ -186,10 +194,14 @@ $(function () {
     var model = {
         init: function () {
             //localStorage.tags=JSON.stringify(tags_init.tags);
+<<<<<<< HEAD
 >>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e
             localStorage.currentTagId=8;
 
 
+=======
+            localStorage.currentTagId=8;
+>>>>>>> b01cb19e00f564264d44538a59214479beef9a1c
         },
 
         add: function (new_tag_name,new_tag_summary) {
@@ -209,16 +221,22 @@ $(function () {
         },
         getTag: function(iterator){
 <<<<<<< HEAD
+<<<<<<< HEAD
             // console.log(localStorage.tags);
             temp_array=JSON.parse(localStorage.tags);
             tag_return= temp_array[iterator];
 
 =======
+=======
+>>>>>>> b01cb19e00f564264d44538a59214479beef9a1c
             // console.log(JSON.parse(localStorage.tags));
             temp_array=JSON.parse(localStorage.tags);
             tag_return = temp_array[iterator];
             // console.log(temp_array);
+<<<<<<< HEAD
 >>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e
+=======
+>>>>>>> b01cb19e00f564264d44538a59214479beef9a1c
         },
         getTagSummary: function(){
             return tag_return.tag_summary;
@@ -228,11 +246,16 @@ $(function () {
         },
         getTotalQuestion: function(){
 <<<<<<< HEAD
+<<<<<<< HEAD
             return tag_return.total_questions;
 =======
             // console.log(tag_return);
             return tag_return.questionId.length;
 >>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e
+=======
+            // console.log(tag_return);
+            return tag_return.questionId.length;
+>>>>>>> b01cb19e00f564264d44538a59214479beef9a1c
         },
         getlength: function(){
             return parseInt(localStorage.currentTagId);
@@ -248,10 +271,14 @@ $(function () {
         init: function() {
             model.init();
 <<<<<<< HEAD
+<<<<<<< HEAD
             console.log("dsds");
 =======
             // console.log("dsds");
 >>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e
+=======
+            // console.log("dsds");
+>>>>>>> b01cb19e00f564264d44538a59214479beef9a1c
             view.init();
         },
         addNewTag: function (new_tag_name,new_tag_summary) {
@@ -276,6 +303,7 @@ $(function () {
         },
         tagSearch:function(subText,iterator){
 <<<<<<< HEAD
+<<<<<<< HEAD
             console.log(subText);
             var re1 = new RegExp(subText);
             octopus.getTagObject(iterator);
@@ -287,6 +315,8 @@ $(function () {
         }
 
 =======
+=======
+>>>>>>> b01cb19e00f564264d44538a59214479beef9a1c
             var re1 = new RegExp(subText);
             octopus.getTagObject(iterator);
             var sttrr=JSON.stringify(tag_return);
@@ -300,7 +330,10 @@ $(function () {
             // console.log(tags_init.tags[id].numberQuestion);
             return tags_init.tags[id].numberQuestion;
         }   
+<<<<<<< HEAD
 >>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e
+=======
+>>>>>>> b01cb19e00f564264d44538a59214479beef9a1c
 
     };
 
@@ -309,6 +342,7 @@ $(function () {
         init: function () {
             view.render();
 <<<<<<< HEAD
+<<<<<<< HEAD
             $("#tagfilter").keyup(function(){
                 var filterString=document.getElementById("tagfilter").value;
                 console.log("here"+filterString);
@@ -316,6 +350,8 @@ $(function () {
                 var len=octopus.getLength();
                 console.log(len);
 =======
+=======
+>>>>>>> b01cb19e00f564264d44538a59214479beef9a1c
 
             // CurrentTag will store the current tag clicked by the user.
             $(".tag").click(function(){
@@ -329,7 +365,10 @@ $(function () {
                 var elem1 = document.getElementById("tags-browser");
                 var len=octopus.getLength();
                 // console.log(len);
+<<<<<<< HEAD
 >>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e
+=======
+>>>>>>> b01cb19e00f564264d44538a59214479beef9a1c
                 var str="";
                 for(var i=0;i<len;i++) {
 
@@ -339,10 +378,14 @@ $(function () {
                         str = str + '<div class="tag-cell">' +
                             '<div class="tag-cell__tagname">' +
 <<<<<<< HEAD
+<<<<<<< HEAD
                             '<a href="" class="tag" title="" rel="tag">' + octopus.getTagName() + '</a>' +
 =======
                             '<a href="tagsQuestion.html" class="tag" title="" rel="tag" id='+tags_init.tags[i].tag_id+'>' + octopus.getTagName() + '</a>' +
 >>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e
+=======
+                            '<a href="tagsQuestion.html" class="tag" title="" rel="tag" id='+tags_init.tags[i].tag_id+'>' + octopus.getTagName() + '</a>' +
+>>>>>>> b01cb19e00f564264d44538a59214479beef9a1c
                             '<span class="tag-cell__tagname__multiply-x">' + "x" + '</span>' +
                             '<span class="tag-cell__tagname__totaltags">' + octopus.getTotalQuestion() + '</span>' +
                             '</div>' +
@@ -354,15 +397,20 @@ $(function () {
 
             });
 <<<<<<< HEAD
+<<<<<<< HEAD
             console.log("dsfds");
 =======
             // console.log("dsfds");
 >>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e
+=======
+            // console.log("dsfds");
+>>>>>>> b01cb19e00f564264d44538a59214479beef9a1c
 
         },
         render: function () {
             var elem1 = document.getElementById("tags-browser");
             var len=octopus.getLength();
+<<<<<<< HEAD
 <<<<<<< HEAD
             console.log(len);
             var str="";
@@ -374,6 +422,8 @@ $(function () {
                     '<div class="tag-cell__tagname">' +
                     '<a href="" class="tag" title="" rel="tag">' + octopus.getTagName()+ '</a>' +
 =======
+=======
+>>>>>>> b01cb19e00f564264d44538a59214479beef9a1c
             // console.log(len);
             var str="";
             for(var i=0;i<len;i++) {
@@ -383,17 +433,25 @@ $(function () {
                 str =str+ '<div class="tag-cell">' +
                     '<div class="tag-cell__tagname">' +
                     '<a href="tagsQuestion.html" class="tag" title="" rel="tag" id='+tags_init.tags[i].tag_id+'>' + octopus.getTagName()+ '</a>' +
+<<<<<<< HEAD
 >>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e
+=======
+>>>>>>> b01cb19e00f564264d44538a59214479beef9a1c
                     '<span class="tag-cell__tagname__multiply-x">' + "x" + '</span>' +
                     '<span class="tag-cell__tagname__totaltags">' + octopus.getTotalQuestion() + '</span>' +
                     '</div>' +
                     '<div class="tag-cell__excerpt">' + octopus.getTagSummary() +
                     '</div>' + '</div>';
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
                     octopus.setNumberQuestions(i,octopus.getTotalQuestion());
                     // console.log(tags_init.tags[i].numberQuestion);
 >>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e
+=======
+                    octopus.setNumberQuestions(i,octopus.getTotalQuestion());
+                    // console.log(tags_init.tags[i].numberQuestion);
+>>>>>>> b01cb19e00f564264d44538a59214479beef9a1c
             }
             elem1.innerHTML=str;
 
@@ -407,9 +465,12 @@ $(function () {
     octopus.init();
 });
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 0a077971d001e5ce93191baa48248f833e8c56a4
 
 
 =======
 >>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e
 
+=======
+>>>>>>> b01cb19e00f564264d44538a59214479beef9a1c

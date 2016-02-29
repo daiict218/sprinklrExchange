@@ -7,10 +7,11 @@
 
 	<link rel="stylesheet" href="css/index2.css">
 	<link rel="stylesheet" href="css/qa.css">
-
+	<link rel="stylesheet" href="css/header.css">
 
 	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.0.min.js"></script>
 	<script type="text/javascript" src="wmd-master/showdown.js"></script>
+<<<<<<< HEAD
 <<<<<<< HEAD
 	<!--<script type="text/javascript" src="js/questions.js"></script>
 	<link href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css"
@@ -26,24 +27,30 @@
 	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
 
 >>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e
+=======
+	<link href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css"
+    rel="stylesheet" type="text/css" >
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="wmd-master/wmd.js"></script>
+>>>>>>> b01cb19e00f564264d44538a59214479beef9a1c
 
 	<title>
 		Sprinklr Exchange
 	</title>
 </head>
 <body>
+<div class="wrapper">	
 <div id="header"></div>
-<div class="content clearfix">
+<div class="content clearfix footerfix">
 	<div class="question-header">
 		<h1><a href="#" class="question-header__question-hyperlink"></a></h1>
 	</div>
 	<div class="mainbar">
 		<div class="question">
-			<table>
-				<tbody>
-				<tr>
-					<td class="votecell">
+			
+					<div class="votecell">
 						<div class="votecell__vote">
+<<<<<<< HEAD
 <<<<<<< HEAD
 							<i class="fa fa-sort-asc fa-3x grey"></i>
 							<div class="votecount">2</div>
@@ -60,70 +67,49 @@
 						</div>
 					</td>
 					<td class="postcell">
+=======
+							<i class="fa fa-sort-asc fa-3x colorless vote" id="qvoteup"></i>
+							<div class="votecount" id="questionvotes"></div>
+							<i class="fa fa-sort-desc fa-3x colorless vote" id="qvotedown"></i>
+							<!--<i class = "fa fa-star-o star"></i>
+							<div class="starcount">3</div>-->
+						</div>
+					</div>
+					<div class="postcell">
+>>>>>>> b01cb19e00f564264d44538a59214479beef9a1c
 						<div class="postcell__posttext">
 						</div>
 						<div class="postcell__posttaglist">
 							<!--<div class="tag">Python</div>
 							<div class="tag">Maths</div>-->
 						</div>
-						<div class="postcell__postfooter">
+						<div class="postcell__postfooter clearfix">
+						<!--	<div class="postcell__postfooter__posteditdiv">
+									<a class="postcell__postfooter__posteditdiv__editlink" id ="qeditlink">Edit</a>
+							</div>-->
 							<div class="postcell__postfooter__info">
+<<<<<<< HEAD
 <<<<<<< HEAD
 								asked <span>4</span>hours ago
 =======
 											
 >>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e
 								<div class="postcell__postfooter__info__userinfo">Karan Tankshali</div>
+=======
+											
+								<!-- <div class="postcell__postfooter__info__userinfo">Karan Tankshali</div> -->
+>>>>>>> b01cb19e00f564264d44538a59214479beef9a1c
 							</div>
 
 						</div>
-					</td>
-				</tr>
-				</tbody>
-			</table>
+					</div>
 		</div>
 
 		<div class="answers">
 			<div class="answer-header">
-				<h2 class="answer-heading"><span class="noofanswers"></span> Answers</h2>
+				<h2 class="answer-heading"><span class="no-of-answers"></span> Answers</h2>
 			</div>
-		<!--	<div class="answer-padding">
-				<table>
-					<tbody>
-					<tr>
-						<td class="votecell">
-							<div class="votecell__vote">
-								<i class="fa fa-sort-asc fa-3x grey"></i>
-								<div class="votecount">2</div>
-								<i class="fa fa-sort-desc fa-3x grey"></i>
 
-							</div>
-						</td>
-						<td class="postcell">
-							<div class="postcell__posttext">I built a calculator for a bio equation, and I think I've narrowed down the source of my problem,
-which is a natural log I take:
-
-goldman = ((R * T) / F) * cmath.log(float(top_row) / float(bot_row))
-
-print("Membrane potential: " + str(goldman) + "V"
-My problem is that it will only display the output in a complex form:
-
-Membrane potential: (0.005100608207126714+0j)V
-Is there any way of getting this to print as a floating number? Nothing I've tried has worked.
-						</div>
-
-							<div class="postcell__postfooter">
-								<div class="postcell__postfooter__info">
-									
-									<div class="postcell__postfooter__info__userinfo"></div>
-								</div>
-
-							</div>
-						</td>
-					</tr>
-					</tbody>
-				</table>
-			</div>-->
 			
 		</div>
 		<div class="addanswer">
@@ -141,10 +127,7 @@ Is there any way of getting this to print as a floating number? Nothing I've tri
 
 			<br/>
 		</div>
-		<div class="inputtags__errors">
-					
-		</div>
-		<div id="inputtags__post">
+		<div id="wmd__footer">
 			<button class="btn" id="btn-submit">
 						Post Your Answer
 			</button>
@@ -221,15 +204,9 @@ Is there any way of getting this to print as a floating number? Nothing I've tri
 	</div>
 
 </div>
-<div id="footer"></div>
-<script type="text/javascript" src="wmd-master/wmd.js"></script>
-<!--<script type="text/javascript">
-//     $(function () {
-//         $('#options').multiselect({
-//             includeSelectAllOption: true,
-//         });
-//     });
-// </script>-->
+<div id="footer" class="clearfix"></div>
+</div>
+
 <script>
 	$("#header").load("./header.html");
 	$("#footer").load("./footer.html");

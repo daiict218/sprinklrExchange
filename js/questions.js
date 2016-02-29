@@ -1,5 +1,6 @@
 $(function(){
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     var quesId;
     if(localStorage.questions!==undefined){
@@ -74,11 +75,18 @@ $(function(){
         this.time= new Date();
         
 =======
+=======
+    var Question= function(title,text,tags,author){
+        this.title = title;
+        this.text = text;
+        this.tags = tags;
+>>>>>>> b01cb19e00f564264d44538a59214479beef9a1c
         this.author = author;
         this.answers = [];
         this.votes = 0;
         this.views = 0;
         this.time = new Date();
+<<<<<<< HEAD
 >>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e
     }
 
@@ -105,8 +113,21 @@ $(function(){
 
 >>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e
     /* Question model in the question */
+=======
+    }
+
+    if(!localStorage.questions){
+        Question.prototype.quesId = 1;
+    }
+    else{
+        Question.prototype.quesId = JSON.parse(localStorage.questions).length+1;
+    }
+
+>>>>>>> b01cb19e00f564264d44538a59214479beef9a1c
     var model = {
+
         init: function(){
+<<<<<<< HEAD
 
         },
 
@@ -127,6 +148,42 @@ $(function(){
             questions.push(question);
             localStorage.questions = JSON.stringify(questions);
             var tagsArray = getTags();
+=======
+            if(!localStorage.author){
+                localStorage.author = "Anonymous";
+            }
+            if(!localStorage.questions){
+                localStorage.questions = JSON.stringify([]);
+            }
+            else
+            {
+                questions = JSON.parse(localStorage.questions);
+            }
+        },
+
+        getAuthor: function(){
+            return localStorage.author;
+        },
+
+        setAuthor: function(author){
+            localStorage.author = author;
+        },
+
+        getTags: function(){
+            return JSON.parse(localStorage.tags);
+        },
+
+        add:function(title,text,tags){
+            // console.log("hello world");
+            var question = new Question(title,text,tags,model.getAuthor());
+            question.id = Question.prototype.quesId;
+            // console.log(question.id);
+            var questions = JSON.parse(localStorage.questions);
+            questions.push(question);
+            localStorage.questions = JSON.stringify(questions);
+            // localStorage.questions = JSON.stringify(JSON.parse(localStorage.questions).push(question));
+            var tagsArray = model.getTags();
+>>>>>>> b01cb19e00f564264d44538a59214479beef9a1c
             for (var i = tagsArray.length - 1; i >= 0; i--) {
                 for(var j=tags.length-1;j>=0;j--){
                     if(tags[j] == tagsArray[i].tag_name){
@@ -134,11 +191,16 @@ $(function(){
                     }
                 }
             };
+<<<<<<< HEAD
             localStorage.tags = JSON.stringify(tagsArray);
 >>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e
+=======
+            Question.quesId++;
+            localStorage.tags = JSON.stringify(tagsArray);
+>>>>>>> b01cb19e00f564264d44538a59214479beef9a1c
         },
         getAllQuestions: function() {
-            return questions;
+            return model.questions;
         }
     };
 
@@ -162,9 +224,12 @@ $(function(){
 
     var view = {
         init:function(){
-            $('#btn-submit').click(function(e){
-                var title = $('#input_element1').val();
+            var button = $('#btn-submit');
+            var dom = $('.mainbar');
+            button.click(function(e){
+                var title = dom.find("#input_element1").val();
                 // console.log(title);
+<<<<<<< HEAD
 <<<<<<< HEAD
                 var text = $('#wmd-input').val();
 =======
@@ -173,6 +238,11 @@ $(function(){
 >>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e
                 var errors = $('.inputtags__errors');
                 var elements = $('.inputtags__element');
+=======
+                var text = dom.find("#wmd-preview").html();
+                var errors = dom.find('.inputtags__errors');
+                var elements = dom.find('.inputtags__element');
+>>>>>>> b01cb19e00f564264d44538a59214479beef9a1c
                 var message = [];
                 var selected = $("#options option:selected");
                 selected.each(function (i) {
@@ -190,15 +260,20 @@ $(function(){
                 else{
                     octopus.addNewQuestion(title,text,message);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
                     window.location.href="index.html";
 >>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e
+=======
+                    window.location.href="index.html";
+>>>>>>> b01cb19e00f564264d44538a59214479beef9a1c
                 }   
                 e.preventDefault();
             });
             view.render();
         },
         render:function(){
+<<<<<<< HEAD
             // $('#viewTemp').html(octopus.getQuestions()[0]);
            // console.log(questions);
            var htmlStr = '';
@@ -206,6 +281,13 @@ $(function(){
                htmlStr += "<option value="+(i+1)+">"+tags[i]+"</option>"
            };        
            //console.log(htmlStr);
+=======
+           var index = -1;
+           var htmlStr = tags.reduce(function(a,b){
+                index++;
+                return a + "<option value="+(index+1)+">"+b+"</option>"; 
+           },'');
+>>>>>>> b01cb19e00f564264d44538a59214479beef9a1c
            $("#options").html(htmlStr);
         }
     };

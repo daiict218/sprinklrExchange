@@ -6,6 +6,7 @@ body
 {
 	margin:0px;
 	font-family: Arial,'Helvetica Neue',Helvetica,sans-serif;
+	height:100vh;
 }
 .topbar
 {
@@ -148,6 +149,7 @@ ul
 	background-color: #f69c55;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 a{
 	color:#ffffff;
 }
@@ -186,6 +188,11 @@ a{
 #ques{
 	color:#ffffff;
 }
+=======
+#ques{
+	color:#ffffff;
+}
+>>>>>>> b01cb19e00f564264d44538a59214479beef9a1c
 #ques:link
 {
 	color:#ffffff;
@@ -197,7 +204,28 @@ a{
 	text-decoration:none;
 }
 a:hover
+<<<<<<< HEAD
 {	color:#ffffff;
 	text-decoration:none;
 }
 >>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e
+=======
+{	text-decoration:none;
+}
+.footerfix
+{
+	padding-bottom:210px;
+}
+#footer{
+    height:200px;
+    width:100%;
+    position:absolute;
+    bottom:0;
+    left:0;
+}
+.wrapper
+{
+	position:relative;
+	min-height:100%;
+}
+>>>>>>> b01cb19e00f564264d44538a59214479beef9a1c

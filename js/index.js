@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 var Model={
     init:function(){
             if (!localStorage.questions) {
@@ -5,6 +6,20 @@ var Model={
             }
             this.questionSummary=JSON.parse(localStorage.questions);
 
+=======
+
+if(!localStorage.author){
+    localStorage.author = "Anonymous";
+}
+
+
+var model={
+    init:function(){
+        if(!localStorageGet("questions")){
+            localStorageSet("questions",[]);
+        }
+        this.questionSummary = localStorageGet("questions");
+>>>>>>> b01cb19e00f564264d44538a59214479beef9a1c
     },
     questionSummary:[
     ],
@@ -12,6 +27,7 @@ var Model={
         return this.questionSummary;
     }
 
+<<<<<<< HEAD
 };//view onlcik
 //answes
 var octopus={
@@ -24,11 +40,27 @@ var octopus={
     },
     getTimeDifference:function(current, previous) {
     
+=======
+};
+var octopus={
+    init: function(){
+            model.init();
+            view.init();
+        },
+    getQuestions: function(){
+           return  model.getallQuestions();
+    }
+};
+var utilityFunctions={
+    getTimeDifference:function(current, previous) {
+
+>>>>>>> b01cb19e00f564264d44538a59214479beef9a1c
         var msPerMinute = 60 * 1000;
         var msPerHour = msPerMinute * 60;
         var msPerDay = msPerHour * 24;
         var msPerMonth = msPerDay * 30;
         var msPerYear = msPerDay * 365;
+<<<<<<< HEAD
         
         var elapsed = current - previous;
         
@@ -92,18 +124,86 @@ var view={
 =======
             '                       <div class="question__summary__ques">'+
 >>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e
+=======
+
+        var elapsed = current - previous;
+
+        if (elapsed < msPerMinute) {
+            return Math.round(elapsed/1000) + ' seconds ago';
+        }
+
+        else if (elapsed < msPerHour) {
+            return Math.round(elapsed/msPerMinute) + ' minutes ago';
+        }
+
+        else if (elapsed < msPerDay ) {
+            return Math.round(elapsed/msPerHour ) + ' hours ago';
+        }
+
+        else if (elapsed < msPerMonth) {
+            return Math.round(elapsed/msPerDay) + ' days ago';
+        }
+
+        else if (elapsed < msPerYear) {
+            return Math.round(elapsed/msPerMonth) + ' months ago';
+        }
+
+        else {
+            return Math.round(elapsed/msPerYear ) + ' years ago';
+        }
+    }
+}
+var view={
+    init:function(){
+        if(!localStorageGet("currentQuestionId")){
+            localStorageSet("currentQuestionId",1);
+        }
+        this.listelem=document.getElementById('questionlist');
+
+            this.listelem.addEventListener('click',function (e){
+                console.log(e.target,"hellohi", e.target.parentNode);
+                console.log(e.target.parentNode.dataset.id,'what is this')
+                var x= e.target;
+                console.log(x, "second",x.parentNode);
+                while(x.dataset.id===undefined){
+                    console.log(x.parentNode);
+                    x= x.parentNode;
+                }
+                var questionSummary=octopus.getQuestions();
+                questionSummary[parseInt(x.dataset.id)].views++;
+                localStorageSet("currentQuestionId",questionSummary[parseInt(x.dataset.id)].id);
+                localStorageSet("questions",questionSummary);
+            });
+
+        this.render();
+    },
+    addHTML:function(elem,i,tagstr){
+        return '<div class="question" data-id="'+i+'"><a href="questionanswer.html"><div class="question__vav">'+view.votesBtnRender(elem.votes)+
+                                 view.answerBtnRender(elem.answers.length)+
+                view.viewsBtnRender(elem.views)+
+            '            </div></a>'+
+            '                   <div class="question__summary">'+
+            '                       <div class="question__summary__ques" >'+
+>>>>>>> b01cb19e00f564264d44538a59214479beef9a1c
             '                           <h3><a href="questionanswer.html"  class="question-link">'+elem.title+'</a></h3>'+
             '                       </div>'+
             '                       <div class="question__summary__tags">'+
             tagstr+
             '                       </div>'+
+<<<<<<< HEAD
             '                       <div id="author'+i+'" class="question__summary__author">'+
             '                           <div class="author">'+
             octopus.getTimeDifference(new Date(),Date.parse(elem.time))
+=======
+            '                       <div class="question__summary__author">'+
+            '                           <div class="author">'+
+            utilityFunctions.getTimeDifference(new Date(),Date.parse(elem.time))+
+>>>>>>> b01cb19e00f564264d44538a59214479beef9a1c
             '                               <a href="#">'+elem.author+'</a>'+
             '                               </author>'+
             '                           </div>'+
             '                       </div>'+
+<<<<<<< HEAD
             '                   </div>';
             //
     },
@@ -115,10 +215,22 @@ var view={
           //questiondiv
             var questionblock= document.createElement('div');
             var htmlstr='';
+=======
+            '                   </div>' +
+            '                  </div>';
+
+
+    },
+    render:function(){
+        var htmlstr='';
+        var questionSummary =octopus.getQuestions();
+        questionSummary.forEach(function(elem,i,array){
+>>>>>>> b01cb19e00f564264d44538a59214479beef9a1c
             var tagstr='';
             elem.tags.forEach(function(element,index,a){
                 tagstr+='<a href="#" class="tags">'+element+'</a>';
             });
+<<<<<<< HEAD
             questionblock.className='question';
             questionblock.id='question'+i;
                 htmlstr=view.addHTML(elem,i,tagstr);
@@ -240,3 +352,33 @@ var tags_init= {
         localStorage.tags = JSON.stringify(tags_init.tags);
     }
 >>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e
+=======
+            htmlstr+=view.addHTML(elem,i,tagstr);
+
+        });
+        this.listelem.innerHTML=htmlstr;
+    },
+    answerBtnRender:function(length){
+        var flag=!length;
+       return '               <div id="answerbtn" '+((flag)? "class=question__vav__btn": "class=question__vav__btn--color")+'>'+
+        '               <div class="mini-counts"><span class="x">'+length+'</span></div>'+
+        '                       <div class="name">answers</div>'+
+        '                       </div>';
+    },
+
+    viewsBtnRender: function(views){
+        return '                       <div  class="question__vav__btn">'+
+        '                           <div class="mini-counts"><span class="x">'+views+'</span></div>'+
+        '                           <div class="name">views</div>'+
+        '                       </div>';
+    },
+    votesBtnRender: function(votes){
+        return '<div  class="question__vav__btn"  >'+
+            '                           <div class="mini-counts"><span class="x">'+votes+'</span></div>'+
+            '                           <div class="name">votes</div>'+
+            '</div>';
+    }
+}
+octopus.init();
+ 
+>>>>>>> b01cb19e00f564264d44538a59214479beef9a1c
