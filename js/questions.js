@@ -117,6 +117,9 @@ $(function(){
                 }   
                 e.preventDefault();
             });
+            $("#btn-discard").click(function(e){
+                $('#wmd-input').val('');
+            });
             view.render();
         },
         render:function(){

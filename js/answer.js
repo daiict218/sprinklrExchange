@@ -305,7 +305,7 @@ var answerView = {
 		});
 
 
-		$("#discard").click(function(e){
+		$("#btn-discard").click(function(e){
 			$('#wmd-input').val('');
 		});
 	},

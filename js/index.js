@@ -6,6 +6,9 @@ var model={
         if(!localStorage.author){
             localStorage.author = "Anonymous";
         }
+        if(!localStorageGet("currentQuestionId")){
+            localStorageSet("currentQuestionId",1);
+        }
         this.questionSummary = localStorageGet("questions");
     },
     getallQuestions: function () {
@@ -20,8 +23,11 @@ var octopus={
         },
     getQuestions: function(){
            return  model.getallQuestions();
+    },
+    Set: function(property,value){
+        localStorageSet(property,value);
     }
-};
+    };
 var utilityFunctions={
     getTimeDifference:function(current, previous) {
 
@@ -60,9 +66,7 @@ var utilityFunctions={
 }
 var view={
     init:function(){
-        if(!localStorageGet("currentQuestionId")){
-            localStorageSet("currentQuestionId",1);
-        }
+        
         this.listelem=document.getElementById('questionlist');
 
             this.listelem.addEventListener('click',function (e){
@@ -80,8 +84,8 @@ var view={
                 var questionSummary=octopus.getQuestions();
                 if(flag)
                     questionSummary[parseInt(x.dataset.id)].views++;
-                localStorageSet("currentQuestionId",questionSummary[parseInt(x.dataset.id)].id);
-                localStorageSet("questions",questionSummary);
+                octopus.Set("currentQuestionId",questionSummary[parseInt(x.dataset.id)].id);
+                octopus.Set("questions",questionSummary);
             });
 
         this.render();

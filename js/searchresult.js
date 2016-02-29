@@ -21,6 +21,9 @@ octopus={
     },
     getTagId :function(){
         return model.tagId;
+    },
+     Set: function(property,value){
+        localStorageSet(property,value);
     }
 
 };
@@ -81,8 +84,8 @@ var view={
             var questionSummary=octopus.getQuestions();
             if(flag)
                 questionSummary[parseInt(x.dataset.id)].views++;
-            localStorageSet("currentQuestionId",questionSummary[parseInt(x.dataset.id)].id);
-            localStorageSet("questions",questionSummary);
+            octopus.Set("currentQuestionId",questionSummary[parseInt(x.dataset.id)].id);
+            octopus.Set("questions",questionSummary);
         });
 
         this.render();
