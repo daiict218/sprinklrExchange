@@ -1,5 +1,8 @@
  model={
         init:function(){
+            if(!localStorageGet("currentQuestionId")){
+            localStorageSet("currentQuestionId",1);
+                }
             this.questions = JSON.parse(localStorage.questions);
             this.tags = JSON.parse(localStorage.tags);
             this.tagId = localStorage.currentTag;
@@ -18,6 +21,9 @@
         },
         getTagId :function(){
             return model.tagId;
+        },
+         Set: function(property,value){
+        localStorageSet(property,value);
         }
 
     };
@@ -60,9 +66,7 @@
 
 var view={
     init:function(){
-        if(!localStorageGet("currentQuestionId")){
-            localStorageSet("currentQuestionId",1);
-        }
+        
         this.listelem=document.getElementById('questionlist');
 
         this.listelem.addEventListener('click',function (e){
@@ -80,8 +84,9 @@ var view={
             var questionSummary=octopus.getQuestions();
             if(flag)
                 questionSummary[parseInt(x.dataset.id)].views++;
-            localStorageSet("currentQuestionId",questionSummary[parseInt(x.dataset.id)].id);
-            localStorageSet("questions",questionSummary);
+            octopus.Set("currentQuestionId",questionSummary[parseInt(x.dataset.id)].id);
+            octopus.Set("questions",questionSummary);
+         
         });
 
         this.render();
@@ -112,6 +117,7 @@ var view={
     },
     render:function(){
         var htmlstr='',questionSummary =octopus.getQuestions(),tags=octopus.getTags(),tagId=octopus.getTagId();
+        console.log(tags[tagId].questionId,'hell');
         tags[tagId].questionId.forEach(function(elem,i,array){
             var tagstr=questionSummary[elem-1].tags.reduce(function(a,b){
                return  a +'<a href="#" class="tags">'+b+'</a>';

@@ -10,7 +10,18 @@ body {
 .topbar {
     background-color: #222426;
 }
-
+.topbar__logoholder{
+    color:#ffffff;
+    display:inline-block;
+    vertical-align:top;
+    font-family:'kefa';
+    margin-top:12px;
+}
+.topbar__logoholder__logofont
+{
+    font-family:'Arial Hebrew Scholar';
+    font-size:16px;
+}
 .topbar__topbarholder {
     box-sizing: content-box;
     margin: 0 auto;
@@ -120,6 +131,7 @@ ul {
 
 .header__tabs__options {
     background-color: #9ea3a9;
+    border-radius:3px;
     color: #ffffff;
     cursor: pointer;
     display: inline-block;
