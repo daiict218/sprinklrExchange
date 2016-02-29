@@ -8,6 +8,7 @@ body
 	height:100vh;
 	margin:0px;
 }
+
 .content{
 	box-sizing: content-box;
 	margin: 0 auto;
@@ -186,3 +187,26 @@ code
 	min-height:100%;
 	position:relative;
 }
+/*@media(max-width:768px){
+.content{
+	width:90%;
+}
+
+.mainbar{
+	width:100%;
+}
+.sidebar{
+	width:0%;
+}
+}
+@media(min-width:768px){
+.content{
+	width:90%;
+}
+}
+@media(min-width:992px){
+.content{
+	width: 75%;	//1060px
+}
+}
+*/
