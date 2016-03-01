@@ -70,13 +70,13 @@ var view={
         this.listelem=document.getElementById('questionlist');
 
             this.listelem.addEventListener('click',function (e){
-                console.log(e.target,"hellohi", e.target.parentNode);
-                console.log(e.target.parentNode.dataset.id,'what is this')
+                //console.log(e.target,"hellohi", e.target.parentNode);
+                //console.log(e.target.parentNode.dataset.id,'what is this')
                 var x= e.target;
-                console.log(x, "second",x.parentNode);
+                //console.log(x, "second",x.parentNode);
                 var flag=0;
                 while(x.dataset.id===undefined){
-                    console.log(x.parentNode);
+                    //console.log(x.parentNode);
                     if(x.dataset.flagger==1)
                         flag=1;
                     x= x.parentNode;

@@ -293,12 +293,12 @@ var answerView = {
 		var domAddAnswer = $(".addanswer");
 		domAddAnswer.find("#btn-submit").click(function(e){
 			var text = domAddAnswer.find('#wmd-preview').html(),rawText = domAddAnswer.find('#wmd-input').val(),errors = domAddAnswer.find('.inputtags__errors'),elements = domAddAnswer.find('.inputtags__element');
-            
-            if(text === ""){
+            if(text == ""){
                     errors.html("Empty Body");   
             }
             else{
 				//console.log(text);
+				errors.html("");
                 answerController.addNewAnswer(text,rawText);
             }
             domAddAnswer.find('#wmd-input').val('');

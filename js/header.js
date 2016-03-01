@@ -38,7 +38,7 @@ $(function () {
 
     var view = {
         init: function () {
-            console.log('ghdjweghwjegw');
+            //console.log('ghdjweghwjegw');
             $("#searchAll").keyup(function(e) {
 
                 var filterString = document.getElementById("searchAll").value;
