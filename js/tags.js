@@ -77,14 +77,18 @@ $(function () {
             }
             var re1 = new RegExp(subText);
             return re1.test(tagString);
+        },
+        setCurrentTag: function(tagId){
+            localStorage.currentTag = tagId;
         }
     };
     var view = {
         init: function () {
             view.render();
             $(".tag").click(function(){
-                var tagID=$(this).attr('id');
-                localStorage.currentTag=tagID;
+                var tagId=$(this).attr('id');
+                octopus.setCurrentTag(tagId);
+                // localStorage.currentTag=tagID;
                 console.log($(this).attr('id'));
             });
             $("#tagfilter").keyup(function () {

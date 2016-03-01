@@ -290,8 +290,9 @@ var answerView = {
 	eventHandlers:function()
 	{
 		this.voteCountHandler();
-		$("#btn-submit").click(function(e){
-			var text = $('#wmd-preview').html(),rawText = $('#wmd-input').val(),errors = $('.inputtags__errors'),elements = $('.inputtags__element');
+		var domAddAnswer = $(".addanswer");
+		domAddAnswer.find("#btn-submit").click(function(e){
+			var text = domAddAnswer.find('#wmd-preview').html(),rawText = domAddAnswer.find('#wmd-input').val(),errors = domAddAnswer.find('.inputtags__errors'),elements = domAddAnswer.find('.inputtags__element');
             
             if(text === ""){
                     errors.html("Empty Body");   
@@ -300,18 +301,19 @@ var answerView = {
 				//console.log(text);
                 answerController.addNewAnswer(text,rawText);
             }
-            $('#wmd-input').val('');
+            domAddAnswer.find('#wmd-input').val('');
             e.preventDefault();    
 		});
 
 
-		$("#btn-discard").click(function(e){
-			$('#wmd-input').val('');
+		domAddAnswer.find("#btn-discard").click(function(e){
+			domAddAnswer.find('#wmd-input').val('');
 		});
 	},
 
 	voteCountHandler:function()
 	{
+	 	var domVote = $(".content");
 		$(".content")[0].addEventListener("click", function (e) 
 		{
 				
@@ -321,14 +323,14 @@ var answerView = {
 					if(element.id.includes("q"))
 					{	
 						toBeChanged = 0;
-						downElement = $("#qvotedown")[0];
-						upElement = $("#qvoteup")[0];	
+						downElement = domVote.find("#qvotedown")[0];
+						upElement = domVote.find("#qvoteup")[0];	
 					}
 					else
 					{
 						toBeChanged = upDownId.slice(-1);
-						downElement = $("#votedown" + toBeChanged)[0];
-						upElement = $("#voteup" + toBeChanged)[0];
+						downElement = domVote.find("#votedown" + toBeChanged)[0];
+						upElement = domVote.find("#voteup" + toBeChanged)[0];
 					}
 					var vote = {upDownId,toBeChanged,downElement,upElement,element};
 					answerView.voteCountHelper(vote);
@@ -440,14 +442,14 @@ var answerView = {
 	{
 		var tagshtml = '',tags = answerController.getTags();
 		tags.forEach(function(element,index,array){
-			tagshtml = tagshtml + answerView.appendTag(tags[index]);
+			tagshtml = tagshtml + answerView.appendTag(tags[index],index);
 		});
 		$(".postcell__posttaglist").html(tagshtml);
 	},
 
-	appendTag:function(tag)
+	appendTag:function(tag,index)
 	{
-		return '<div class="tag">'+tag+'</div>';
+		return '<div class="tag" id="'+index+'">'+tag+'</div>';
 	},
 
 	changeQuestionCount:function()

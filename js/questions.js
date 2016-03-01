@@ -93,14 +93,15 @@ $(function(){
             var dom = $('.mainbar');
             button.click(function(e){
                 var title = dom.find("#input_element1").val();
-                // console.log(title);
                 var text = dom.find("#wmd-preview").html();
                 var errors = dom.find('.inputtags__errors');
                 var elements = dom.find('.inputtags__element');
                 var message = [];
                 var selected = $("#options option:selected");
+                
                 selected.each(function (i) {
                     message[i] = $(this).text();
+
                 });
                 if(title === ""){
                     errors.html("Empty title");
