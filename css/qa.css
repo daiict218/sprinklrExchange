@@ -144,11 +144,12 @@ body
 }
 code
 {
-	display:inline-block;
+	display:inline;
 	max-height:250px;
 	overflow:auto;
 	vertical-align: top;
 	width:100%;
+	color:#000000;
 }
 .postcell__postfooter__posteditdiv
 {
