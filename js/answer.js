@@ -316,6 +316,7 @@ var answerView = {
 	 	var domVote = $(".content");
 		$(".content")[0].addEventListener("click", function (e) 
 		{
+			console.log("hello World");
 				
 				var element = e.target;
 				if (element.id.includes("voteup") || element.id.includes("votedown")) {
