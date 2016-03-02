@@ -50,6 +50,9 @@ body
 	display:inline-block;
 	vertical-align:top;
 }
+.votecell{
+	margin-right:15px;
+}
 .postcell{
 	width:660px;
 }
@@ -63,7 +66,7 @@ body
 .votecell .votecell__vote
 {
 	min-width:46px;
-	padding-right:15px;
+	//padding-right:15px;
 }
 .votecell__vote
 {

@@ -10,13 +10,20 @@ body {
 .topbar {
     background-color: #222426;
     min-width:1070px;
+
+}
+.topbar__topbarholder:before{
+    content:" ";
+    display:inline-block;
+    vertical-align:middle;
+    height:100%;
 }
 .topbar__topbarholder__logoholder{
     color:#ffffff;
     display:inline-block;
-    vertical-align:top;
+    vertical-align:middle;
     font-family:'kefa';
-    margin-top:12px;
+   // margin-top:12px;
 
 }
 .topbar__topbarholder__logoholder__logofont
@@ -44,15 +51,24 @@ body {
 .topbar__topbarholder__rightcorner {
     color: #ffffff;
     float: right;
-}
+    display:inline-block;
+    height:41px;
+    //vertical-align:middle;
 
+}
+.topbar__topbarholder__rightcorner:before {
+    content:" ";
+    display:inline-block;
+    vertical-align:middle;
+    height:100%;
+}
 .topbar__topbarholder__rightcorner__profile {
     cursor: pointer;
     display: inline-block;
     height: 34px;
-    margin-bottom:2px;
-    margin-top: 5px;
-    vertical-align: top;
+    //margin-bottom:2px;
+    //margin-top: 5px;
+    vertical-align: middle;
     width: 34px;
 }
 
@@ -65,16 +81,16 @@ body {
 
 .topbar__topbarholder__rightcorner__searchcontainer {
     display: inline-block;
-    height: 34px;
+    //height: 34px;
     margin-left: 10px;
-    vertical-align: top;
+    vertical-align: middle;
  
 }
 
 .searchform__searchbox {
     font-size: 13px;
     line-height: 1.5;
-    margin-top: 8px;
+    //margin-top: 8px;
     max-width: 188px;
     padding-left: 25px;
     width: 188px;
@@ -162,7 +178,8 @@ body {
 }
 .g-signin2 {
     display: inline-block;
-   padding-top: 9px;
+   //padding-top: 9px;
+   vertical-align:middle;
 
 }
 .signin{

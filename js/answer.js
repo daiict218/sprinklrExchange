@@ -396,7 +396,7 @@ var answerView = {
 						'<div class="postcell__posttext">'+answerController.getAnswerText(tempObject.index)+'</div>'+
 						'<div class="postcell__postfooter clearfix">'+
 							'<div class="postcell__postfooter__info">'+
-								"answered "+answerController.getTimeDifference(new Date(),answerController.getPostingTime(tempObject.index))+
+								"<div> answered "+answerController.getTimeDifference(new Date(),answerController.getPostingTime(tempObject.index))+'</div>'+
 								'<div class="postcell__postfooter__info__userinfo">'+answerController.getUserName(tempObject.index)+'</div>'+
 							'</div>'+
 						'</div>'+
@@ -459,7 +459,7 @@ var answerView = {
 
 	addPostFooterInfo:function()
 	{
-		var postFooterHtml =  'asked '+answerController.getTimeDifference(new Date(),answerController.getQuestionPostingTime())+'<div class="postcell__postfooter__info__userinfo">'+answerController.getAsker();+'</div>';
+		var postFooterHtml =  '<div>asked '+answerController.getTimeDifference(new Date(),answerController.getQuestionPostingTime())+'</div><div class="postcell__postfooter__info__userinfo">'+answerController.getAsker();+'</div>';
 		$(".postcell__postfooter__info").html(postFooterHtml);
 	},
 	changeCount:function(index)
