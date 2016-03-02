@@ -80,8 +80,8 @@ body{
 }
 .text-area{
 	display: inline-block;
-	padding-top: 30px;
-	padding-bottom: 30px;
+	margin-top: 30px;
+	margin-bottom: 30px;
 	width: 665px;
 	font-size: 16px;
 }
@@ -95,10 +95,7 @@ body{
 	padding-bottom: 5px;
 //border: 1px solid red;
 }
-.btn{
-	zoom:100%;
-	transition: zoom 0.15s ease;
-}
+
 #btn-submit{
 	display: inline-block;
     position: relative;
@@ -140,8 +137,7 @@ body{
 }
 .btn:hover
 {
-	zoom:102%;
-
+	transform:scale(1.02);
 }
 #discard{
 	display: inline-block;
@@ -179,7 +175,7 @@ body{
 .inputtags__errors{
 	display: inline-block;
 	color: #800000;
-	padding-bottom: 20px;
+	//padding-bottom: 20px;
 }
 code{
 	background-color:#eee;
