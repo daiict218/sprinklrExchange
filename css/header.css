@@ -9,6 +9,7 @@ body {
 
 .topbar {
     background-color: #222426;
+    min-width:1070px;
 }
 .topbar__logoholder{
     color:#ffffff;
