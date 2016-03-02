@@ -316,7 +316,6 @@ var answerView = {
 	 	var domVote = $(".content");
 		$(".content")[0].addEventListener("click", function (e) 
 		{
-			console.log("hello World");
 				
 				var element = e.target;
 				if (element.id.includes("voteup") || element.id.includes("votedown")) {
@@ -385,7 +384,7 @@ var answerView = {
 	},
 	appendAnswerString:function(tempObject)
 	{
-		return '<div class="answer-padding">'+
+		return '<div class="answer-closure">'+
 					'<div class="votecell">'+
 						'<div class="votecell__vote">'+
 							'<i class="fa fa-sort-asc fa-3x colorless" id="'+tempObject.voteUpId+'"></i>'+
