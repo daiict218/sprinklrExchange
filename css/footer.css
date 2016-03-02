@@ -13,6 +13,7 @@
 .footer{
     background-color:rgb(36,39,41);
     height:auto;
+    min-width:1070px;
 }
 .footer__footerwrap{
      width: 900px;
