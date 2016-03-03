@@ -1,83 +1,67 @@
 <!DOCTYPE html>
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/qa.css">
-<<<<<<< HEAD
-<<<<<<< HEAD
     <meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id" content="472834415640-o419551t0kpu4jfl6h0pj7v64frcfsmi.apps.googleusercontent.com">
+    <meta name="google-signin-client_id"
+          content="472834415640-o419551t0kpu4jfl6h0pj7v64frcfsmi.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-=======
-=======
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.0.min.js"></script>
->>>>>>> b01cb19e00f564264d44538a59214479beef9a1c
-
->>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e
+    <script src="js/header.js"></script>
     <title>
         Sprinklr Exchange
     </title>
 </head>
 <body>
-<div class ="topbar clearfix">
+<div class="topbar clearfix">
     <!--<div class="toplogo">
         <img class="top__logo__img" src="img/sprinklrlogotop.png">
     </div>-->
-    <div class="topbar__topbarholder">
+    <div class="topbar__topbarholder clearfix">
+        <div class="topbar__logoholder">
+            <a href="index.html" class="topbar__logoholder__logofont">Sprinklr Exchange</a>
+        </div>
         <div class="topbar__topbarholder__rightcorner">
             <div class="topbar__topbarholder__rightcorner__profile">
-                <img class="topbar__topbarholder__rightcorner__profile__profileimage" src="img/profile.png">
+                <img class="topbar__topbarholder__rightcorner__profile__profileimage" id="image_url">
 
+            </div>
+
+            <div class="g-signin2" id="signin" data-onsuccess="onSignIn" data-theme="dark" data-width="150"
+                 data-height="23"></div>
+            <div class="signout" id="siou">
+                <button class="signout__button">
+                    <a href="#" onclick="signOut()">Signout</a>
+                </button>
             </div>
             <div class="topbar__topbarholder__rightcorner__searchcontainer">
 
-                <form class="searchform" id="search">
+                <form class="searchform" id="search" action="searchresult.html">
                     <i class="fa fa-search" id="searchicon"></i>
-                    <input class="searchform__searchbox" id="searchAll" maxlength="240" placeholder="Search Q&A">
+                    <input id="searchAll" class="searchform__searchbox" maxlength="240" placeholder="Search Q&A">
                 </form>
             </div>
-<<<<<<< HEAD
-            <div class="g-signin2" id ="signin" data-onsuccess="onSignIn" data-theme="dark" data-width="150" data-height="23"></div>
-            <button class="signout">
-                <a href="#" onclick="signOut()">Signout</a>
-            </button>
-            <div id="profile-name"></div>
 
-=======
->>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e
+
         </div>
     </div>
 </div>
-<div class = "container">
-    <div class = "header clearfix">
+<div class="container">
+    <div class="header clearfix">
         <div class="header__logo">
-        <a href="index.html"> <img class="header__logo__image" src="img/sprinklrlogo.png"></a>
+            <a href="index.html"><img class="header__logo__image" src="img/sprinklrlogo.png"></a>
         </div>
         <div class="header__tabs">
             <ul>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                <li class="header__tabs__options"><a  id="questions">Questions</a></li>
-                <li class="header__tabs__options"><a id="questions">Tags</a></li>
-                <li class="header__tabs__options"><a id="questions">Ask Question</a></li>
-=======
-                <li class="header__tabs__options"><a href="index.html" id="ques">Questions</a></li>
-                <li class="header__tabs__options"><a href="tags.html" id="ques">Tags</a></li>
-                <li class="header__tabs__options"><a href="index2.html" id="ques">Ask Question</a></li>
->>>>>>> b01cb19e00f564264d44538a59214479beef9a1c
+                <li class="header__tabs__options"><a href="index.html">Questions</a></li>
+                <li class="header__tabs__options"><a href="tags.html">Tags</a></li>
+                <li class="header__tabs__options"><a href="index2.html">Ask Question</a></li>
 
             </ul>
         </div>
 
-=======
-                <li class="header__tabs__options"><a href="index.html" id="ques">Questions</a></li>
-                <li class="header__tabs__options"><a id="ques">Tags</a></li>
-                <li class="header__tabs__options"><a href="index2.html" id="ques">Ask Question</a></li>
-
-            </ul>
-        </div>
->>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e
     </div>
     <div class="content">
 
@@ -86,76 +70,37 @@
 <div class="footer">
 
 </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
 <script>
     function signOut() {
         var auth2 = gapi.auth2.getAuthInstance();
         auth2.signOut().then(function () {
             console.log('User signed out.');
-            document.getElementById("profile-name").innerHTML="";
+            document.getElementById("signin").style.display = "inline-block";
+            document.getElementById("siou").style.display = "none";
+            document.getElementById("image_url").style.display="none";
+            localStorage.author="Anonymous";
+
         });
     }
 </script>
 <script>
     function onSignIn(googleUser) {
-        // Useful data for your client-side scripts:
+
         var profile = googleUser.getBasicProfile();
-        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-        console.log("Name: " + profile.getName());
-        console.log("Image URL: " + profile.getImageUrl());
-        console.log("Email: " + profile.getEmail());
-        document.getElementById("profile-name").innerHTML=profile.getName();
+
+        document.getElementById("signin").style.display = "none";
+        document.getElementById("siou").style.display = "inline-block";
+        document.getElementById("image_url").style.display="inline-block";
+        if(profile.getImageUrl()) {
+            document.getElementById("image_url").src = profile.getImageUrl();
+        }
+        localStorage.author=profile.getName();
+        console.log(localStorage.author);
 
 
-        // The ID token you need to pass to your backend:
-        var id_token = googleUser.getAuthResponse().id_token;
-        console.log("ID Token: " + id_token);
 
-    };
+
+    }
+    ;
 </script>
-=======
->>>>>>> 020cf6ef5bf34b0bee583e6c7f5581fa141b9c0e
 </body>
-=======
-</body>
-<script type="text/javascript" src="js/header.js"></script>
-<!-- 
-<div class ="topbar clearfix">
-    <!--<div class="toplogo">
-        <img class="top__logo__img" src="img/sprinklrlogotop.png">
-    </div>-->
- <!--    <div class="topbar__topbarholder">
-        <div class="topbar__topbarholder__rightcorner">
-            <div class="topbar__topbarholder__rightcorner__profile">
-                <img class="topbar__topbarholder__rightcorner__profile__profileimage" src="img/profile.png">
-
-            </div>
-            <div class="topbar__topbarholder__rightcorner__searchcontainer">
-
-                <form class="searchform" id="search">
-                    <i class="fa fa-search" id="searchicon"></i>
-                    <input class="searchform__searchbox" maxlength="240" placeholder="Search Q&A">
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<div class = "container">
-    <div class = "header clearfix">
-        <div class="header__logo">
-            <a href="index.html"><img class="header__logo__image" src="img/sprinklrlogo.png"></a>
-        </div>
-        <div class="header__tabs">
-            <ul>
-                <li class="header__tabs__options"><a href="index.html" id="ques">Questions</a></li>
-                <li class="header__tabs__options"><a href="tags.html" id="ques">Tags</a></li>
-                <li class="header__tabs__options"><a href="index2.html" id="ques">Ask Question</a></li>
-
-            </ul>
-        </div>
-    </div>
-<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.0.min.js"></script>
-<script type="text/javascript" src="js/header.js"></script>
- --> 
->>>>>>> b01cb19e00f564264d44538a59214479beef9a1c

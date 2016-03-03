@@ -38,7 +38,7 @@ $(function () {
 
     var view = {
         init: function () {
-            //console.log('ghdjweghwjegw');
+            console.log('ghdjweghwjegw');
             $("#searchAll").keyup(function(e) {
 
                 var filterString = document.getElementById("searchAll").value;
@@ -57,10 +57,10 @@ $(function () {
 
                 }
 
-                //console.log(resultArray);
+                console.log(resultArray);
                 localStorage.searchResult=JSON.stringify(resultArray);
 
-                //console.log(localStorage.searchResult,'gddddddd');
+                console.log(localStorage.searchResult,'gddddddd');
             });
         }
     };
