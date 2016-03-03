@@ -11,11 +11,11 @@ var answerModel = {
 		hasVotedUp:[],	//0th index for question
 		hasVotedDown:[],	
 		init:function(){
-			if(!localStorage.author)
-	    		localStorage.author = "Anonynous";
-			questions = JSON.parse(localStorage.questions);
+			if(!localStorage.getItem('author'))
+	    		localStorage.setItem('author',"Anonynous");
+			questions = JSON.parse(localStorage.getItem('questions'));
 			
-			answerModel.currentQuestionId = localStorage.currentQuestionId;
+			answerModel.currentQuestionId = localStorage.getItem('currentQuestionId');
 			
 			answerModel.question = questions[parseInt(answerModel.currentQuestionId)-1];
 			
@@ -29,9 +29,9 @@ var answerModel = {
             }
             answerModel.answers.push(answer);
             answerModel.question.answers = JSON.stringify(answerModel.answers);
-            var tempQuestions = JSON.parse(localStorage.questions);
+            var tempQuestions = JSON.parse(localStorage.getItem('questions'));
             tempQuestions[answerModel.currentQuestionId-1].answers.push(answer);
-            localStorage.questions = JSON.stringify(tempQuestions);
+            localStorage.setItem('questions',JSON.stringify(tempQuestions));
 		},
 		getQuestiontitle:function()
 		{
@@ -61,25 +61,25 @@ var answerModel = {
 		changeCount:function(index,change)
 		{
 			answerModel.answersArray[index-1].votes += change;
-			var tempQuestions = JSON.parse(localStorage.questions);
+			var tempQuestions = JSON.parse(localStorage.getItem('questions'));
 			tempQuestions[parseInt(answerModel.currentQuestionId)-1].answers[index-1].votes = answerModel.answersArray[index-1].votes;
-			localStorage.questions = JSON.stringify(tempQuestions);
+			localStorage.setItem('questions',JSON.stringify(tempQuestions));
 		},
 		changeQuestionCount:function(change)
 		{
 			answerModel.question.votes +=change;
-			var tempQuestions = JSON.parse(localStorage.questions);
-			tempQuestions[parseInt(localStorage.currentQuestionId)-1].votes += change;
-			localStorage.questions = JSON.stringify(tempQuestions);
+			var tempQuestions = JSON.parse(localStorage.getItem('questions'));
+			tempQuestions[parseInt(localStorage.getItem('currentQuestionId'))-1].votes += change;
+			localStorage.setItem('questions',JSON.stringify(tempQuestions));
 			
 		},
 		getAuthor:function()
 		{
-			return localStorage.author;
+			return localStorage.getItem('author');
 		},
 		getCurrentQuestionId:function()
 		{
-			return parseInt(localStorage.currentQuestionId);
+			return parseInt(localStorage.getItem('currentQuestionId'));
 		}
 		
 };
