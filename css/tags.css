@@ -50,6 +50,7 @@ html, body{
     border: 1px solid #E1ECF4;
     display: inline-block;
     margin: 2px 2px 2px 0;
+    padding:0.4em 0.5em;
 }
 .tag-cell__tagname__totaltags
 {

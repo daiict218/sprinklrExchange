@@ -13,7 +13,6 @@ var answerModel = {
 		init:function(){
 			if(!localStorage.author)
 	    		localStorage.author = "Anonynous";
-		
 			questions = JSON.parse(localStorage.questions);
 			
 			answerModel.currentQuestionId = localStorage.currentQuestionId;
@@ -149,7 +148,7 @@ var answerController = {
 		newAnswer.user=answerModel.getAuthor();
 		newAnswer.question=answerModel.getCurrentQuestionId();
 		newAnswer.text=text;
-		newAnswer.rawText = rawText;
+		newAnswer.rawText = rawText;	//not used now,if we want to have a feature edit answer then this will be used
 		newAnswer.votes=0;
 		newAnswer.time=new Date();
 		newAnswer.verified=false;

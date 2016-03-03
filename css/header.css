@@ -1,6 +1,4 @@
-* {
-    box-sizing: content-box;
-}
+
 
 body {
     font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
@@ -213,4 +211,19 @@ body {
     margin-bottom: 10px;
     margin-left: 3px;
 }
-
+.footerfix
+{
+    padding-bottom:210px;
+}
+#footer{
+    bottom:0;
+    height:200px;
+    left:0;
+    position:absolute;
+    width:100%;
+}
+.wrapper
+{
+    min-height:100%;
+    position:relative;
+}
