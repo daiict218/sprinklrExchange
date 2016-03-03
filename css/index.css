@@ -168,3 +168,8 @@ body{
     margin-bottom: 1.2em;
     text-decoration: none;
 }
+.question__vavlink
+{
+	display:inline-block;
+	vertical-align:top;
+}

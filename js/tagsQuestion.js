@@ -1,12 +1,18 @@
  model={
         init:function(){
-            if(!localStorageGet("currentQuestionId")){
-            localStorageSet("currentQuestionId",1);
+            if(!localStorage.getItem("currentQuestionId")){
+            localStorage.setItem("currentQuestionId",'1');
                 }
             this.questions = JSON.parse(localStorage.questions);
             this.tags = JSON.parse(localStorage.tags);
             this.tagId = localStorage.currentTag;
         },
+     setter: function(property,value){
+         localStorage.setItem(property, JSON.stringify(value));
+     },
+     increment: function(questionBlockId) {
+         this.questions[questionBlockId].views++;
+     }
     };
     octopus={
         init:function(){
@@ -22,8 +28,11 @@
         getTagId :function(){
             return model.tagId;
         },
-         Set: function(property,value){
-        localStorageSet(property,value);
+         set: function(property,value){
+            model.setter(property,value);
+        },
+        incrementViews: function(questionBlockId){
+            model.increment(questionBlockId);
         }
 
     };
@@ -64,88 +73,84 @@
      }
  };
 
-var view={
-    init:function(){
-        
-        this.listelem=document.getElementById('questionlist');
+ var view = {
+     init: function () {
 
-        this.listelem.addEventListener('click',function (e){
-            console.log(e.target,"hellohi", e.target.parentNode);
-            console.log(e.target.parentNode.dataset.id,'what is this')
-            var x= e.target;
-            console.log(x, "second",x.parentNode);
-            var flag=0;
-            while(x.dataset.id===undefined){
-                console.log(x.parentNode);
-                if(x.dataset.flagger==1)
-                    flag=1;
-                x= x.parentNode;
-            }
-            var questionSummary=octopus.getQuestions();
-            if(flag)
-                questionSummary[parseInt(x.dataset.id)].views++;
-            octopus.Set("currentQuestionId",questionSummary[parseInt(x.dataset.id)].id);
-            octopus.Set("questions",questionSummary);
-         
-        });
+         //todo: camelCase
+         this.listElem = document.getElementById('questionlist');
+         var questionSummary = octopus.getQuestions();
+         this.listElem.addEventListener('click', function (e) {
+             //todo: var
+             var targetEl = e.target;
+             var isValidClick = 0;
+             while (targetEl.dataset.id === undefined) {
+                 if (targetEl.dataset.flagger == 1)
+                     isValidClick = 1;
+                 targetEl = targetEl.parentNode;
+             }
+             if (isValidClick) {
+                 octopus.incrementViews(parseInt(targetEl.dataset.id));
+             }
+             octopus.set("currentQuestionId", questionSummary[parseInt(targetEl.dataset.id)].id);
+             octopus.set("questions", questionSummary);
+         });
 
-        this.render();
-    },
-    addHTML:function(elem,i,tagstr){
-        return '<div class="question" data-id="'+i+'"><a href="questionanswer.html" ><div class="question__vav">'+view.votesBtnRender(elem.votes)+
-                                 view.answerBtnRender(elem.answers.length)+
-                view.viewsBtnRender(elem.views)+
-            '            </div></a>'+
-            '                   <div class="question__summary">'+
-            '                       <div class="question__summary__ques">'+
-            '                           <h3><a href="questionanswer.html" data-flagger="1"  class="question-link">'+elem.title+'</a></h3>'+
-            '                       </div>'+
-            '                       <div class="question__summary__tags">'+
-            tagstr+
-            '                       </div>'+
-            '                       <div class="question__summary__author">'+
-            '                           <div class="author">'+
-            utilityFunctions.getTimeDifference(new Date(),Date.parse(elem.time))+
-            '                               <a href="#">'+elem.author+'</a>'+
-            '                               </author>'+
-            '                           </div>'+
-            '                       </div>'+
-            '                   </div>' +
-            '                  </div>';
+         this.render();
+     },
+     questionBlockRender: function (elem, index, tagstr) {
+         return '<div class="question" data-id="' + index + '"><a class="question__vavlink" href="questionanswer.html"><div class="question__vav" data-flagger="1">' + view.votesBtnRender(elem.votes) +
+             view.answerBtnRender(elem.answers.length) +
+             view.viewsBtnRender(elem.views) +
+             '            </div></a>' +
+             '                   <div class="question__summary">' +
+             '                       <div class="question__summary__ques">' +
+             '                           <h3><a href="questionanswer.html" data-flagger="1"  class="question-link">' + elem.title + '</a></h3>' +
+             '                       </div>' +
+             '                       <div class="question__summary__tags">' +
+             tagstr +
+             '                       </div>' +
+             '                       <div class="question__summary__author">' +
+             '                           <div class="author">' +
+             utilityFunctions.getTimeDifference(new Date(), Date.parse(elem.time)) +
+             '                               <a href="#">' + elem.author + '</a>' +
+             '                               </author>' +
+             '                           </div>' +
+             '                       </div>' +
+             '                   </div>' +
+             '                  </div>';
 
 
-    },
+     },
     render:function(){
-        var htmlstr='',questionSummary =octopus.getQuestions(),tags=octopus.getTags(),tagId=octopus.getTagId();
-        console.log(tags[tagId].questionId,'hell');
-        tags[tagId].questionId.forEach(function(elem,i,array){
-            var tagstr=questionSummary[elem-1].tags.reduce(function(a,b){
-               return  a +'<a href="#" class="tags">'+b+'</a>';
+        var htmlStr='',questionSummary =octopus.getQuestions(),tags=octopus.getTags(),tagId=octopus.getTagId();
+        tags[tagId].questionId.forEach(function(elem,index){
+            var tagStr=questionSummary[elem-1].tags.reduce(function(accumulator,tagname){
+               return  accumulator +'<a href="#" class="tags">'+tagname+'</a>';
             },'');
-            htmlstr+=view.addHTML(questionSummary[elem-1],i,tagstr);
+            htmlStr+=view.questionBlockRender(questionSummary[elem-1],elem-1,tagStr);
 
         });
-        this.listelem.innerHTML=htmlstr;
+        this.listElem.innerHTML=htmlStr;
     },
-    answerBtnRender:function(length){
-        var flag=!length;
-       return '               <div id="answerbtn" data-flagger="1"'+((flag)? "class=question__vav__btn": "class=question__vav__btn--color")+'>'+
-        '               <div class="mini-counts"><span class="x">'+length+'</span></div>'+
-        '                       <div class="name">answers</div>'+
-        '                       </div>';
-    },
+     answerBtnRender: function (length) {
+         var flag = !length;
+         return '               <div id="answerbtn" ' + ((flag) ? "class=question__vav__btn" : "class=question__vav__btn--color") + '>' +
+             '               <div class="mini-counts"><span class="x">' + length + '</span></div>' +
+             '                       <div class="name">answers</div>' +
+             '                       </div>';
+     },
 
-    viewsBtnRender: function(views){
-        return '                       <div  class="question__vav__btn" data-flagger="1">'+
-        '                           <div class="mini-counts"><span class="x">'+views+'</span></div>'+
-        '                           <div class="name">views</div>'+
-        '                       </div>';
-    },
-    votesBtnRender: function(votes){
-        return '<div  class="question__vav__btn" data-flagger="1">'+
-            '                           <div class="mini-counts"><span class="x">'+votes+'</span></div>'+
-            '                           <div class="name">votes</div>'+
-            '</div>';
-    }
+     viewsBtnRender: function (views) {
+         return '                       <div  class="question__vav__btn" >' +
+             '                           <div class="mini-counts"><span class="x">' + views + '</span></div>' +
+             '                           <div class="name">views</div>' +
+             '                       </div>';
+     },
+     votesBtnRender: function (votes) {
+         return '<div  class="question__vav__btn" >' +
+             '                           <div class="mini-counts"><span class="x">' + votes + '</span></div>' +
+             '                           <div class="name">votes</div>' +
+             '</div>';
+     }
 }
 octopus.init();

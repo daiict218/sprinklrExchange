@@ -1,149 +1,151 @@
-var model={
-    init:function(){
-        if(!localStorageGet("questions")){
-            localStorageSet("questions",[]);
+var model = {
+    init: function () {
+        if (!localStorage.getItem("questions")) {
+            localStorage.setItem("questions", JSON.stringify([]));
         }
-        if(!localStorage.author){
-            localStorage.author = "Anonymous";
+        if (!localStorage.getItem("author")) { //todo
+            localStorage.setItem("author","Anonymus");
         }
-        if(!localStorageGet("currentQuestionId")){
-            localStorageSet("currentQuestionId",1);
+        if (!localStorage.getItem("currentQuestionId")) {
+            localStorage.setItem("currentQuestionId", '1');
         }
-        this.questionSummary = localStorageGet("questions");
+        this.questionSummary = JSON.parse(localStorage.getItem("questions"));
     },
-    getallQuestions: function () {
+    getAllQuestions: function () { //todo
         return this.questionSummary;
-    }
-
-};
-var octopus={
-    init: function(){
-            model.init();
-            view.init();
-        },
-    getQuestions: function(){
-           return  model.getallQuestions();
     },
-    Set: function(property,value){
-        localStorageSet(property,value);
+    increment: function(questionBlockId) {
+        this.questionSummary[questionBlockId].views++;
+    },
+    setter: function(property,value){
+        localStorage.setItem(property, JSON.stringify(value));
     }
-    };
-var utilityFunctions={
-    getTimeDifference:function(current, previous) {
+};
+var octopus = {
+    init: function () {
+        model.init();
+        view.init();
+    },
+    getQuestions: function () {
+        return model.getAllQuestions();
+    },
+    set: function (property, value) { //todo
+        model.setter(property,value);
+    },
+    incrementViews: function(questionBlockId){
+      model.increment(questionBlockId);
+    }
+};
 
-        var msPerMinute = 60 * 1000;
-        var msPerHour = msPerMinute * 60;
-        var msPerDay = msPerHour * 24;
-        var msPerMonth = msPerDay * 30;
-        var msPerYear = msPerDay * 365;
-
-        var elapsed = current - previous;
+var utilityFunctions = {
+    getTimeDifference: function (current, previous) {
+        //todo:var
+        var msPerMinute = 60 * 1000,msPerHour = msPerMinute * 60,msPerDay = msPerHour * 24,msPerMonth = msPerDay * 30,msPerYear = msPerDay * 365,elapsed = current - previous;
 
         if (elapsed < msPerMinute) {
-            return Math.round(elapsed/1000) + ' seconds ago';
+            return Math.round(elapsed / 1000) + ' seconds ago';
         }
 
         else if (elapsed < msPerHour) {
-            return Math.round(elapsed/msPerMinute) + ' minutes ago';
+            return Math.round(elapsed / msPerMinute) + ' minutes ago';
         }
 
-        else if (elapsed < msPerDay ) {
-            return Math.round(elapsed/msPerHour ) + ' hours ago';
+        else if (elapsed < msPerDay) {
+            return Math.round(elapsed / msPerHour) + ' hours ago';
         }
 
         else if (elapsed < msPerMonth) {
-            return Math.round(elapsed/msPerDay) + ' days ago';
+            return Math.round(elapsed / msPerDay) + ' days ago';
         }
 
         else if (elapsed < msPerYear) {
-            return Math.round(elapsed/msPerMonth) + ' months ago';
+            return Math.round(elapsed / msPerMonth) + ' months ago';
         }
 
         else {
-            return Math.round(elapsed/msPerYear ) + ' years ago';
+            return Math.round(elapsed / msPerYear) + ' years ago';
         }
     }
 }
-var view={
-    init:function(){
-        
-        this.listelem=document.getElementById('questionlist');
+var view = {
+    init: function () {
 
-            this.listelem.addEventListener('click',function (e){
-                //console.log(e.target,"hellohi", e.target.parentNode);
-                //console.log(e.target.parentNode.dataset.id,'what is this')
-                var x= e.target;
-                //console.log(x, "second",x.parentNode);
-                var flag=0;
-                while(x.dataset.id===undefined){
-                    //console.log(x.parentNode);
-                    if(x.dataset.flagger==1)
-                        flag=1;
-                    x= x.parentNode;
-                }
-                var questionSummary=octopus.getQuestions();
-                if(flag)
-                    questionSummary[parseInt(x.dataset.id)].views++;
-                octopus.Set("currentQuestionId",questionSummary[parseInt(x.dataset.id)].id);
-                octopus.Set("questions",questionSummary);
-            });
+        //todo: camelCase
+        this.listElem = document.getElementById('questionlist');
+        var questionSummary = octopus.getQuestions();
+        this.listElem.addEventListener('click', function (e) {
+            //todo: var
+            var targetEl = e.target;
+            var isValidClick = 0;
+            while (targetEl.dataset.id === undefined) {
+                if (targetEl.dataset.flagger == 1)
+                    isValidClick = 1;
+                targetEl = targetEl.parentNode;
+            }
+
+            if (isValidClick) {
+                octopus.incrementViews(parseInt(targetEl.dataset.id));
+            }
+            octopus.set("currentQuestionId", questionSummary[parseInt(targetEl.dataset.id)].id);
+            octopus.set("questions", questionSummary);
+        });
 
         this.render();
     },
-    addHTML:function(elem,i,tagstr){
-        return '<div class="question" data-id="'+i+'"><a href="questionanswer.html" ><div class="question__vav">'+view.votesBtnRender(elem.votes)+
-                                 view.answerBtnRender(elem.answers.length)+
-                view.viewsBtnRender(elem.views)+
-            '            </div></a>'+
-            '                   <div class="question__summary">'+
-            '                       <div class="question__summary__ques">'+
-            '                           <h3><a href="questionanswer.html" data-flagger="1"  class="question-link">'+elem.title+'</a></h3>'+
-            '                       </div>'+
-            '                       <div class="question__summary__tags">'+
-            tagstr+
-            '                       </div>'+
-            '                       <div class="question__summary__author">'+
-            '                           <div class="author">'+
-            utilityFunctions.getTimeDifference(new Date(),Date.parse(elem.time))+
-            '                               <a href="#">'+elem.author+'</a>'+
-            '                               </author>'+
-            '                           </div>'+
-            '                       </div>'+
+    //todo: rename `i`
+    questionBlockRender: function (elem, index, tagstr) {
+        return '<div class="question" data-id="' + index + '"><a class="question__vavlink" href="questionanswer.html"><div class="question__vav" data-flagger="1">' + view.votesBtnRender(elem.votes) +
+            view.answerBtnRender(elem.answers.length) +
+            view.viewsBtnRender(elem.views) +
+            '            </div></a>' +
+            '                   <div class="question__summary">' +
+            '                       <div class="question__summary__ques">' +
+            '                           <h3><a href="questionanswer.html" data-flagger="1"  class="question-link">' + elem.title + '</a></h3>' +
+            '                       </div>' +
+            '                       <div class="question__summary__tags">' +
+            tagstr +
+            '                       </div>' +
+            '                       <div class="question__summary__author">' +
+            '                           <div class="author">' +
+            utilityFunctions.getTimeDifference(new Date(), Date.parse(elem.time)) +
+            '                               <a href="#">' + elem.author + '</a>' +
+            '                               </author>' +
+            '                           </div>' +
+            '                       </div>' +
             '                   </div>' +
             '                  </div>';
 
 
     },
-    render:function(){
-        var htmlstr='';
-        var questionSummary =octopus.getQuestions();
-        questionSummary.forEach(function(elem,i,array){
-            var tagstr=elem.tags.reduce(function(a,b){
-                return  a +'<a href="#" class="tags">'+b+'</a>';
-            },'');
-            htmlstr+=view.addHTML(elem,i,tagstr);
-
+    render: function () {
+        var htmlStr = ''; //todo: camelCase
+        octopus.getQuestions().forEach(function (elem, index) { //todo: `i`
+            //todo: camelCase
+            var tagStr = elem.tags.reduce(function (a, b) { //todo
+                return a + '<a href="#" class="tags">' + b + '</a>';
+            }, '');
+            htmlStr += view.questionBlockRender(elem, index, tagStr);
         });
-        this.listelem.innerHTML=htmlstr;
+        this.listElem.innerHTML = htmlStr;
     },
-    answerBtnRender:function(length){
-        var flag=!length;
-       return '               <div id="answerbtn" data-flagger="1"'+((flag)? "class=question__vav__btn": "class=question__vav__btn--color")+'>'+
-        '               <div class="mini-counts"><span class="x">'+length+'</span></div>'+
-        '                       <div class="name">answers</div>'+
-        '                       </div>';
+    answerBtnRender: function (length) {
+        var flag = !length;
+        return '               <div id="answerbtn" ' + ((flag) ? "class=question__vav__btn" : "class=question__vav__btn--color") + '>' +
+            '               <div class="mini-counts"><span class="x">' + length + '</span></div>' +
+            '                       <div class="name">answers</div>' +
+            '                       </div>';
     },
 
-    viewsBtnRender: function(views){
-        return '                       <div  class="question__vav__btn" data-flagger="1">'+
-        '                           <div class="mini-counts"><span class="x">'+views+'</span></div>'+
-        '                           <div class="name">views</div>'+
-        '                       </div>';
+    viewsBtnRender: function (views) {
+        return '                       <div  class="question__vav__btn" >' +
+            '                           <div class="mini-counts"><span class="x">' + views + '</span></div>' +
+            '                           <div class="name">views</div>' +
+            '                       </div>';
     },
-    votesBtnRender: function(votes){
-        return '<div  class="question__vav__btn" data-flagger="1">'+
-            '                           <div class="mini-counts"><span class="x">'+votes+'</span></div>'+
-            '                           <div class="name">votes</div>'+
+    votesBtnRender: function (votes) {
+        return '<div  class="question__vav__btn" >' +
+            '                           <div class="mini-counts"><span class="x">' + votes + '</span></div>' +
+            '                           <div class="name">votes</div>' +
             '</div>';
     }
 }
