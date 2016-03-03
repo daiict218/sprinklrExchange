@@ -3,7 +3,6 @@ $(function(){
 	//var answersArray = [];
 	
 var answerModel = {
-		answers : [],
 		nextAnswerId : 0,
 		currentQuestionId : 0,
 		question : "",
@@ -27,8 +26,8 @@ var answerModel = {
             {    
             	answeerModel.answers = JSON.parse(answerModel.question.answers);
             }
-            answerModel.answers.push(answer);
-            answerModel.question.answers = JSON.stringify(answerModel.answers);
+            answerModel.answersArray.push(answer);
+            answerModel.question.answers = JSON.stringify(answerModel.answersArray);
             var tempQuestions = JSON.parse(localStorage.getItem('questions'));
             tempQuestions[answerModel.currentQuestionId-1].answers.push(answer);
             localStorage.setItem('questions',JSON.stringify(tempQuestions));
@@ -174,7 +173,7 @@ var answerController = {
 	},
 	getNoOfAnswers:function()
 	{
-		return answerModel.answers.length;
+		return answerModel.answersArray.length;
 	},
 	getTimeDifference:function(current, previous) {
     
