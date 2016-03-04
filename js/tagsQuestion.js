@@ -1,9 +1,19 @@
  model={
-        init:function(){
+    questions:[],
+    noOfQuestions:0,
+    init:function(){
+            if(!localStorage.getItem("noOfQuestions")){
+                localStorage.setItem("noOfQuestions",JSON.stringify(0));
+            }
+            else{   
+                model.noOfQuestions = localStorage.getItem("noOfQuestions");
+            }
+
             if(!localStorage.getItem("currentQuestionId")){
-            localStorage.setItem("currentQuestionId",'1');
-                }
-            this.questions = JSON.parse(localStorage.questions);
+                localStorage.setItem("currentQuestionId",'1');
+            }
+            for(var index=1;index<=this.noOfQuestions;index++)
+                this.questions.push(JSON.parse(localStorage.getItem("question"+index)));
             this.tags = JSON.parse(localStorage.tags);
             this.tagId = localStorage.currentTag;
         },
@@ -28,7 +38,7 @@
         getTagId :function(){
             return model.tagId;
         },
-         set: function(property,value){
+        set: function(property,value){
             model.setter(property,value);
         },
         incrementViews: function(questionBlockId){

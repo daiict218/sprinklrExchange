@@ -1,15 +1,25 @@
 var model = {
+    questionSummary:[],
+    noOfQuestions:0,
     init: function () {
-        if (!localStorage.getItem("questions")) {
-            localStorage.setItem("questions", JSON.stringify([]));
+        // if (!localStorage.getItem("questions")) {
+        //     localStorage.setItem("questions", JSON.stringify([]));
+        // }
+        if(!localStorage.getItem("noOfQuestions")){
+            localStorage.setItem("noOfQuestions",JSON.stringify(0));
         }
+        else{   
+         model.noOfQuestions = localStorage.getItem("noOfQuestions");
+        }
+
         if (!localStorage.getItem("author")) { //todo
             localStorage.setItem("author","Anonymus");
         }
         if (!localStorage.getItem("currentQuestionId")) {
             localStorage.setItem("currentQuestionId", '1');
         }
-        this.questionSummary = JSON.parse(localStorage.getItem("questions"));
+        for(var index=1;index<=this.noOfQuestions;index++)
+            this.questionSummary.push(JSON.parse(localStorage.getItem("question"+index)));
     },
     getAllQuestions: function () { //todo
         return this.questionSummary;
@@ -87,7 +97,7 @@ var view = {
                 octopus.incrementViews(parseInt(targetEl.dataset.id));
             }
             octopus.set("currentQuestionId", questionSummary[parseInt(targetEl.dataset.id)].id);
-            octopus.set("questions", questionSummary);
+            octopus.set("question"+questionSummary[parseInt(targetEl.dataset.id)].id, questionSummary[parseInt(targetEl.dataset.id)]);
         });
 
         this.render();
@@ -119,9 +129,12 @@ var view = {
     },
     render: function () {
         var htmlStr = ''; //todo: camelCase
+        //console.log(octopus.getQuestions()[0]);
         octopus.getQuestions().forEach(function (elem, index) { //todo: `i`
             //todo: camelCase
+            //console.log(elem.tags,"elem");
             var tagStr = elem.tags.reduce(function (a, b) { //todo
+                //console.log("I came here");
                 return a + '<a href="#" class="tags">' + b + '</a>';
             }, '');
             htmlStr += view.questionBlockRender(elem, index, tagStr);

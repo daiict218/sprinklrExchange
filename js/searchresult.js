@@ -1,9 +1,19 @@
 model={
+    questions:[],
+    noOfQuestions:0,
     init:function(){
+        if(!localStorage.getItem("noOfQuestions")){
+            localStorage.setItem("noOfQuestions",JSON.stringify(0));
+        }
+        else{   
+         model.noOfQuestions = localStorage.getItem("noOfQuestions");
+        }
+
         if(!localStorage.getItem("currentQuestionId")){
             localStorage.setItem("currentQuestionId",'1');
         }
-        this.questions = JSON.parse(localStorage.questions);
+        for(var index=1;index<=this.noOfQuestions;index++)
+            this.questions.push(JSON.parse(localStorage.getItem("question"+index)));
         this.searchResult = JSON.parse(localStorage.searchResult);
 
     },
@@ -25,9 +35,7 @@ octopus={
     getSearchResult: function(){
         return model.searchResult;
     },
-    getTagId :function(){
-        return model.tagId;
-    },
+
     set: function (property, value) { //todo
         model.setter(property,value);
     },
@@ -93,7 +101,7 @@ var view = {
                 octopus.incrementViews(parseInt(targetEl.dataset.id));
             }
             octopus.set("currentQuestionId", questionSummary[parseInt(targetEl.dataset.id)].id);
-            octopus.set("questions", questionSummary);
+            octopus.set("question"+questionSummary[parseInt(targetEl.dataset.id)].id, questionSummary[parseInt(targetEl.dataset.id)]);
         });
 
         this.render();

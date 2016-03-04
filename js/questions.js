@@ -10,11 +10,11 @@ $(function(){
         this.time = new Date();
     }
 
-    if(!localStorage.questions){
+    if(!localStorage.noOfQuestions){
         Question.prototype.quesId = 1;
     }
     else{
-        Question.prototype.quesId = JSON.parse(localStorage.questions).length+1;
+        Question.prototype.quesId = JSON.parse(localStorage.noOfQuestions)+1;
     }
 
     var model = {
@@ -23,13 +23,9 @@ $(function(){
             if(!localStorage.author){
                 localStorage.author = "Anonymous";
             }
-            if(!localStorage.questions){
-                localStorage.questions = JSON.stringify([]);
-            }
-            else
-            {
-                questions = JSON.parse(localStorage.questions);
-            }
+            if(!localStorage.noOfQuestions)
+                localStorage.noOfQuestions = JSON.stringify(0);
+
         },
 
         getAuthor: function(){
@@ -45,14 +41,11 @@ $(function(){
         },
 
         add:function(title,text,tags){
-            // console.log("hello world");
             var question = new Question(title,text,tags,model.getAuthor());
+
             question.id = Question.prototype.quesId;
-            // console.log(question.id);
-            var questions = JSON.parse(localStorage.questions);
-            questions.push(question);
-            localStorage.questions = JSON.stringify(questions);
-            // localStorage.questions = JSON.stringify(JSON.parse(localStorage.questions).push(question));
+            localStorage.setItem("question"+question.id,JSON.stringify(question));
+            localStorage.setItem("noOfQuestions",question.id);
             var tagsArray = model.getTags();
             for (var i = tagsArray.length - 1; i >= 0; i--) {
                 for(var j=tags.length-1;j>=0;j--){
@@ -64,9 +57,7 @@ $(function(){
             Question.quesId++;
             localStorage.tags = JSON.stringify(tagsArray);
         },
-        getAllQuestions: function() {
-            return model.questions;
-        }
+
     };
 
 
@@ -74,10 +65,6 @@ $(function(){
         addNewQuestion:function(title,text,tags){
             model.add(title,text,tags);
             view.render();
-        },
-
-        getQuestions: function() {
-            return model.getAllQuestions();
         },
 
         init: function() {
