@@ -1,15 +1,21 @@
+<!DOCTYPE html>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/header.css">
-    <meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id"
-          content="472834415640-o419551t0kpu4jfl6h0pj7v64frcfsmi.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.0.min.js"></script>
-    <script src="js/header.js"></script>
-<div class="topbar">
+    <link rel="stylesheet" href="css/qa.css">
+
+
+    <title>
+        Sprinklr Exchange
+    </title>
+</head>
+<body>
+<div class="topbar clearfix">
+
     <div class="topbar__topbarholder clearfix">
-        <div class="topbar__topbarholder__logoholder">
-            <a href="index.html" class="topbar__topbarholder__logoholder__logofont">Sprinklr Exchange</a>
+        <div class="topbar__logoholder">
+            <a href="index.html" class="topbar__logoholder__logofont">Sprinklr Exchange</a>
         </div>
         <div class="topbar__topbarholder__rightcorner">
             <div class="topbar__topbarholder__rightcorner__profile">
@@ -17,11 +23,10 @@
 
             </div>
 
-            <div class="g-signin2" id="signin" data-onsuccess="onSignIn" data-theme="dark" data-width="150"
-                 data-height="23"></div>
-            <div class="signout" id="siou">
+            <div id="signin2"></div>
+            <div class="signout" id="siout">
                 <button class="signout__button">
-                    <a href="#" onclick="signOut()">Signout</a>
+                    <a href="#" onclick=onSignOut()>Signout</a>
                 </button>
             </div>
             <div class="topbar__topbarholder__rightcorner__searchcontainer">
@@ -36,53 +41,33 @@
         </div>
     </div>
 </div>
-<div class="header__container">
-    <div class="header__container__contentholder clearfix">
+<div class="container">
+    <div class="header clearfix">
         <div class="header__logo">
             <a href="index.html"><img class="header__logo__image" src="img/sprinklrlogo.png"></a>
         </div>
         <div class="header__tabs">
-            <ul class="header__tabs__ul">
-                <li class="header__tabs__options"><a href="index.html" class="header__tabs__options__link"><i class="fa fa-list"></i> <span>Questions</span></a></li>
-                <li class="header__tabs__options"><a href="tags.html" class="header__tabs__options__link"><i class="fa fa-tags"></i> <span>Tags</span></a></li>
-                <li class="header__tabs__options"><a href="index2.html" class="header__tabs__options__link"><i class="fa fa-question-circle"></i> <span>Ask Question</span></a></li>
+            <ul>
+                <li class="header__tabs__options"><a href="index.html">Questions</a></li>
+                <li class="header__tabs__options"><a href="tags.html">Tags</a></li>
+                <li class="header__tabs__options"><a href="index2.html">Ask Question</a></li>
 
             </ul>
         </div>
 
     </div>
+    <div class="content">
+
+    </div>
+</div>
+<div class="footer">
 
 </div>
-<script>
-    function signOut() {
-        var auth2 = gapi.auth2.getAuthInstance();
-        auth2.signOut().then(function () {
-            console.log('User signed out.');
-            document.getElementById("signin").style.display = "inline-block";
-            document.getElementById("siou").style.display = "none";
-            document.getElementById("image_url").style.display="none";
-            localStorage.author="Anonymous";
-
-        });
-    }
-</script>
-<script>
-    function onSignIn(googleUser) {
-
-        var profile = googleUser.getBasicProfile();
-
-        document.getElementById("signin").style.display = "none";
-        document.getElementById("siou").style.display = "inline-block";
-        document.getElementById("image_url").style.display="inline-block";
-        if(profile.getImageUrl()) {
-            document.getElementById("image_url").src = profile.getImageUrl();
-        }
-        localStorage.author=profile.getName();
-        console.log(localStorage.author);
 
 
+</body>
+<script src="js/header.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.0.min.js"></script>
+<meta name="google-signin-client_id" content="472834415640-o419551t0kpu4jfl6h0pj7v64frcfsmi.apps.googleusercontent.com">
+<script src="https://apis.google.com/js/platform.js?onload=onSignIn"></script>
 
-
-    }
-    ;
-</script>
