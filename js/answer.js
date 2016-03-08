@@ -1,7 +1,5 @@
 $(function(){
 	
-	//var answersArray = [];
-	
 var answerModel = {
 		nextAnswerId : 0,
 		currentQuestionId : 0,
@@ -13,13 +11,10 @@ var answerModel = {
 		init:function(){
 			if(!localStorage.getItem('author'))
 	    		localStorage.setItem('author',"Anonynous");
-
-			//questions = JSON.parse(localStorage.getItem('questions'));
 			
 			answerModel.currentQuestionId = JSON.parse(localStorage.getItem('currentQuestionId'));
 			
 			answerModel.question = JSON.parse(localStorage.getItem('question'+answerModel.currentQuestionId));//questions[parseInt(answerModel.currentQuestionId)-1];
-			//console.log(JSON.parse(localStorage.getItem('question'+answerModel.currentQuestionId)),"first");
 			answerModel.answersArray = answerModel.question.answers;
 
 		},
@@ -27,11 +22,6 @@ var answerModel = {
 		addAnswer:function(answer){
 
             answerModel.answersArray.push(answer);
-          	//console.log(answerModel.question,"before");
-            //var tempQuestion = answerModel.question;//JSON.parse(localStorage.getItem('question'+answerModel.currentQuestionId));
-            //tempQuestion.answers.push(answer);
-            //console.log(tempQuestion,"temp");
-            // Why setting all questions when one is edited?
             localStorage.setItem('question'+answerModel.currentQuestionId,JSON.stringify(answerModel.question));
 		},
 
@@ -48,7 +38,6 @@ var answerModel = {
 		},
 
 		getQuestionPostingTime:function(){
-			// console.log("ohh",Date.parse(JSON.parse(localStorage.questions)[parseInt(localStorage.currentQuestionId)-1].time));
 			return Date.parse(answerModel.question.time);
 		},
 
@@ -57,7 +46,6 @@ var answerModel = {
 		},
 
 		getTags:function(){
-			//console.log(answerModel.question);
 			return answerModel.question.tags;
 		},
 
@@ -67,20 +55,15 @@ var answerModel = {
 
 		getCurrentQuestionId:function(){
 			return answerModel.currentQuestionId;
-			//return parseInt(localStorage.getItem('currentQuestionId'));
 		},
 
 		changeVoteCount:function(index,change) {
 			answerModel.answersArray[index-1].votes += change;
-			//var tempQuestion = JSON.parse(localStorage.getItem('question'+answerModel.currentQuestionId));
-			//tempQuestion.answers[index-1].votes += change;// answerModel.answersArray[index-1].votes;
 			localStorage.setItem('question'+answerModel.currentQuestionId,JSON.stringify(answerModel.question));
 		},
 
-		changeQuestionCount:function(change){
+		changeQuestionVoteCount:function(change){
 			answerModel.question.votes +=change;
-			//var tempQuestion = JSON.parse(localStorage.getItem('question'+answerModel.currentQuestionId));
-			//tempQuestion.votes += change;
 			localStorage.setItem('question'+answerModel.currentQuestionId,JSON.stringify(answerModel.question));
 			
 		}
@@ -122,24 +105,13 @@ var answerController = {
 	getUserName:function(index){
 		return answerModel.answersArray[index].user;
 	},
-
-	/*changeVoteCount:function(index,change)
-	{
-		answerModel.changeVoteCount(index,change);
-		answerView.changeVoteCount(index);
-	},
-	changeQuestionCount:function(change)
-	{
-		answerModel.changeQuestionCount(change);
-		answerView.changeQuestionCount(); 
-	},*/
-	changeVoteCount:function(index,change){
+	changeVoteCount:function(index,countElement,change){
 		if(index==0){
-			answerModel.changeQuestionCount(change);
-			answerView.changeQuestionCount();
+			answerModel.changeQuestionVoteCount(change);
+			answerView.changeQuestionVoteCount();
 		}else{
 			answerModel.changeVoteCount(index,change);
-			answerView.changeVoteCount(index);
+			answerView.changeVoteCount(index,countElement);
 		}
 	},
 
@@ -155,15 +127,6 @@ var answerController = {
 						id:++answerModel.nextAnswerId
 
 		};
-		/*newAnswer.user=answerModel.getAuthor();
-		newAnswer.question=answerModel.getCurrentQuestionId();
-		newAnswer.text=text;
-		newAnswer.rawText = rawText;	//not used now,if we want to have a feature edit answer then this will be used
-		newAnswer.votes=0;
-		newAnswer.time=new Date();
-		newAnswer.verified=false;
-		newAnswer.id = ++answerModel.nextAnswerId;
-		*/
 		answerModel.addAnswer(newAnswer);
 		answerView.addNewAnswer(answerModel.answersArray.length-1);
 	},
@@ -230,29 +193,27 @@ var answerController = {
 		answerModel.answers = answers;
 	},
 
-	// Separate handlers for ques answer. Not by index.
-	votedUp:function(index){
-		answerModel.hasVotedUp[index] = true;
+	setVoted:function(upDown,index)
+	{
+		if(upDown=="up")
+			answerModel.hasVotedUp[index] = true;		
+		else
+			answerModel.hasVotedDown[index] = true;	
 	},
-	
-	votedDown:function(index){
-		answerModel.hasVotedDown[index] = true;
+	cancelVoted:function(upDown,index)
+	{
+		if(upDown=="up")
+			answerModel.hasVotedUp[index] = false;		
+		else
+			answerModel.hasVotedDown[index] = false;
 	},
-	
-	notVotedUp:function(index){
-		answerModel.hasVotedUp[index] = false;
-	},
-	
-	notVotedDown:function(index){
-		answerModel.hasVotedDown[index] = false;
-	},
-	
-	hasVotedUp:function(index){
-		return !!(answerModel.hasVotedUp[index]);
-	},
-	
-	hasVotedDown:function(index){
-		return !!(answerModel.hasVotedDown[index]);
+
+	getHasVoted:function(upDown,index)
+	{
+		if(upDown=="up")
+			return !!(answerModel.hasVotedUp[index]);
+		else
+			return !!(answerModel.hasVotedDown[index]);
 	}
 
 };
@@ -260,10 +221,8 @@ var answerController = {
 var answerView = {
 	init:function(){
 		
-
-		// All rendering inside this.
 		this.render();
-		this.eventHandlers();
+		this.setEventHandlers();
 		
 		
 
@@ -285,36 +244,39 @@ var answerView = {
 
 	
 	render:function(){
+		this.jQuestionVotes = $("#questionvotes");
+		this.jNoOfAnswers = $(".no-of-answers");
+		this.jAnswers = $(".answers");
+			
 		$(".question-header__question-hyperlink").text(answerController.getQuestionTitle());
-		$("#questionvotes").text(answerController.getQuestionVotes());
+		this.jQuestionVotes.text(answerController.getQuestionVotes());
 		$(".postcell__posttext").html(answerController.getText()); 
 		
-		this.addTags();
-		this.addPostFooterInfo();
+		this.renderTags();
+		this.renderPostFooterInfo();
 		
 		answerController.setAnswers(answerController.getAnswersArray());
 
-		$(".no-of-answers").text(answerController.getNoOfAnswers());
+		this.jNoOfAnswers.text(answerController.getNoOfAnswers());
+		
 		var allAnswersHtmlString = '';
-		var tempObject = {};		//to pass 5 arguments
 		answerController.getAnswers().forEach(function(element,index,array){
-
-			tempObject.voteUpId = "voteup"+(index+1);
-			tempObject.voteCountId = "votecount"+(index+1);
-			tempObject.voteDownId = "votedown"+(index+1);
-			tempObject.editLinkId = "editLink"+(index+1);
-			tempObject.index = index;
-			allAnswersHtmlString = allAnswersHtmlString + answerView.appendAnswerString(tempObject);
+			allAnswersHtmlString = allAnswersHtmlString + answerView.getAnswerHtml(index);
 
 		});
-		$(".answers").append(allAnswersHtmlString);	
+		this.jAnswers.append(allAnswersHtmlString);	
 	},
 
-	eventHandlers:function(){
-		this.voteCountHandler();
-		var domAddAnswer = $(".addanswer");
-		domAddAnswer.find("#btn-submit").click(function(e){
-			var text = domAddAnswer.find('#wmd-preview').html(),rawText = domAddAnswer.find('#wmd-input').val(),errors = domAddAnswer.find('.inputtags__errors'),elements = domAddAnswer.find('.inputtags__element');
+	setEventHandlers:function(){
+		this.setVoteCountHandler();
+
+		var jAddAnswer = $(".addanswer");
+		jAddAnswer.find("#btn-submit").click(function(e){
+			var text = jAddAnswer.find('#wmd-preview').html(),
+				rawText = jAddAnswer.find('#wmd-input').val(),
+				errors = jAddAnswer.find('.inputtags__errors'),
+				elements = jAddAnswer.find('.inputtags__element');
+            
             if(text == ""){
                     errors.html("Empty Body");   
             }else{
@@ -322,101 +284,163 @@ var answerView = {
 				errors.html("");
                 answerController.addNewAnswer(text,rawText);
             }
-            domAddAnswer.find('#wmd-input').val('');
+
+            jAddAnswer.find('#wmd-input').val('');
             e.preventDefault();    
 		});
 
 
-		domAddAnswer.find("#btn-discard").click(function(e){
-			domAddAnswer.find('#wmd-input').val('');
+		jAddAnswer.find("#btn-discard").click(function(e){
+			jAddAnswer.find('#wmd-input').val('');
 		});
 	},
 
-	voteCountHandler:function(){
-	 	var domVote = $(".content");
-		$(".content")[0].addEventListener("click", function (e) {
+	setVoteCountHandler:function(){
+		$(".content").on("click", function (e) {
 				
-				var element = e.target;
-				if (element.id.includes("voteup") || element.id.includes("votedown")) {
-					var upDownId = element.id,toBeChanged,downElement,upElement;
-					if(element.id.includes("q"))
-					{	
-						toBeChanged = 0;
-						downElement = domVote.find("#qvotedown")[0];
-						upElement = domVote.find("#qvoteup")[0];	
+				var targetElem = e.target,
+					voteDetails,
+					jParentNode;
+
+				if (answerView.isAscending(targetElem) || answerView.isDescending(targetElem)){		//if (element.id.includes("voteup") || element.id.includes("votedown")
+					jParentNode = $(targetElem).parent();
+					
+					voteDetails = {
+						parentNode : jParentNode,
+						upDownId : jParentNode[0].dataset.id,
+						downElement : jParentNode.find(".fa-sort-desc")[0],
+						upElement : jParentNode.find(".fa-sort-asc")[0],
+						countElement : jParentNode.find(".votecount")[0],
+						targetElem : targetElem
 					}
-					else
-					{
-						toBeChanged = upDownId.slice(-1);
-						downElement = domVote.find("#votedown" + toBeChanged)[0];
-						upElement = domVote.find("#voteup" + toBeChanged)[0];
-					}
-					var vote = {upDownId,toBeChanged,downElement,upElement,element};
-					answerView.voteCountHelper(vote);
+					
+					answerView.setVoteCountChange(voteDetails);
 				}
+
 		});
 			
 
 	},
 
-	voteCountHelper:function(vote){
-		if (vote.upDownId.includes("up")) {
-			if (!answerController.hasVotedUp(vote.toBeChanged)) {
-				if (!answerController.hasVotedDown(vote.toBeChanged)) {
-					answerController.changeVoteCount(vote.toBeChanged, 1);
+	// setVoteCountChange:function(voteDetails){
+	// 	var voteChange = 0;
+	// 	if (voteDetails.targetElem.className.indexOf("asc") > -1) {
+	// 		if (!answerController.getHasVotedUp(voteDetails.upDownId)) {
+	// 			if (!answerController.getHasVotedDown(voteDetails.upDownId)) {
+	// 				voteChange = 1;
+	// 			}
+	// 			else {
+	// 				voteChange = 2;
+	// 				answerController.cancelVotedDown(voteDetails.upDownId);
+	// 				voteDetails.downElement.className = "fa fa-sort-desc fa-3x colorless";
+	// 			}
+	// 			voteDetails.targetElem.className = "fa fa-sort-asc fa-3x colored";
+	// 			answerController.setVotedUp(voteDetails.upDownId);
+	// 		}
+	// 		else {
+	// 			voteDetails.targetElem.className = "fa fa-sort-asc fa-3x colorless";
+	// 			voteChange = -1;
+	// 			answerController.cancelVotedUp(voteDetails.upDownId);
+	// 		}
+	// 	}
+	// 	else {
+	// 		if (!answerController.getHasVotedDown(voteDetails.upDownId)) {
+	// 			if (!answerController.getHasVotedUp(voteDetails.upDownId)) {
+	// 				voteChange = -1;
+	// 			}
+	// 			else {
+	// 				voteChange = -2;
+	// 				answerController.cancelVotedUp(voteDetails.upDownId)
+	// 				voteDetails.upElement.className = "fa fa-sort-asc fa-3x colorless";
+	// 			}
+	// 			voteDetails.targetElem.className = "fa fa-sort-desc fa-3x colored";
+	// 			answerController.setVotedDown(voteDetails.upDownId);
+	// 		}
+	// 		else {
+	// 			voteDetails.targetElem.className = "fa fa-sort-desc fa-3x colorless";
+	// 			voteChange = 1;
+	// 			answerController.cancelVotedDown(voteDetails.upDownId);
+	// 		}
+	// 	}
+	// 	answerController.changeVoteCount(voteDetails.upDownId,voteDetails.countElement, voteChange);
 
+	// },
+	setVoteCountChange:function(voteDetails){
+		var oppositeElement;
+		if (answerView.isAscending(voteDetails.targetElem)) {
+			oppositeElement = voteDetails.downElement;
+			answerView.setVoteCountUpDown(voteDetails,"up","down",1,oppositeElement);
+		} else {
+			oppositeElement = voteDetails.upElement;
+			answerView.setVoteCountUpDown(voteDetails,"down","up",-1,oppositeElement);
+		}
+
+	},
+	setVoteCountUpDown:function(voteDetails,clicked,oppositeOfClicked,countMultiplier,oppositeElement)
+	{
+			
+			if (!answerController.getHasVoted(clicked,voteDetails.upDownId)) {
+				if (!answerController.getHasVoted(oppositeOfClicked,voteDetails.upDownId)) {
+					voteChange = 1*countMultiplier;
 				}
 				else {
-					answerController.changeVoteCount(vote.toBeChanged, 2);
-					answerController.notVotedDown(vote.toBeChanged);
-					vote.downElement.className = "fa fa-sort-desc fa-3x colorless vote";
+					voteChange = 2*countMultiplier;
+					answerController.cancelVoted(oppositeOfClicked,voteDetails.upDownId);
+					$(oppositeElement).attr('class',answerView.getChangedClassName(oppositeOfClicked,"colorless"));//"fa fa-sort-desc fa-3x colorless";
 				}
-				vote.element.className = "fa fa-sort-asc fa-3x colored vote";
-				answerController.votedUp(vote.toBeChanged);
+				$(voteDetails.targetElem).attr('class',answerView.getChangedClassName(clicked,"colored"));//"fa fa-sort-asc fa-3x colored";
+				answerController.setVoted(clicked,voteDetails.upDownId);
 			}
 			else {
-				vote.element.className = "fa fa-sort-asc fa-3x colorless vote";
-				answerController.changeVoteCount(vote.toBeChanged, -1);
-				answerController.notVotedUp(vote.toBeChanged);
+				$(voteDetails.targetElem).attr('class',answerView.getChangedClassName(clicked,"colorless"));//"fa fa-sort-asc fa-3x colorless";
+				voteChange = -1*countMultiplier;
+				answerController.cancelVoted(clicked,voteDetails.upDownId);
 			}
-		}
-		else {
-			if (!answerController.hasVotedDown(vote.toBeChanged)) {
-				if (!answerController.hasVotedUp(vote.toBeChanged)) {
-					answerController.changeVoteCount(vote.toBeChanged, -1);
-
-				}
-				else {
-					answerController.changeVoteCount(vote.toBeChanged, -2);
-					answerController.notVotedUp(vote.toBeChanged)
-					vote.upElement.className = "fa fa-sort-asc fa-3x colorless vote";
-				}
-				vote.element.className = "fa fa-sort-desc fa-3x colored vote";
-				answerController.votedDown(vote.toBeChanged);
-			}
-			else {
-				vote.element.className = "fa fa-sort-desc fa-3x colorless vote";
-				answerController.changeVoteCount(vote.toBeChanged, 1)
-				answerController.notVotedDown(vote.toBeChanged);
-			}
-		}
+			answerController.changeVoteCount(voteDetails.upDownId,voteDetails.countElement, voteChange);
+	},
+	getChangedClassName:function(upDown,color)
+	{
+		if(upDown == "up")
+			return "fa fa-sort-asc fa-3x "+color;
+		else
+			return "fa fa-sort-desc fa-3x "+color;
 	},
 
-	appendAnswerString:function(tempObject){
+	isAscending:function(targetElem)
+	{
+		var targetClassName = $(targetElem).attr('class');
+		console.log(targetClassName);
+		if(targetClassName)
+			return targetClassName.indexOf("asc") > -1;
+		else
+			return false;
+	},
+
+	isDescending:function(targetElem)
+	{
+		var targetClassName = $(targetElem).attr('class');
+		console.log(targetClassName);
+		if(targetClassName)
+			return targetClassName.indexOf("desc") > -1;
+		else
+			return false;
+	},
+
+	getAnswerHtml:function(index){
 		return '<div class="answer-closure">'+
 					'<div class="votecell">'+
-						'<div class="votecell__vote">'+
-							'<i class="fa fa-sort-asc fa-3x colorless" id="'+tempObject.voteUpId+'"></i>'+
-							'<div class="votecount" id="'+tempObject.voteCountId+'">'+answerController.getVoteCount(tempObject.index)+'</div>'+
-							'<i class="fa fa-sort-desc fa-3x colorless" id="'+tempObject.voteDownId+'"></i>'+
+						'<div class="votecell__vote" data-id="'+(index+1)+'">'+
+							'<i class="fa fa-sort-asc fa-3x colorless"></i>'+
+							'<div class="votecount">'+answerController.getVoteCount(index)+'</div>'+
+							'<i class="fa fa-sort-desc fa-3x colorless"></i>'+
 						'</div>'+
 					'</div>'+
 					'<div class="postcell">'+
-						'<div class="postcell__posttext">'+answerController.getAnswerText(tempObject.index)+'</div>'+
+						'<div class="postcell__posttext">'+answerController.getAnswerText(index)+'</div>'+
 						'<div class="postcell__postfooter clearfix">'+
 							'<div class="postcell__postfooter__info">'+
-								"<div> answered "+answerController.getTimeDifference(new Date(),answerController.getPostingTime(tempObject.index))+'</div>'+
-								'<div class="postcell__postfooter__info__userinfo">'+answerController.getUserName(tempObject.index)+'</div>'+
+								"<div> answered "+answerController.getTimeDifference(new Date(),answerController.getPostingTime(index))+'</div>'+
+								'<div class="postcell__postfooter__info__userinfo">'+answerController.getUserName(index)+'</div>'+
 							'</div>'+
 						'</div>'+
 					'</div>'+
@@ -424,43 +448,40 @@ var answerView = {
 	},
 
 	addNewAnswer:function(index){
-			var tempObject = {};	//to pass 5 arguments
-			tempObject.voteUpId = "voteup"+(index+1);
-			tempObject.voteCountId = "votecount"+(index+1);
-			tempObject.voteDownId = "votedown"+(index+1);
-			tempObject.editLinkId = "editLink"+(index+1);
-			tempObject.index = index;
+			var answerHtml = this.getAnswerHtml(index);
 			
-		var newAnswerHtmlString = this.appendAnswerString(tempObject);
 			
-			$(".answers").append(newAnswerHtmlString);	
-			$(".no-of-answers").text(answerController.getNoOfAnswers());
+			
+			this.jAnswers.append(answerHtml);	
+			this.jNoOfAnswers.text(answerController.getNoOfAnswers());
 	},
 
-	addTags:function(){
-		var tagshtml = '',tags = answerController.getTags();
-		//console.log(tags,"tags");
+	renderTags:function(){
+		var tagshtml = '',
+			tags = answerController.getTags();
+
 		tags.forEach(function(element,index,array){
-			tagshtml = tagshtml + answerView.appendTag(tags[index],index);
+			tagshtml = tagshtml + answerView.getTag(tags[index],index);
 		});
+
 		$(".postcell__posttaglist").html(tagshtml);
 	},
 
-	appendTag:function(tag,index){
+	getTag:function(tag,index){
 		return '<div class="tag" id="'+index+'">'+tag+'</div>';
 	},
 
-	changeQuestionCount:function(){
-		$("#questionvotes").text(answerController.getQuestionVotes());
+	changeQuestionVoteCount:function(){
+		this.jQuestionVotes.text(answerController.getQuestionVotes());
 	},
 
-	addPostFooterInfo:function(){
+	renderPostFooterInfo:function(){
 		var postFooterHtml =  '<div>asked '+answerController.getTimeDifference(new Date(),answerController.getQuestionPostingTime())+'</div><div class="postcell__postfooter__info__userinfo">'+answerController.getAsker();+'</div>';
 		$(".postcell__postfooter__info").html(postFooterHtml);
 	},
 
-	changeVoteCount:function(index){
-		$("#votecount"+(index)).text(answerController.getVoteCount(index-1));
+	changeVoteCount:function(index,countElement){
+		$(countElement).text(answerController.getVoteCount(index-1));
 	}
 };
 answerController.init();
