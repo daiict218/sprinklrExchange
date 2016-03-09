@@ -193,24 +193,15 @@ var answerController = {
 		answerModel.answers = answers;
 	},
 
-	setVoted:function(upDown,index)
-	{
-		if(upDown=="up")
-			answerModel.hasVotedUp[index] = true;		
+	setVoted:function(isUpButton,index,toBeSet){
+		if(isUpButton)
+			answerModel.hasVotedUp[index] = toBeSet;		
 		else
-			answerModel.hasVotedDown[index] = true;	
-	},
-	cancelVoted:function(upDown,index)
-	{
-		if(upDown=="up")
-			answerModel.hasVotedUp[index] = false;		
-		else
-			answerModel.hasVotedDown[index] = false;
+			answerModel.hasVotedDown[index] = toBeSet;	
 	},
 
-	getHasVoted:function(upDown,index)
-	{
-		if(upDown=="up")
+	getHasVoted:function(isUpButton,index){
+		if(isUpButton)
 			return !!(answerModel.hasVotedUp[index]);
 		else
 			return !!(answerModel.hasVotedDown[index]);
@@ -366,41 +357,46 @@ var answerView = {
 
 	// },
 	setVoteCountChange:function(voteDetails){
-		var oppositeElement;
+		var oppositeVoteButton;
 		if (answerView.isAscending(voteDetails.targetElem)) {
-			oppositeElement = voteDetails.downElement;
-			answerView.setVoteCountUpDown(voteDetails,"up","down",1,oppositeElement);
+			oppositeVoteButton = voteDetails.downElement;
+			answerView.setVoteCountUpDown(voteDetails,true,1,oppositeVoteButton);		//true for up and false for down
 		} else {
-			oppositeElement = voteDetails.upElement;
-			answerView.setVoteCountUpDown(voteDetails,"down","up",-1,oppositeElement);
+			oppositeVoteButton = voteDetails.upElement;
+			answerView.setVoteCountUpDown(voteDetails,false,-1,oppositeVoteButton);
 		}
 
 	},
-	setVoteCountUpDown:function(voteDetails,clicked,oppositeOfClicked,countMultiplier,oppositeElement)
+
+	//This function is used for both voteup and vote down
+	//countMultiplier negates the votes to be changed(eg if in voteup I want to change vote by +1 , in downvote it will change by -1)
+	//isUpButton checks whether upbutton was clicked or downbutton was clicked
+	//oppositeViteButton contains opposite element,for upvote it contains downvote element and viceversa.
+	setVoteCountUpDown:function(voteDetails,isUpButton,countMultiplier,oppositeVoteButton)
 	{
 			
-			if (!answerController.getHasVoted(clicked,voteDetails.upDownId)) {
-				if (!answerController.getHasVoted(oppositeOfClicked,voteDetails.upDownId)) {
+			if (!answerController.getHasVoted(isUpButton,voteDetails.upDownId)) {
+				if (!answerController.getHasVoted(!isUpButton,voteDetails.upDownId)) {
 					voteChange = 1*countMultiplier;
 				}
 				else {
 					voteChange = 2*countMultiplier;
-					answerController.cancelVoted(oppositeOfClicked,voteDetails.upDownId);
-					$(oppositeElement).attr('class',answerView.getChangedClassName(oppositeOfClicked,"colorless"));//"fa fa-sort-desc fa-3x colorless";
+					answerController.setVoted(!isUpButton,voteDetails.upDownId,false);
+					$(oppositeVoteButton).attr('class',answerView.getChangedClassName(!isUpButton,"colorless"));//"fa fa-sort-desc fa-3x colorless";
 				}
-				$(voteDetails.targetElem).attr('class',answerView.getChangedClassName(clicked,"colored"));//"fa fa-sort-asc fa-3x colored";
-				answerController.setVoted(clicked,voteDetails.upDownId);
+				$(voteDetails.targetElem).attr('class',answerView.getChangedClassName(isUpButton,"colored"));//"fa fa-sort-asc fa-3x colored";
+				answerController.setVoted(isUpButton,voteDetails.upDownId,true);
 			}
 			else {
-				$(voteDetails.targetElem).attr('class',answerView.getChangedClassName(clicked,"colorless"));//"fa fa-sort-asc fa-3x colorless";
+				$(voteDetails.targetElem).attr('class',answerView.getChangedClassName(isUpButton,"colorless"));//"fa fa-sort-asc fa-3x colorless";
 				voteChange = -1*countMultiplier;
-				answerController.cancelVoted(clicked,voteDetails.upDownId);
+				answerController.setVoted(isUpButton,voteDetails.upDownId,false);
 			}
 			answerController.changeVoteCount(voteDetails.upDownId,voteDetails.countElement, voteChange);
 	},
-	getChangedClassName:function(upDown,color)
+	getChangedClassName:function(isUpButton,color)
 	{
-		if(upDown == "up")
+		if(isUpButton)
 			return "fa fa-sort-asc fa-3x "+color;
 		else
 			return "fa fa-sort-desc fa-3x "+color;
@@ -409,7 +405,6 @@ var answerView = {
 	isAscending:function(targetElem)
 	{
 		var targetClassName = $(targetElem).attr('class');
-		console.log(targetClassName);
 		if(targetClassName)
 			return targetClassName.indexOf("asc") > -1;
 		else
@@ -419,7 +414,6 @@ var answerView = {
 	isDescending:function(targetElem)
 	{
 		var targetClassName = $(targetElem).attr('class');
-		console.log(targetClassName);
 		if(targetClassName)
 			return targetClassName.indexOf("desc") > -1;
 		else
