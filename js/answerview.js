@@ -1,215 +1,5 @@
 $(function(){
-	
-var answerModel = {
-		nextAnswerId : 0,
-		currentQuestionId : 0,
-		question : {},
-		answersArray:[],
-		hasVotedUp:[],	//0th index for question
-		hasVotedDown:[],	
-
-		init:function(){
-			if(!localStorage.getItem('author'))
-	    		localStorage.setItem('author',"Anonynous");
-			
-			answerModel.currentQuestionId = JSON.parse(localStorage.getItem('currentQuestionId'));
-			
-			answerModel.question = JSON.parse(localStorage.getItem('question'+answerModel.currentQuestionId));//questions[parseInt(answerModel.currentQuestionId)-1];
-			answerModel.answersArray = answerModel.question.answers;
-
-		},
-
-		addAnswer:function(answer){
-
-            answerModel.answersArray.push(answer);
-            localStorage.setItem('question'+answerModel.currentQuestionId,JSON.stringify(answerModel.question));
-		},
-
-		getQuestionTitle:function(){
-			return answerModel.question.title;
-		},
-
-		getQuestionVotes:function(){
-			return answerModel.question.votes;	
-		},
-
-		getText:function(){
-			return answerModel.question.text;
-		},
-
-		getQuestionPostingTime:function(){
-			return Date.parse(answerModel.question.time);
-		},
-
-		getAsker:function(){
-		 	return answerModel.question.author;
-		},
-
-		getTags:function(){
-			return answerModel.question.tags;
-		},
-
-		getAuthor:function(){
-			return localStorage.getItem('author');
-		},
-
-		getCurrentQuestionId:function(){
-			return answerModel.currentQuestionId;
-		},
-
-		changeVoteCount:function(index,change) {
-			answerModel.answersArray[index-1].votes += change;
-			localStorage.setItem('question'+answerModel.currentQuestionId,JSON.stringify(answerModel.question));
-		},
-
-		changeQuestionVoteCount:function(change){
-			answerModel.question.votes +=change;
-			localStorage.setItem('question'+answerModel.currentQuestionId,JSON.stringify(answerModel.question));
-			
-		}
-
-		
-};
-
-
-var answerController = {
-	init:function(){
-		answerModel.init();
-		answerView.init();
-	},
-
-	getAnswersArray:function(){
-		return answerModel.answersArray;
-	},
-
-	getCurrentAnswer:function(){
-		return answerModel.currentAnswer;
-	},
-
-	setCurrentAnswer:function(answer){
-		answerModel.currentAnswer = answer;
-	},
-
-	getVoteCount:function(index){
-		return answerModel.answersArray[index].votes;
-	},
-
-	getAnswerText:function(index){
-		return answerModel.answersArray[index].text;
-	},
-
-	getPostingTime:function(index){
-		return Date.parse(answerModel.answersArray[index].time);
-	},
-
-	getUserName:function(index){
-		return answerModel.answersArray[index].user;
-	},
-	changeVoteCount:function(index,countElement,change){
-		if(index==0){
-			answerModel.changeQuestionVoteCount(change);
-			answerView.changeQuestionVoteCount();
-		}else{
-			answerModel.changeVoteCount(index,change);
-			answerView.changeVoteCount(index,countElement);
-		}
-	},
-
-	addNewAnswer:function(text,rawText){
-
-		var newAnswer = {user:answerModel.getAuthor(),
-						question:answerModel.getCurrentQuestionId(),
-						text:text,
-						rawText:rawText,
-						votes:0,
-						time:new Date(),
-						verified:false,
-						id:++answerModel.nextAnswerId
-
-		};
-		answerModel.addAnswer(newAnswer);
-		answerView.addNewAnswer(answerModel.answersArray.length-1);
-	},
-
-	getQuestionTitle:function(){
-		return answerModel.getQuestionTitle();
-	},
-
-	getQuestionVotes:function(){
-		return answerModel.getQuestionVotes();	
-	},
-
-	getText:function(){
-		return answerModel.getText();
-	},
-
-	getAnswers:function(){
-		return answerModel.answers;
-	},
-
-	getNoOfAnswers:function(){
-		return answerModel.answersArray.length;
-	},
-
-	getTimeDifference:function(current, previous) {
-    
-	    var msPerMinute = 60 * 1000,msPerHour = msPerMinute * 60,msPerDay = msPerHour * 24,msPerMonth = msPerDay * 30,msPerYear = msPerDay * 365;
-	    
-	    var elapsed = current - previous;
-	    
-	    if (elapsed < msPerMinute) {
-	         return Math.round(elapsed/1000) + ' seconds ago';   
-	    } else if (elapsed < msPerHour) {
-	         return Math.round(elapsed/msPerMinute) + ' minutes ago';   
-	    } else if (elapsed < msPerDay ) {
-	         return Math.round(elapsed/msPerHour ) + ' hours ago';   
-	    } else if (elapsed < msPerMonth) {
-	         return Math.round(elapsed/msPerDay) + ' days ago';   
-	    }else if (elapsed < msPerYear) {
-	         return Math.round(elapsed/msPerMonth) + ' months ago';   
-	    }else {
-	         return Math.round(elapsed/msPerYear ) + ' years ago';   
-	    }
-	},
-
-	isAnswerVerified:function(index){	//After Backend Support and User Integration
-		return answerModel.answersArray[index].verified;
-	},
-
-	getQuestionPostingTime:function(){
-		return answerModel.getQuestionPostingTime();
-	},
-
-	getAsker:function(){
-	 	return answerModel.getAsker();
-	},
-
-	getTags:function(){
-		return answerModel.getTags();
-	},
-
-
-	setAnswers:function(answers){
-		answerModel.answers = answers;
-	},
-
-	setVoted:function(isUpButton,index,toBeSet){
-		if(isUpButton)
-			answerModel.hasVotedUp[index] = toBeSet;		
-		else
-			answerModel.hasVotedDown[index] = toBeSet;	
-	},
-
-	getHasVoted:function(isUpButton,index){
-		if(isUpButton)
-			return !!(answerModel.hasVotedUp[index]);
-		else
-			return !!(answerModel.hasVotedDown[index]);
-	}
-
-};
-
-var answerView = {
+answerView = {
 	init:function(){
 		
 		this.render();
@@ -357,46 +147,41 @@ var answerView = {
 
 	// },
 	setVoteCountChange:function(voteDetails){
-		var oppositeVoteButton;
+		var oppositeElement;
 		if (answerView.isAscending(voteDetails.targetElem)) {
-			oppositeVoteButton = voteDetails.downElement;
-			answerView.setVoteCountUpDown(voteDetails,true,1,oppositeVoteButton);		//true for up and false for down
+			oppositeElement = voteDetails.downElement;
+			answerView.setVoteCountUpDown(voteDetails,"up","down",1,oppositeElement);
 		} else {
-			oppositeVoteButton = voteDetails.upElement;
-			answerView.setVoteCountUpDown(voteDetails,false,-1,oppositeVoteButton);
+			oppositeElement = voteDetails.upElement;
+			answerView.setVoteCountUpDown(voteDetails,"down","up",-1,oppositeElement);
 		}
 
 	},
-
-	//This function is used for both voteup and vote down
-	//countMultiplier negates the votes to be changed(eg if in voteup I want to change vote by +1 , in downvote it will change by -1)
-	//isUpButton checks whether upbutton was clicked or downbutton was clicked
-	//oppositeViteButton contains opposite element,for upvote it contains downvote element and viceversa.
-	setVoteCountUpDown:function(voteDetails,isUpButton,countMultiplier,oppositeVoteButton)
+	setVoteCountUpDown:function(voteDetails,clicked,oppositeOfClicked,countMultiplier,oppositeElement)
 	{
 			
-			if (!answerController.getHasVoted(isUpButton,voteDetails.upDownId)) {
-				if (!answerController.getHasVoted(!isUpButton,voteDetails.upDownId)) {
+			if (!answerController.getHasVoted(clicked,voteDetails.upDownId)) {
+				if (!answerController.getHasVoted(oppositeOfClicked,voteDetails.upDownId)) {
 					voteChange = 1*countMultiplier;
 				}
 				else {
 					voteChange = 2*countMultiplier;
-					answerController.setVoted(!isUpButton,voteDetails.upDownId,false);
-					$(oppositeVoteButton).attr('class',answerView.getChangedClassName(!isUpButton,"colorless"));//"fa fa-sort-desc fa-3x colorless";
+					answerController.cancelVoted(oppositeOfClicked,voteDetails.upDownId);
+					$(oppositeElement).attr('class',answerView.getChangedClassName(oppositeOfClicked,"colorless"));//"fa fa-sort-desc fa-3x colorless";
 				}
-				$(voteDetails.targetElem).attr('class',answerView.getChangedClassName(isUpButton,"colored"));//"fa fa-sort-asc fa-3x colored";
-				answerController.setVoted(isUpButton,voteDetails.upDownId,true);
+				$(voteDetails.targetElem).attr('class',answerView.getChangedClassName(clicked,"colored"));//"fa fa-sort-asc fa-3x colored";
+				answerController.setVoted(clicked,voteDetails.upDownId);
 			}
 			else {
-				$(voteDetails.targetElem).attr('class',answerView.getChangedClassName(isUpButton,"colorless"));//"fa fa-sort-asc fa-3x colorless";
+				$(voteDetails.targetElem).attr('class',answerView.getChangedClassName(clicked,"colorless"));//"fa fa-sort-asc fa-3x colorless";
 				voteChange = -1*countMultiplier;
-				answerController.setVoted(isUpButton,voteDetails.upDownId,false);
+				answerController.cancelVoted(clicked,voteDetails.upDownId);
 			}
 			answerController.changeVoteCount(voteDetails.upDownId,voteDetails.countElement, voteChange);
 	},
-	getChangedClassName:function(isUpButton,color)
+	getChangedClassName:function(upDown,color)
 	{
-		if(isUpButton)
+		if(upDown == "up")
 			return "fa fa-sort-asc fa-3x "+color;
 		else
 			return "fa fa-sort-desc fa-3x "+color;
@@ -478,5 +263,4 @@ var answerView = {
 		$(countElement).text(answerController.getVoteCount(index-1));
 	}
 };
-answerController.init();
 });
